@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <Name>ExpressApp7</Name>
+    <RootNamespace>ExpressApp7</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>83aac9f6-1094-40fc-8ce9-2ca0fe8ccbac</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>app.js</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
+    <ProjectView>ShowAllFiles</ProjectView>
+    <NodejsPort>1337</NodejsPort>
+    <StartWebBrowser>true</StartWebBrowser>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="app.js" />
+    <Compile Include="config\secrets.js" />
+    <Compile Include="controllers\game.js" />
+    <Compile Include="controllers\home.js" />
+    <Compile Include="models\Game.js" />
+    <Compile Include="public\js\application.js" />
+    <Compile Include="public\js\lib\bootstrap.min.js" />
+    <Compile Include="public\js\lib\jquery-2.1.1.min.js" />
+    <Compile Include="public\js\main.js" />
+    <Compile Include="routes.js" />
+    <Compile Include="routes\user.js" />
+    <Compile Include="test\app.js" />
+    <Content Include="package.json" />
+    <Content Include="public\css\lib\bootstrap-social.less" />
+    <Content Include="public\css\lib\bootstrap\.csscomb.json" />
+    <Content Include="public\css\lib\bootstrap\.csslintrc" />
+    <Content Include="public\css\lib\bootstrap\alerts.less" />
+    <Content Include="public\css\lib\bootstrap\badges.less" />
+    <Content Include="public\css\lib\bootstrap\bootstrap.less" />
+    <Content Include="public\css\lib\bootstrap\breadcrumbs.less" />
+    <Content Include="public\css\lib\bootstrap\button-groups.less" />
+    <Content Include="public\css\lib\bootstrap\buttons.less" />
+    <Content Include="public\css\lib\bootstrap\carousel.less" />
+    <Content Include="public\css\lib\bootstrap\close.less" />
+    <Content Include="public\css\lib\bootstrap\code.less" />
+    <Content Include="public\css\lib\bootstrap\component-animations.less" />
+    <Content Include="public\css\lib\bootstrap\dropdowns.less" />
+    <Content Include="public\css\lib\bootstrap\forms.less" />
+    <Content Include="public\css\lib\bootstrap\glyphicons.less" />
+    <Content Include="public\css\lib\bootstrap\grid.less" />
+    <Content Include="public\css\lib\bootstrap\input-groups.less" />
+    <Content Include="public\css\lib\bootstrap\jumbotron.less" />
+    <Content Include="public\css\lib\bootstrap\labels.less" />
+    <Content Include="public\css\lib\bootstrap\list-group.less" />
+    <Content Include="public\css\lib\bootstrap\media.less" />
+    <Content Include="public\css\lib\bootstrap\mixins.less" />
+    <Content Include="public\css\lib\bootstrap\mixins\alerts.less" />
+    <Content Include="public\css\lib\bootstrap\mixins\background-variant.less" />
+    <Content Include="public\css\lib\bootstrap\mixins\border-radius.less" />
+    <Content Include="public\css\lib\bootstrap\mixins\buttons.less" />
+    <Content Include="public\css\lib\bootstrap\mixins\center-block.less" />
+    <Content Include="public\css\lib\bootstrap\mixins\clearfix.less" />
+    <Content Include="public\css\lib\bootstrap\mixins\forms.less" />
+    <Content Include="public\css\lib\bootstrap\mixins\gradients.less" />
+    <Content Include="public\css\lib\bootstrap\mixins\grid-framework.less" />
+    <Content Include="public\css\lib\bootstrap\mixins\grid.less" />
+    <Content Include="public\css\lib\bootstrap\mixins\hide-text.less" />
+    <Content Include="public\css\lib\bootstrap\mixins\image.less" />
+    <Content Include="public\css\lib\bootstrap\mixins\labels.less" />
+    <Content Include="public\css\lib\bootstrap\mixins\list-group.less" />
+    <Content Include="public\css\lib\bootstrap\mixins\nav-divider.less" />
+    <Content Include="public\css\lib\bootstrap\mixins\nav-vertical-align.less" />
+    <Content Include="public\css\lib\bootstrap\mixins\opacity.less" />
+    <Content Include="public\css\lib\bootstrap\mixins\pagination.less" />
+    <Content Include="public\css\lib\bootstrap\mixins\panels.less" />
+    <Content Include="public\css\lib\bootstrap\mixins\progress-bar.less" />
+    <Content Include="public\css\lib\bootstrap\mixins\reset-filter.less" />
+    <Content Include="public\css\lib\bootstrap\mixins\resize.less" />
+    <Content Include="public\css\lib\bootstrap\mixins\responsive-visibility.less" />
+    <Content Include="public\css\lib\bootstrap\mixins\size.less" />
+    <Content Include="public\css\lib\bootstrap\mixins\tab-focus.less" />
+    <Content Include="public\css\lib\bootstrap\mixins\table-row.less" />
+    <Content Include="public\css\lib\bootstrap\mixins\text-emphasis.less" />
+    <Content Include="public\css\lib\bootstrap\mixins\text-overflow.less" />
+    <Content Include="public\css\lib\bootstrap\mixins\vendor-prefixes.less" />
+    <Content Include="public\css\lib\bootstrap\modals.less" />
+    <Content Include="public\css\lib\bootstrap\navbar.less" />
+    <Content Include="public\css\lib\bootstrap\navs.less" />
+    <Content Include="public\css\lib\bootstrap\normalize.less" />
+    <Content Include="public\css\lib\bootstrap\pager.less" />
+    <Content Include="public\css\lib\bootstrap\pagination.less" />
+    <Content Include="public\css\lib\bootstrap\panels.less" />
+    <Content Include="public\css\lib\bootstrap\popovers.less" />
+    <Content Include="public\css\lib\bootstrap\print.less" />
+    <Content Include="public\css\lib\bootstrap\progress-bars.less" />
+    <Content Include="public\css\lib\bootstrap\responsive-embed.less" />
+    <Content Include="public\css\lib\bootstrap\responsive-utilities.less" />
+    <Content Include="public\css\lib\bootstrap\scaffolding.less" />
+    <Content Include="public\css\lib\bootstrap\tables.less" />
+    <Content Include="public\css\lib\bootstrap\theme.less" />
+    <Content Include="public\css\lib\bootstrap\thumbnails.less" />
+    <Content Include="public\css\lib\bootstrap\tooltip.less" />
+    <Content Include="public\css\lib\bootstrap\type.less" />
+    <Content Include="public\css\lib\bootstrap\utilities.less" />
+    <Content Include="public\css\lib\bootstrap\variables.less" />
+    <Content Include="public\css\lib\bootstrap\wells.less" />
+    <Content Include="public\css\lib\font-awesome\bordered-pulled.less" />
+    <Content Include="public\css\lib\font-awesome\core.less" />
+    <Content Include="public\css\lib\font-awesome\fixed-width.less" />
+    <Content Include="public\css\lib\font-awesome\font-awesome.less" />
+    <Content Include="public\css\lib\font-awesome\icons.less" />
+    <Content Include="public\css\lib\font-awesome\larger.less" />
+    <Content Include="public\css\lib\font-awesome\list.less" />
+    <Content Include="public\css\lib\font-awesome\mixins.less" />
+    <Content Include="public\css\lib\font-awesome\path.less" />
+    <Content Include="public\css\lib\font-awesome\rotated-flipped.less" />
+    <Content Include="public\css\lib\font-awesome\spinning.less" />
+    <Content Include="public\css\lib\font-awesome\stacked.less" />
+    <Content Include="public\css\lib\font-awesome\variables.less" />
+    <Content Include="public\css\lib\ionicons\ionicons.less" />
+    <Content Include="public\css\lib\ionicons\_ionicons-animation.less" />
+    <Content Include="public\css\lib\ionicons\_ionicons-font.less" />
+    <Content Include="public\css\lib\ionicons\_ionicons-icons.less" />
+    <Content Include="public\css\lib\ionicons\_ionicons-variables.less" />
+    <Content Include="public\css\styles.css" />
+    <Content Include="public\css\styles.less" />
+    <Content Include="public\css\themes\default.less" />
+    <Content Include="public\css\themes\flatly.less" />
+    <Content Include="public\css\themes\ios7.less" />
+    <Content Include="public\css\themes\modern.less" />
+    <Content Include="public\fonts\fontawesome-webfont.eot" />
+    <Content Include="public\fonts\fontawesome-webfont.svg" />
+    <Content Include="public\fonts\fontawesome-webfont.ttf" />
+    <Content Include="public\fonts\fontawesome-webfont.woff" />
+    <Content Include="public\fonts\FontAwesome.otf" />
+    <Content Include="public\fonts\ionicons.eot" />
+    <Content Include="public\fonts\ionicons.svg" />
+    <Content Include="public\fonts\ionicons.ttf" />
+    <Content Include="public\fonts\ionicons.woff" />
+    <Content Include="views\game\add.jade" />
+    <Content Include="views\game\index.jade" />
+    <Content Include="views\game\start.jade" />
+    <Content Include="views\home.jade" />
+    <Content Include="views\layout.jade" />
+    <Content Include="views\_partials\flash.jade" />
+    <Content Include="views\_partials\footer.jade" />
+    <Content Include="views\_partials\navbar.jade" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="config\" />
+    <Folder Include="controllers\" />
+    <Folder Include="models\" />
+    <Folder Include="public\" />
+    <Folder Include="public\css\" />
+    <Folder Include="public\css\lib\" />
+    <Folder Include="public\css\lib\bootstrap\" />
+    <Folder Include="public\css\lib\bootstrap\mixins\" />
+    <Folder Include="public\css\lib\font-awesome\" />
+    <Folder Include="public\css\lib\ionicons\" />
+    <Folder Include="public\css\themes\" />
+    <Folder Include="public\fonts\" />
+    <Folder Include="public\js\" />
+    <Folder Include="public\js\lib\" />
+    <Folder Include="routes\" />
+    <Folder Include="test\" />
+    <Folder Include="views\" />
+    <Folder Include="views\game\" />
+    <Folder Include="views\_partials\" />
+  </ItemGroup>
+  <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsTools.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:48022/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost:1337</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

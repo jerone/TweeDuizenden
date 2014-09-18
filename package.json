@@ -1,0 +1,40 @@
+{
+  "name": "TweeDuizenden",
+  "description": "Tool to track a game called TweeDuizenden.",
+  "author": "jerone <jeronevw@hotmail.com>",
+  "homepage": "https://github.com/jerone/TweeDuizenden",
+  "version": "0.1.0",
+  "license": "ISC",
+  "keywords": [
+    "game"
+  ],
+  "bugs": {
+    "url": "https://github.com/jerone/TweeDuizenden/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jerone/TweeDuizenden.git"
+  },
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "body-parser": "^1.8.2",
+    "connect-mongo": "^0.4.1",
+    "express": "^4.9.2",
+    "express-session": "^1.8.2",
+    "express-flash": "^0.0.2",
+    "jade": "^1.7.0",
+    "less": "^1.7.5",
+    "less-middleware": "^1.0.4",
+    "mongoose": "^3.8.16",
+    "morgan": "^1.3.1"
+  },
+  "devDependencies": {
+    "supertest": "^0.13.0"
+  }
+}

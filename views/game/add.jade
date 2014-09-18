@@ -1,0 +1,16 @@
+extends ../layout
+
+block content
+  .page-header
+    h3 Game Add
+
+  form.form-horizontal(role='form', method='POST',action='/game/start')
+    .form-group
+      label(class='col-sm-2 control-label', for='name') Players
+      .col-sm-8
+        textarea.form-control(name='players', id='players', autofocus=true) #{players}
+    .form-group
+      .col-sm-offset-2.col-sm-8
+        button.btn.btn-primary(type='submit')
+          span.ion-paper-airplane
+          | Start Game

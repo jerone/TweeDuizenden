@@ -1,0 +1,49 @@
+extends ../layout
+
+block content
+  .page-header
+    h3 Game Start
+
+  if players
+    table.table.table-striped.table-hover.table-condensed
+      thead
+        tr
+          th
+          th Deler
+          th Wilde
+          - for player in players
+            th= player
+      tbody
+        - for (var i = 0; i < 30; i++) {
+          tr
+            th
+              span= i+1
+            td
+              p.form-control-static.input-sm= players[i % players.length]
+            td
+              select.form-control.input-sm
+                option(selected) -
+                option A
+                option K
+                option Q
+                option J
+                option 10
+                option 9
+                option 8
+                option 7
+                option 6
+                option 5
+                option 4
+            - for player in players
+              td
+                input.form-control.input-sm(type='text')
+            if i!=0
+              tr
+                th
+                td
+                td
+                - for player in players
+                  td
+                    input.form-control.input-sm(type='text',disabled=true,style="display: inline-block; width: 95%;")
+                    | +
+        - }
