@@ -20,7 +20,7 @@ module.exports = {
 
   db: (function () {
     if (process.env.OPENSHIFT_MONGODB_DB_URL) {
-      return process.env.OPENSHIFT_MONGODB_DB_URL + 'nodejs';
+      return process.env.OPENSHIFT_MONGODB_DB_URL + 'tweeduizenden';
     }
     return 'mongodb://localhost:27017/TweeDuizenden';
   })(),
