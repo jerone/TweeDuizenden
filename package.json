@@ -1,6 +1,6 @@
 {
   "name": "TweeDuizenden",
-  "description": "Tool to track a game called TweeDuizenden.",
+  "description": "Tool to help record statistics for the game called TweeDuizenden.",
   "author": "jerone <jeronevw@hotmail.com>",
   "homepage": "https://github.com/jerone/TweeDuizenden",
   "version": "0.1.0",

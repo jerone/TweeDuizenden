@@ -15,7 +15,8 @@ mongoose.connection.on('error', function() {
   console.error('MongoDB Connection Error. Make sure MongoDB is running.');
 });
 
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 3000);
+app.set('ipaddr', process.env.OPENSHIFT_NODEJS_IP || process.env.OPENSHIFT_INTERNAL_IP || 'localhost');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
@@ -38,7 +39,7 @@ app.use(express.static(path.join(__dirname, 'public'), { maxAge: 1000 * 60 * 60 
 
 require('./routes.js')(app);
 
-app.listen(app.get('port'), function() {
+app.listen(app.get('port'), app.get('ipaddr'), function () {
   console.log('Express server listening on port %d in %s mode', app.get('port'), app.get('env'));
 });
 

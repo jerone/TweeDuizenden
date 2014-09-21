@@ -18,7 +18,12 @@
 
 module.exports = {
 
-  db: process.env.MONGODB|| 'mongodb://localhost:27017/TweeDuizenden',
+  db: (function () {
+    if (process.env.OPENSHIFT_MONGODB_DB_URL) {
+      return process.env.OPENSHIFT_MONGODB_DB_URL + 'nodejs';
+    }
+    return 'mongodb://localhost:27017/TweeDuizenden';
+  })(),
 
   sessionSecret: process.env.SESSION_SECRET || 'TweeDuizendenSecret'
 };
