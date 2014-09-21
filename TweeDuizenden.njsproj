@@ -40,7 +40,6 @@
     <Compile Include="public\js\lib\jquery-2.1.1.min.js" />
     <Compile Include="public\js\main.js" />
     <Compile Include="routes.js" />
-    <Compile Include="routes\user.js" />
     <Compile Include="test\app.js" />
     <Content Include="package.json" />
     <Content Include="public\css\lib\bootstrap-social.less" />
@@ -173,7 +172,6 @@
     <Folder Include="public\fonts\" />
     <Folder Include="public\js\" />
     <Folder Include="public\js\lib\" />
-    <Folder Include="routes\" />
     <Folder Include="test\" />
     <Folder Include="views\" />
     <Folder Include="views\game\" />
