@@ -35,10 +35,9 @@
     <Compile Include="controllers\game.js" />
     <Compile Include="controllers\home.js" />
     <Compile Include="models\Game.js" />
-    <Compile Include="public\js\application.js" />
     <Compile Include="public\js\lib\bootstrap.min.js" />
     <Compile Include="public\js\lib\jquery-2.1.1.min.js" />
-    <Compile Include="public\js\main.js" />
+    <Compile Include="public\js\tweeduizenden.js" />
     <Compile Include="routes.js" />
     <Compile Include="test\app.js" />
     <Content Include="package.json" />
