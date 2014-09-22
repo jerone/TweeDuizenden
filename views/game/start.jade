@@ -36,7 +36,7 @@ block content
                 option 4
             - for player, index in players
               td
-                input.form-control.input-sm.g2000-value(type='text',
+                input.form-control.input-sm.g2000-value(type='number',
                                                         data-player-index=index,
                                                         class='g2000-player-'+index)
           if i!=0
@@ -46,7 +46,7 @@ block content
               td
               - for player, index in players
                 td
-                  input.form-control.input-sm.g2000-sum(type='text',
+                  input.form-control.input-sm.g2000-sum(type='number',
                                                         data-player-index=index,
                                                         class='g2000-player-'+index,
                                                         disabled=true,
