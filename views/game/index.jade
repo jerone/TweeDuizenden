@@ -4,4 +4,26 @@ block content
   .page-header
     h3 Games
 
-    a(href='/game/add') Add Game
+  a(href='/game/add') Add Game
+
+  if games
+    table.table
+      thead
+        tr
+          th Name
+          th Id
+          th Players
+          th Actions
+          th 
+      tbody
+        each game, index in games
+          tr
+            td #{game.name}
+            td #{game._id}
+            td #{game.players}
+            td
+              a(href='/game/open/'+game.name)
+                | open
+            td
+              a(href='/game/delete/'+game.name)
+                | delete

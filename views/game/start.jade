@@ -2,57 +2,59 @@ extends ../layout
 
 block content
   .page-header
-    h3 Start Game
+    h3 Start Game "#{name}"
 
-  if players
-    table.table.table-striped.table-hover.table-condensed
-      thead
-        tr
-          th
-          th Deler
-          th Wilde
-          - for player in players
-            th= player
-      tbody
-        - for (var i = 0; i < 20; i++) {
+  form(role='form', method='POST', action='/game/save')
+
+    if players
+      table.table.table-striped.table-hover.table-condensed
+        thead
           tr
             th
-              span= i+1
-            td
-              p.form-control-static.input-sm= players[i % players.length]
-            td
-              select.form-control.input-sm
-                option(selected) -
-                option A
-                option K
-                option Q
-                option J
-                option 10
-                option 9
-                option 8
-                option 7
-                option 6
-                option 5
-                option 4
-            - for player, index in players
-              td
-                input.form-control.input-sm.g2000-value(type='number',
-                                                        data-player-index=index,
-                                                        class='g2000-player-'+index)
-          if i!=0
+            th Deler
+            th Wilde
+            - for player in players
+              th= player
+        tbody
+          - for (var i = 0; i < 20; i++) {
             tr
               th
+                span= i+1
               td
+                p.form-control-static.input-sm= players[i % players.length]
               td
+                - var wildOptions = ["-", "A", "K", "Q", "J", 10, 9, 8, 7, 6, 5, 4];
+                select.form-control.input-sm(name='g2000-wild')
+                  each wildOption in wildOptions
+                    option(selected=wild[i]===wildOption) #{wildOption}
               - for player, index in players
                 td
-                  input.form-control.input-sm.g2000-sum(type='text',
-                                                        data-player-index=index,
-                                                        class='g2000-player-'+index,
-                                                        disabled=true,
-                                                        style="display: inline-block; width: 95%;")
-                  | +
-        - }
+                  input.form-control.input-sm.g2000-value(name='g2000-player-'+index,
+                                                          class='g2000-player-'+index,
+                                                          type='number',
+                                                          data-player-index=index,
+                                                          value=score[player]&&score[player][i])
+            if i!=0
+              tr
+                th
+                td
+                td
+                - for player, index in players
+                  td
+                    input.form-control.input-sm.g2000-sum(class='g2000-player-'+index,
+                                                          type='text',
+                                                          disabled=true,
+                                                          data-player-index=index,
+                                                          style="display: inline-block; width: 95%;")
+                    | +
+          - }
+
+    input(name='name', type='text', value=name)
+    input(name='players', type='text', value=players)
+    button.btn.btn-primary(type='submit')
+      span.ion-paper-airplane
+      | Save Game
+
 
 block scripts
   script(src='/js/tweeduizenden.js')
