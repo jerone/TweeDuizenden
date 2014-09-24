@@ -2,13 +2,17 @@ extends ../layout
 
 block content
   .page-header
-    h3 Game Add
+    h3 Add Game
 
-  form.form-horizontal(role='form', method='POST',action='/game/start')
+  form.form-horizontal(role='form', method='POST', action='/game/start')
     .form-group
-      label(class='col-sm-2 control-label', for='name') Players
+      label.col-sm-2.control-label(for='name') Name
       .col-sm-8
-        textarea.form-control(name='players', id='players', autofocus=true) #{players}
+        input.form-control(name='name', type='text', value=name)
+    .form-group
+      label.col-sm-2.control-label(for='players') Players
+      .col-sm-8
+        textarea.form-control(name='players', autofocus=true, rows=5) #{players}
     .form-group
       .col-sm-offset-2.col-sm-8
         button.btn.btn-primary(type='submit')

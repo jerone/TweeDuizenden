@@ -32,6 +32,7 @@
   <ItemGroup>
     <Compile Include="app.js" />
     <Compile Include="config\secrets.js" />
+    <Compile Include="controllers\debug.js" />
     <Compile Include="controllers\game.js" />
     <Compile Include="controllers\home.js" />
     <Compile Include="models\Game.js" />
@@ -40,6 +41,7 @@
     <Compile Include="public\js\tweeduizenden.js" />
     <Compile Include="routes.js" />
     <Compile Include="test\app.js" />
+    <Content Include="LICENSE" />
     <Content Include="package.json" />
     <Content Include="public\css\lib\bootstrap-social.less" />
     <Content Include="public\css\lib\bootstrap\.csscomb.json" />
@@ -147,6 +149,8 @@
     <Content Include="public\fonts\ionicons.svg" />
     <Content Include="public\fonts\ionicons.ttf" />
     <Content Include="public\fonts\ionicons.woff" />
+    <Content Include="public\images\cards.jpg" />
+    <Content Include="README.md" />
     <Content Include="views\game\add.jade" />
     <Content Include="views\game\index.jade" />
     <Content Include="views\game\start.jade" />
@@ -169,6 +173,7 @@
     <Folder Include="public\css\lib\ionicons\" />
     <Folder Include="public\css\themes\" />
     <Folder Include="public\fonts\" />
+    <Folder Include="public\images\" />
     <Folder Include="public\js\" />
     <Folder Include="public\js\lib\" />
     <Folder Include="test\" />

@@ -2,6 +2,27 @@ extends ../layout
 
 block content
   .page-header
-    h3 Game Index
+    h3 Games
 
-    a(href='/game/add') Add Game
+  a.btn.btn-primary(href='/game/add') Add new game
+
+  if games
+    table.table
+      thead
+        tr
+          th Name
+          th Id
+          th Players
+          th Actions
+      tbody
+        each game, index in games
+          tr
+            td #{game.name}
+            td #{game._id}
+            td #{game.players}
+            td
+              a.btn.btn-primary(href='/game/open/'+game.name)
+                | Open
+              &nbsp;
+              a.btn.btn-primary(href='/game/delete/'+game.name)
+                | Delete
