@@ -3,12 +3,28 @@ extends layout
 block content
   h1 TweeDuizenden
   p.lead A website to record scores for a game called TweeDuizenden.
-  hr
   .row
-    .col-sm-9
-      h2 About
-      p Use the button below to start a new game.
+    .col-sm-4
+      h2 Overview
+      .well.text-justify
+        p On this website you can start new games or view previous games.
+        p Use the button below to start a new game.
       p
-        a.btn.btn-primary(href='/game', role='button') Start a new game »
-    .col-sm-3
+        a.btn.btn-primary(href='/game/add')
+          span.glyphicon.glyphicon-plus
+          | Start new game &raquo;
+        | &nbsp;
+        a.btn.btn-default(href='/game')
+          span.glyphicon.glyphicon-stats
+          | View previous games &raquo;
+    .col-sm-4.text-center
       img(src='/images/cards.jpg')
+    .col-sm-4.text-right
+      h2 Rules
+      .well.text-justify
+        p Tweeduizenden is an advanced game.
+        p If you're not familiar with the rules of this game it's highly recommanded that you read them first.
+      p
+        a.btn.btn-success(href='/game/rules')
+          span.glyphicon.glyphicon-book
+          | Read the rules &raquo;

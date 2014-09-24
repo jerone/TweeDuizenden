@@ -4,7 +4,10 @@ block content
   .page-header
     h3 Games
 
-  a.btn.btn-primary(href='/game/add') Add new game
+  p
+    a.btn.btn-primary(href='/game/add') 
+      span.glyphicon.glyphicon-plus
+      | Add new game
 
   if games
     table.table
@@ -22,7 +25,9 @@ block content
             td #{game.players}
             td
               a.btn.btn-primary(href='/game/open/'+game.name)
+                span.glyphicon.glyphicon-folder-open
                 | Open
               &nbsp;
               a.btn.btn-primary(href='/game/delete/'+game.name)
+                span.glyphicon.glyphicon-trash
                 | Delete

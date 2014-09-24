@@ -38,6 +38,10 @@ exports.add = function (req, res) {
   });
 };
 
+exports.rules = function (req, res) {
+  res.render('game/rules', { title: 'Game Rules' });
+};
+
 exports.start = function (req, res) {
   if (req.body.name && req.body.players) {
     var name = req.body.name,

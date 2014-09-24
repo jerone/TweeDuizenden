@@ -2,9 +2,17 @@ extends ../layout
 
 block content
   .page-header
+    .pull-right
+      button.btn.btn-primary(type='submit')
+        span.glyphicon.glyphicon-floppy-disk
+        | Save Game
     h3 Start Game "#{name}"
 
+
   form(role='form', method='POST', action='/game/save')
+
+    input(name='name', type='hidden', value=name)
+    input(name='players', type='hidden', value=players)
 
     if players
       table.table.table-striped.table-hover.table-condensed
@@ -49,11 +57,10 @@ block content
                     | +
           - }
 
-    input(name='name', type='text', value=name)
-    input(name='players', type='text', value=players)
-    button.btn.btn-primary(type='submit')
-      span.ion-paper-airplane
-      | Save Game
+    p.text-right
+      button.btn.btn-primary(type='submit')
+        span.glyphicon.glyphicon-floppy-disk
+        | Save Game
 
 
 block scripts
