@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  .well.text-center
+    h1(style='font-size:10em') #{code}
+    p #{message}
+    p
+      a.btn.btn-info(href='/')
+        span.glyphicon.glyphicon-home
+        | Back home

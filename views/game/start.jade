@@ -2,9 +2,17 @@ extends ../layout
 
 block content
   .page-header
+    .pull-right
+      button.btn.btn-primary(type='submit')
+        span.glyphicon.glyphicon-floppy-disk
+        | Save Game
     h3 Start Game "#{name}"
 
+
   form(role='form', method='POST', action='/game/save')
+
+    input(name='name', type='hidden', value=name)
+    input(name='players', type='hidden', value=players)
 
     if players
       table.table.table-striped.table-hover.table-condensed
@@ -13,7 +21,7 @@ block content
             th
             th Deler
             th Wilde
-            - for player in players
+            each player in players
               th= player
         tbody
           - for (var i = 0; i < 20; i++) {
@@ -24,13 +32,13 @@ block content
                 p.form-control-static.input-sm= players[i % players.length]
               td
                 - var wildOptions = ["-", "A", "K", "Q", "J", 10, 9, 8, 7, 6, 5, 4];
-                select.form-control.input-sm(name='g2000-wild')
+                select.form-control.input-sm(name='g2000n-wild')
                   each wildOption in wildOptions
                     option(selected=wild[i]===wildOption) #{wildOption}
-              - for player, index in players
+              each player, index in players
                 td
-                  input.form-control.input-sm.g2000-value(name='g2000-player-'+index,
-                                                          class='g2000-player-'+index,
+                  input.form-control.input-sm.g2000n-value(name='g2000n-player-'+index,
+                                                          class='g2000n-player-'+index,
                                                           type='number',
                                                           data-player-index=index,
                                                           value=score[player]&&score[player][i])
@@ -39,9 +47,9 @@ block content
                 th
                 td
                 td
-                - for player, index in players
+                each player, index in players
                   td
-                    input.form-control.input-sm.g2000-sum(class='g2000-player-'+index,
+                    input.form-control.input-sm.g2000n-sum(class='g2000n-player-'+index,
                                                           type='text',
                                                           disabled=true,
                                                           data-player-index=index,
@@ -49,11 +57,10 @@ block content
                     | +
           - }
 
-    input(name='name', type='text', value=name)
-    input(name='players', type='text', value=players)
-    button.btn.btn-primary(type='submit')
-      span.ion-paper-airplane
-      | Save Game
+    p.text-right
+      button.btn.btn-primary(type='submit')
+        span.glyphicon.glyphicon-floppy-disk
+        | Save Game
 
 
 block scripts

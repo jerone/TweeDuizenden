@@ -16,13 +16,13 @@ exports.api = function (req, res) {
 exports.index = function (req, res) {
   Game.find({}, function (err, games) {
     if (err) return console.error(err);
-
+    
     var gamesMap = {};
     
     games.forEach(function (game) {
       gamesMap[game._id] = game;
     });
-
+    
     res.render('game/index', {
       title: 'Games',
       games: gamesMap
@@ -36,6 +36,10 @@ exports.add = function (req, res) {
     name: new Date().getTime(),
     players: 'Player 1\nPlayer 2\nPlayer 3'
   });
+};
+
+exports.rules = function (req, res) {
+  res.render('game/rules', { title: 'Game Rules' });
 };
 
 exports.start = function (req, res) {
@@ -60,13 +64,13 @@ exports.save = function (req, res) {
   if (req.body.name && req.body.players) {
     var name = req.body.name,
         players = req.body.players.split(','),
-        wild = req.body['g2000-wild'];
+        wild = req.body['g2000n-wild'];
     
     var game = new Game({ name: name });
     game.players = players;
     game.wild = wild;
     for (var i = 0; i < players.length; i++) {
-      game.score[players[i]] = req.body['g2000-player-' + i];
+      game.score[players[i]] = req.body['g2000n-player-' + i];
     }
     game.save(function (err) {
       if (err) return console.error(err);

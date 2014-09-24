@@ -1,11 +1,9 @@
-@import "lib/bootstrap/bootstrap";
-@import "lib/font-awesome/font-awesome";
-@import "lib/ionicons/ionicons";
-@import "lib/bootstrap-social";
-@import "themes/modern";
+@import "bootstrap.min.css";
+@import "bootstrap-theme.min.css";
 
-// Scaffolding
-// --------------------------
+/*
+    Common
+*/
 
 html {
   position: relative;
@@ -30,35 +28,11 @@ footer {
   }
 }
 
-// Navbar
-// -------------------------
 
-.navbar-nav img {
-  width: 30px;
-  height: 30px;
-  margin: -15px 15px -15px;
-}
+/*
+    Icons
+*/
 
-// Alerts
-// -------------------------
-
-.alert {
-  margin-top: 20px;
-}
-
-// Thumbnails
-// -------------------------
-
-.thumbnail {
-  padding: 0;
-  border-radius: 0;
-  box-shadow: 0 0 5px #ccc, inset 0 0 0 #000;
-}
-
-// Font Icons
-// -------------------------
-
-.fa,
-[class^='ion-'] {
+.glyphicon {
   margin-right: 6px;
 }

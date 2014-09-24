@@ -4,7 +4,10 @@ block content
   .page-header
     h3 Games
 
-  a(href='/game/add') Add Game
+  p
+    a.btn.btn-primary(href='/game/add') 
+      span.glyphicon.glyphicon-plus
+      | Add new game
 
   if games
     table.table
@@ -14,7 +17,6 @@ block content
           th Id
           th Players
           th Actions
-          th 
       tbody
         each game, index in games
           tr
@@ -22,8 +24,10 @@ block content
             td #{game._id}
             td #{game.players}
             td
-              a(href='/game/open/'+game.name)
-                | open
-            td
-              a(href='/game/delete/'+game.name)
-                | delete
+              a.btn.btn-primary(href='/game/open/'+game.name)
+                span.glyphicon.glyphicon-folder-open
+                | Open
+              &nbsp;
+              a.btn.btn-primary(href='/game/delete/'+game.name)
+                span.glyphicon.glyphicon-trash
+                | Delete
