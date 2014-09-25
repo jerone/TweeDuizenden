@@ -14,13 +14,14 @@ block content
                         title='Delete all games!',
                         onclick='return confirm("Are you sure you want to delete all games?");')
         span.glyphicon.glyphicon-trash
-        | Delete All
+        | Delete all
 
   table.table
     thead
       tr
         th Name
-        th Id
+        if admin
+          th Id
         th Created
         th Updated
         th Players
@@ -31,7 +32,8 @@ block content
         each game, index in games
           tr
             td #{game.name}
-            td #{game._id}
+            if admin
+              td #{game._id}
             td #{game.createdAt.toLocaleDateString('nl-NL')} #{game.createdAt.toLocaleTimeString('nl-NL')}
             td #{game.updatedAt.toLocaleDateString('nl-NL')} #{game.updatedAt.toLocaleTimeString('nl-NL')}
             td #{game.players.join(', ')}
@@ -48,5 +50,5 @@ block content
     else
       tbody
         tr
-          td(colspan=6)
+          td(colspan=admin ? 6 : 5)
             p.text-danger There are no games available!
