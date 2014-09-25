@@ -49,14 +49,32 @@ exports.start = function (req, res) {
     var name = req.body.name,
         players = req.body.players.split('\r\n');
     
-    res.render('game/start', {
-      title: 'Start Game ' + name,
-      name: name,
-      players: players,
-      wild: ['-'],
-      score: {}
+    var exists = Game.find({ name: name }, function (err, games) {
+      if (err) return console.error(err);
+      
+      if (games.length === 0) {
+        res.render('game/start', {
+          title: 'Start Game ' + name,
+          name: name,
+          players: players,
+          wild: ['-'],
+          score: {}
+        });
+      } else {
+        var messages = [{ msg: 'The name for this game already exists! Please define another name.' }];
+        req.flash('error', messages);
+        res.redirect('/game/add');
+      }
     });
   } else {
+    var messages = [];
+    if (!req.body.name) {
+      messages.push({ msg: 'No name defined!' });
+    }
+    if (!req.body.players) {
+      messages.push({ msg: 'No players defined!' });
+    }
+    req.flash('error', messages);
     res.redirect('/game/add');
   }
 };
