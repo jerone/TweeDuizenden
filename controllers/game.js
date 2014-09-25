@@ -14,6 +14,7 @@ exports.api = function (req, res) {
 };
 
 exports.index = function (req, res) {
+  var admin = typeof req.query.admin !== 'undefined';
   Game.find({}, function (err, games) {
     if (err) return console.error(err);
     
@@ -25,6 +26,7 @@ exports.index = function (req, res) {
     
     res.render('game/index', {
       title: 'Games',
+      admin: admin,
       games: gamesMap
     });
   });
@@ -51,7 +53,7 @@ exports.start = function (req, res) {
       title: 'Start Game ' + name,
       name: name,
       players: players,
-      wild: ["-"],
+      wild: ['-'],
       score: {}
     });
   } else {
@@ -98,11 +100,11 @@ exports.open = function (req, res) {
           title: 'Start Game ' + game.name,
           name: game.name,
           players: game.players,
-          wild: game.wild || ["-"],
+          wild: game.wild || ['-'],
           score: game.score || {}
         });
       } else {
-        res.send("no game!!!");
+        res.send('no game!!!');
         return;
       }
     });

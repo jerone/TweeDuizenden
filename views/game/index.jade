@@ -9,35 +9,37 @@ block content
       span.glyphicon.glyphicon-plus
       | Add new game
 
-  #games
-    table.table
-      thead
-        tr
-          th Name
-          th Id
-          th Created
-          th Updated
-          th Players
-          th Actions
-      //- Check if object is really empty;
-      if Object.keys(games).length
-        tbody
-          each game, index in games
-            tr
-              td #{game.name}
-              td #{game._id}
-              td #{game.createdAt.toLocaleDateString('nl-NL')} #{game.createdAt.toLocaleTimeString('nl-NL')}
-              td #{game.updatedAt.toLocaleDateString('nl-NL')} #{game.updatedAt.toLocaleTimeString('nl-NL')}
-              td #{game.players.join(', ')}
-              td.text-nowrap
-                a.btn.btn-primary(href='/game/open/'+game.name, title='Open this game.')
-                  span.glyphicon.glyphicon-folder-open
-                  | Open
-                | &nbsp;
-                a.btn.btn-primary(href='/game/delete/'+game.name, title='Delete this game.', onclick='return confirm("Are you sure you want to delete this game?");')
-                  span.glyphicon.glyphicon-trash
-      else
-        tbody
+  table.table
+    thead
+      tr
+        th Name
+        th Id
+        th Created
+        th Updated
+        th Players
+        th Actions
+    //- Check if object is really empty;
+    if Object.keys(games).length
+      tbody
+        each game, index in games
           tr
-            td(colspan=6)
-              p.text-danger There are no games available!
+            td #{game.name}
+            td #{game._id}
+            td #{game.createdAt.toLocaleDateString('nl-NL')} #{game.createdAt.toLocaleTimeString('nl-NL')}
+            td #{game.updatedAt.toLocaleDateString('nl-NL')} #{game.updatedAt.toLocaleTimeString('nl-NL')}
+            td #{game.players.join(', ')}
+            td.text-nowrap
+              a.btn.btn-primary(href='/game/open/'+game.name, title='Open this game.')
+                span.glyphicon.glyphicon-folder-open
+                | Open
+              if admin
+                | &nbsp;
+                a.btn.btn-primary(href='/game/delete/'+game.name,
+                                  title='Delete this game.',
+                                  onclick='return confirm("Are you sure you want to delete this game?");')
+                  span.glyphicon.glyphicon-trash
+    else
+      tbody
+        tr
+          td(colspan=6)
+            p.text-danger There are no games available!
