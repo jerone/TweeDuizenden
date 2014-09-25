@@ -49,7 +49,7 @@ exports.start = function (req, res) {
     var name = req.body.name,
         players = req.body.players.split('\r\n');
     
-    var exists = Game.find({ name: name }, function (err, games) {
+    Game.find({ name: name }, function (err, games) {
       if (err) return console.error(err);
       
       if (games.length === 0) {
@@ -63,6 +63,7 @@ exports.start = function (req, res) {
       } else {
         var messages = [{ msg: 'The name for this game already exists! Please define another name.' }];
         req.flash('error', messages);
+
         res.redirect('/game/add');
       }
     });
@@ -75,38 +76,37 @@ exports.start = function (req, res) {
       messages.push({ msg: 'No players defined!' });
     }
     req.flash('error', messages);
+
     res.redirect('/game/add');
   }
 };
 
-// TODO: check for duplicates;
 exports.save = function (req, res) {
   if (req.body.name && req.body.players) {
     var name = req.body.name,
         players = req.body.players.split(','),
-        wild = req.body['g2000n-wild'];
+        wild = req.body.wild;
     
     Game.findOne({ name: name }, function (err, game) {
       if (err) return console.error(err);
-      console.log(!!game);
-
+      
       if (!game) {
         game = new Game({
           name: name,
           players: players
         });
       }
-
+      
       game.wild = wild;
-
+      
       game.score = {};  // Resetting is required to save the score;
       for (var i = 0; i < players.length; i++) {
-        game.score[players[i]] = req.body['g2000n-player-' + i];
+        game.score[players[i]] = req.body['player-' + i];
       }
-
+      
       game.save(function (err) {
         if (err) return console.error(err);
-        console.dir(game);
+        
         res.redirect('/game/open/' + game.name);
       });
     });
@@ -121,7 +121,6 @@ exports.open = function (req, res) {
       if (err) return console.error(err);
       
       if (game) {
-        
         res.render('game/start', {
           title: 'Start Game ' + game.name,
           name: game.name,
@@ -131,7 +130,6 @@ exports.open = function (req, res) {
         });
       } else {
         res.send('no game!!!');
-        return;
       }
     });
   } else {
@@ -141,7 +139,7 @@ exports.open = function (req, res) {
 
 exports.delete = function (req, res) {
   if (req.params.name) {
-    Game.findOneAndRemove({ name: req.params.name.toString() }, function (err, game) {
+    Game.findOneAndRemove({ name: req.params.name }, function (err, game) {
       if (err) return console.error(err);
       
       res.redirect('/game?admin');

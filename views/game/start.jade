@@ -33,16 +33,16 @@ block content
                 p.form-control-static.input-sm= players[i % players.length]
               td
                 - var wildOptions = ["-", "A", "K", "Q", "J", 10, 9, 8, 7, 6, 5, 4];
-                select.form-control.input-sm(name='g2000n-wild')
+                select.form-control.input-sm(name='wild')
                   each wildOption in wildOptions
                     option(selected=wild[i]===wildOption) #{wildOption}
               each player, index in players
                 td
-                  input.form-control.input-sm.g2000n-value(name='g2000n-player-'+index,
-                                                          class='g2000n-player-'+index,
-                                                          type='number',
-                                                          data-player-index=index,
-                                                          value=score[player]&&score[player][i])
+                  input.form-control.input-sm.g2000n-value(name='player-'+index,
+                                                           class='g2000n-player-'+index,
+                                                           type='number',
+                                                           data-player-index=index,
+                                                           value=score[player]&&score[player][i])
             if i!=0
               tr
                 th
@@ -51,10 +51,10 @@ block content
                 each player, index in players
                   td
                     input.form-control.input-sm.g2000n-sum(class='g2000n-player-'+index,
-                                                          type='text',
-                                                          disabled=true,
-                                                          data-player-index=index,
-                                                          style="display: inline-block; width: 95%;")
+                                                           type='text',
+                                                           disabled=true,
+                                                           data-player-index=index,
+                                                           style="display: inline-block; width: 95%;")
                     | +
           - }
 
