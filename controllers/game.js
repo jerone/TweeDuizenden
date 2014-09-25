@@ -68,21 +68,18 @@ exports.save = function (req, res) {
         players = req.body.players.split(','),
         wild = req.body['g2000n-wild'];
     
-    var game = new Game({ name: name });
-    game.players = players;
-    game.wild = wild;
+    var game = new Game({
+      name: name,
+      players: players,
+      wild : wild
+    });
     for (var i = 0; i < players.length; i++) {
       game.score[players[i]] = req.body['g2000n-player-' + i];
     }
     game.save(function (err) {
+      console.dir(game);
       if (err) return console.error(err);
-      res.render('game/start', {
-        title: 'Start Game ' + game.name,
-        name: game.name,
-        players: game.players,
-        wild: game.wild,
-        score: game.score
-      });
+      res.redirect('/game/open/' + game.name);
     });
   } else {
     res.redirect('/game/add');
