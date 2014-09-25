@@ -17,9 +17,3 @@ gameSchema.path('score').default(function () {
 gameSchema.plugin(timestamps);
 
 module.exports = mongoose.model('Game', gameSchema);
-/*
-new Game({
-  name: String,
-  score: { id: [Number] }
-});
-*/

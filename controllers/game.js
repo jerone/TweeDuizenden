@@ -68,18 +68,29 @@ exports.save = function (req, res) {
         players = req.body.players.split(','),
         wild = req.body['g2000n-wild'];
     
-    var game = new Game({
-      name: name,
-      players: players,
-      wild : wild
-    });
-    for (var i = 0; i < players.length; i++) {
-      game.score[players[i]] = req.body['g2000n-player-' + i];
-    }
-    game.save(function (err) {
-      console.dir(game);
+    Game.findOne({ name: name }, function (err, game) {
       if (err) return console.error(err);
-      res.redirect('/game/open/' + game.name);
+      console.log(!!game);
+
+      if (!game) {
+        game = new Game({
+          name: name,
+          players: players
+        });
+      }
+
+      game.wild = wild;
+
+      game.score = {};  // Resetting is required to save the score;
+      for (var i = 0; i < players.length; i++) {
+        game.score[players[i]] = req.body['g2000n-player-' + i];
+      }
+
+      game.save(function (err) {
+        if (err) return console.error(err);
+        console.dir(game);
+        res.redirect('/game/open/' + game.name);
+      });
     });
   } else {
     res.redirect('/game/add');
@@ -88,7 +99,7 @@ exports.save = function (req, res) {
 
 exports.open = function (req, res) {
   if (req.params.name) {
-    Game.findOne({ name: req.params.name.toString() }, function (err, game) {
+    Game.findOne({ name: req.params.name }, function (err, game) {
       if (err) return console.error(err);
       
       if (game) {
@@ -115,9 +126,17 @@ exports.delete = function (req, res) {
     Game.findOneAndRemove({ name: req.params.name.toString() }, function (err, game) {
       if (err) return console.error(err);
       
-      res.redirect('/game');
+      res.redirect('/game?admin');
     });
   } else {
     res.redirect('/game');
   }
+};
+
+exports.deleteAll = function (req, res) {
+  Game.remove({}, function (err) {
+    if (err) return console.error(err);
+    
+    res.redirect('/game?admin');
+  });
 };

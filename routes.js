@@ -14,6 +14,7 @@ module.exports = function (app) {
   app.route('/game/save').all(gameController.save);
   app.route('/game/open/:name').all(gameController.open);
   app.route('/game/delete/:name').all(gameController.delete);
+  app.route('/game/deleteAll').all(gameController.deleteAll);
   
   // debugController.all
   
