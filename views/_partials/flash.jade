@@ -1,18 +1,28 @@
 if messages.error
-  .alert.alert-danger.fade.in
+  .alert.alert-danger.alert-dismissible.fade.in
     button.close(type='button', data-dismiss='alert')
-      span.ion-close-circled
+      span(aria-hidden=true) &times;
+      span.sr-only Close
     for error in messages.error
       div= error.msg
-if messages.info
-  .alert.alert-info.fade.in
+if messages.warning
+  .alert.alert-warning.alert-dismissible.fade.in
     button.close(type='button', data-dismiss='alert')
-      span.ion-close-circled
+      span(aria-hidden=true) &times;
+      span.sr-only Close
+    for warning in messages.warning
+      div= warning.msg
+if messages.info
+  .alert.alert-info.alert-dismissible.fade.in
+    button.close(type='button', data-dismiss='alert')
+      span(aria-hidden=true) &times;
+      span.sr-only Close
     for info in messages.info
       div= info.msg
 if messages.success
-  .alert.alert-success.fade.in
+  .alert.alert-success.alert-dismissible.fade.in
     button.close(type='button', data-dismiss='alert')
-      span.ion-close-circled
+      span(aria-hidden=true) &times;
+      span.sr-only Close
     for success in messages.success
       div= success.msg

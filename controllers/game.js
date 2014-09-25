@@ -75,7 +75,7 @@ exports.start = function (req, res) {
     if (!req.body.players) {
       messages.push({ msg: 'No players defined!' });
     }
-    req.flash('error', messages);
+    req.flash('warning', messages);
 
     res.redirect('/game/add');
   }

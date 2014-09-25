@@ -50,13 +50,13 @@ block content
                 td
                 each player, index in players
                   td
-                    input.form-control.input-sm.text-center(
-                      class='g2000n-sum g2000n-player-'+index,
-                      type='text',
-                      disabled=true,
-                      data-player-index=index,
-                      style="display: inline-block; width: 95%;")
-                    | +
+                    .input-group
+                      input.form-control.input-sm.text-center(
+                        class='g2000n-sum g2000n-player-'+index,
+                        type='text',
+                        disabled=true,
+                        data-player-index=index)
+                      span.input-group-addon +
           - }
 
     p.text-right
