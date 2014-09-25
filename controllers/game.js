@@ -107,6 +107,9 @@ exports.save = function (req, res) {
       game.save(function (err) {
         if (err) return console.error(err);
         
+        var messages = [{ msg: 'Game is saved.' }];
+        req.flash('info', messages);
+        
         res.redirect('/game/open/' + game.name);
       });
     });
