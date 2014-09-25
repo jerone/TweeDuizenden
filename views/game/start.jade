@@ -8,15 +8,14 @@ block content
         button.btn.btn-primary(type='submit')
           span.glyphicon.glyphicon-floppy-disk
           | Save Game
-      h3 Start Game "#{name}"
-
-
+      h3 Start Game 
+        small #{name}
 
     input(name='name', type='hidden', value=name)
     input(name='players', type='hidden', value=players)
 
     if players
-      table.table.table-striped.table-hover.table-condensed
+      table.table.table-hover.table-condensed
         thead
           tr
             th #
@@ -26,7 +25,7 @@ block content
               th= player
         tbody
           - for (var i = 0; i < 20; i++) {
-            tr
+            tr.active
               th
                 span= i+1
               td
