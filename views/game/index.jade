@@ -11,8 +11,9 @@ block content
     if admin
       | &nbsp;
       a.btn.btn-danger(href='/game/deleteAll',
-                        title='Delete all games!',
-                        onclick='return confirm("Are you sure you want to delete all games?");')
+                       title='Delete all games!',
+                       onclick='return confirm("Are you sure you want to delete all games?");',
+                       class=Object.keys(games).length?undefined:'disabled')
         span.glyphicon.glyphicon-trash
         | Delete all
 
