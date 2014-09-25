@@ -1,5 +1,5 @@
 var Game = require('../models/Game');
-
+require('intl');
 
 exports.api = function (req, res) {
   Game.find({}, function (err, games) {
@@ -35,7 +35,7 @@ exports.index = function (req, res) {
 exports.add = function (req, res) {
   res.render('game/add', {
     title: 'Add Game',
-    name: new Date().getTime(),
+    name: new Date().toLocaleDateString('nl-NL') + ' ' + new Date().toLocaleTimeString('nl-NL'),
     players: 'Player 1\nPlayer 2\nPlayer 3'
   });
 };
