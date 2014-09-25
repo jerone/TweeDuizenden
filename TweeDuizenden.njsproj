@@ -55,12 +55,12 @@
     <Content Include="public\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="public\images\cards.jpg" />
     <Content Include="README.md" />
-    <Content Include="views\505.jade" />
+    <Content Include="RELEASE.txt" />
+    <Content Include="views\error.jade" />
     <Content Include="views\game\add.jade" />
     <Content Include="views\game\rules.jade" />
     <Content Include="views\game\index.jade" />
     <Content Include="views\game\start.jade" />
-    <Content Include="views\404.jade" />
     <Content Include="views\home.jade" />
     <Content Include="views\layout.jade" />
     <Content Include="views\_partials\flash.jade" />
