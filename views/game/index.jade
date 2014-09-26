@@ -4,18 +4,22 @@ block content
   .page-header
     h3 Games
 
-  p
+  div
     a.btn.btn-primary(href='/game/add', title='Add a new game.')
       span.glyphicon.glyphicon-plus
       | Add new game
     if admin
       | &nbsp;
-      a.btn.btn-danger(href='/game/deleteAll',
-                       title='Delete all games!',
-                       onclick='return confirm("Are you sure you want to delete all games?");',
-                       class=Object.keys(games).length?undefined:'disabled')
-        span.glyphicon.glyphicon-trash
-        | Delete all
+      form(method='POST', action='/game/delete', enctype='application/x-www-form-urlencoded', style='display:inline-block')
+        input(type='hidden', name='_method', value='DELETE')
+        button.btn.btn-danger(type='submit',
+                              title='Delete all games!',
+                              onclick='return confirm("Are you sure you want to delete all games?");',
+                              class=Object.keys(games).length?undefined:'disabled')
+          span.glyphicon.glyphicon-trash
+          | Delete all
+
+  br
 
   table.table
     thead
@@ -44,10 +48,12 @@ block content
                 span.hidden-xs Open
               if admin
                 | &nbsp;
-                a.btn.btn-danger(href='/game/delete/'+game.name,
-                                  title='Delete this game!',
-                                  onclick='return confirm("Are you sure you want to delete this game?");')
-                  span.glyphicon.glyphicon-trash
+                form(method='POST', action='/game/delete/'+game.name, enctype='application/x-www-form-urlencoded', style='display:inline-block')
+                  input(type='hidden', name='_method', value='DELETE')
+                  button.btn.btn-danger(type='submit',
+                                        title='Delete this game!',
+                                        onclick='return confirm("Are you sure you want to delete this game?");')
+                    span.glyphicon.glyphicon-trash
     else
       tbody
         tr

@@ -8,7 +8,8 @@ var express = require('express'),
     mongoose = require('mongoose'),
     less = require('less-middleware'),
     favicon = require('serve-favicon'),
-    secrets = require('./config/secrets');
+    secrets = require('./config/secrets'),
+    methodOverride = require('method-override');
 
 var app = express();
 
@@ -33,6 +34,13 @@ app.use(session({
     url: secrets.db,
     auto_reconnect: true
   })
+}));
+app.use(methodOverride(function (req, res) {
+  if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+    var method = req.body._method;
+    delete req.body._method;
+    return method;
+  }
 }));
 app.use(flash());
 

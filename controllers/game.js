@@ -33,16 +33,16 @@ exports.index = function (req, res) {
   });
 };
 
+exports.rules = function (req, res) {
+  res.render('game/rules', { title: 'Game Rules' });
+};
+
 exports.add = function (req, res) {
   res.render('game/add', {
     title: 'Add Game',
     name: new Date().toLocaleDateString('nl-NL') + ' ' + new Date().toLocaleTimeString('nl-NL'),
     players: 'Player 1\nPlayer 2\nPlayer 3'
   });
-};
-
-exports.rules = function (req, res) {
-  res.render('game/rules', { title: 'Game Rules' });
 };
 
 exports.start = function (req, res) {
@@ -64,7 +64,7 @@ exports.start = function (req, res) {
       } else {
         var messages = [{ msg: 'The name for this game already exists! Please define another name.' }];
         req.flash(Flash.error, messages);
-
+        
         res.redirect('/game/add');
       }
     });
@@ -77,7 +77,7 @@ exports.start = function (req, res) {
       messages.push({ msg: 'No players defined!' });
     }
     req.flash(Flash.warning, messages);
-
+    
     res.redirect('/game/add');
   }
 };
@@ -149,14 +149,10 @@ exports.delete = function (req, res) {
       res.redirect('/game?admin');
     });
   } else {
-    res.redirect('/game');
+    Game.remove({}, function (err) {
+      if (err) return console.error(err);
+      
+      res.redirect('/game?admin');
+    });
   }
-};
-
-exports.deleteAll = function (req, res) {
-  Game.remove({}, function (err) {
-    if (err) return console.error(err);
-    
-    res.redirect('/game?admin');
-  });
 };
