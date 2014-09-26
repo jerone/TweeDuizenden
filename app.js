@@ -1,13 +1,15 @@
-var express = require('express');
-var session = require('express-session');
-var bodyParser = require('body-parser');
-var logger = require('morgan');
-var MongoStore = require('connect-mongo')({ session: session });
-var flash = require('express-flash');
-var path = require('path');
-var mongoose = require('mongoose');
-var less = require('less-middleware');
-var secrets = require('./config/secrets');
+var express = require('express'),
+    session = require('express-session'),
+    bodyParser = require('body-parser'),
+    logger = require('morgan'),
+    MongoStore = require('connect-mongo')({ session: session }),
+    flash = require('express-flash'),
+    path = require('path'),
+    mongoose = require('mongoose'),
+    less = require('less-middleware'),
+    favicon = require('serve-favicon'),
+    secrets = require('./config/secrets');
+
 var app = express();
 
 mongoose.connect(secrets.db);
@@ -34,7 +36,8 @@ app.use(session({
 }));
 app.use(flash());
 
-app.use(less(__dirname + '/public'));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(less(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: 1000 * 60 * 60 * 24 * 7 }));
 
 require('./routes.js')(app);

@@ -49,6 +49,7 @@
     <Content Include="public\css\bootstrap.css.map" />
     <Content Include="public\css\bootstrap.min.css" />
     <Content Include="public\css\styles.less" />
+    <Content Include="public\favicon.ico" />
     <Content Include="public\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="public\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="public\fonts\glyphicons-halflings-regular.ttf" />
@@ -56,6 +57,7 @@
     <Content Include="public\images\cards.jpg" />
     <Content Include="README.md" />
     <Content Include="RELEASE.txt" />
+    <Content Include="TODO.md" />
     <Content Include="views\error.jade" />
     <Content Include="views\game\add.jade" />
     <Content Include="views\game\rules.jade" />
