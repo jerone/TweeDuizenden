@@ -1,4 +1,5 @@
-var Game = require('../models/Game');
+var Game = require('../models/Game'),
+    Flash = require('../models/Flash');
 require('intl');
 
 exports.api = function (req, res) {
@@ -62,7 +63,7 @@ exports.start = function (req, res) {
         });
       } else {
         var messages = [{ msg: 'The name for this game already exists! Please define another name.' }];
-        req.flash('error', messages);
+        req.flash(Flash.error, messages);
 
         res.redirect('/game/add');
       }
@@ -75,7 +76,7 @@ exports.start = function (req, res) {
     if (!req.body.players) {
       messages.push({ msg: 'No players defined!' });
     }
-    req.flash('warning', messages);
+    req.flash(Flash.warning, messages);
 
     res.redirect('/game/add');
   }
@@ -108,7 +109,7 @@ exports.save = function (req, res) {
         if (err) return console.error(err);
         
         var messages = [{ msg: 'Game is saved.' }];
-        req.flash('info', messages);
+        req.flash(Flash.info, messages);
         
         res.redirect('/game/open/' + game.name);
       });
