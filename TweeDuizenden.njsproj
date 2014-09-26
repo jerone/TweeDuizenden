@@ -47,6 +47,7 @@
     <Content Include="public\css\bootstrap-theme.css" />
     <Content Include="public\css\bootstrap-theme.css.map" />
     <Content Include="public\css\bootstrap-theme.min.css" />
+    <Content Include="public\css\bootstrap.css" />
     <Content Include="public\css\bootstrap.css.map" />
     <Content Include="public\css\bootstrap.min.css" />
     <Content Include="public\css\styles.less" />
