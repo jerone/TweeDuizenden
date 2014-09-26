@@ -1,11 +1,19 @@
-﻿var debugController = require('./controllers/debug');
-var homeController = require('./controllers/home');
+﻿var homeController = require('./controllers/home');
 var gameController = require('./controllers/game');
+//var debugController = require('./controllers/debug');
 
 module.exports = function (app) {
   
+  // Handle current menu item;
+  app.use(function (req, res, next) {
+    res.locals.menuParts = require('url').parse(req.url).pathname.substring(1).toLowerCase().split('/');
+    next();
+  });
+  
+  // Handle home;
   app.route('/').get(homeController.index);
   
+  // Handle game pages;
   app.route('/game').get(gameController.index);
   app.route('/game/rules').get(gameController.rules);
   app.route('/game/add').get(gameController.add);
@@ -15,8 +23,6 @@ module.exports = function (app) {
   app.route('/game/open/:name').all(gameController.open);
   app.route('/game/delete/:name').all(gameController.delete);
   app.route('/game/deleteAll').all(gameController.deleteAll);
-  
-  // debugController.all
   
   // Handle 404;
   app.use(function (req, res) {
@@ -35,4 +41,5 @@ module.exports = function (app) {
       message: error
     });
   });
+  
 };

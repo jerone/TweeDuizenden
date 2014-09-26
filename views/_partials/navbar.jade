@@ -8,12 +8,12 @@
         span.icon-bar
       a.navbar-brand(href='/')
         span.glyphicon.glyphicon-tower
-        | Tweeduizenden
+        | TweeDuizenden
     .collapse.navbar-collapse
       ul.nav.navbar-nav
-        li(class=title=='Home'?'active':undefined)
+        li(class=!!~menuParts.indexOf('')?'active':undefined)
           a(href='/') Home
-        li(class=title=='Game'?'active':undefined)
+        li(class=!!~menuParts.indexOf('game')&&!~menuParts.indexOf('rules')?'active':undefined)
           a(href='/game') Game
-        li(class=title=='Game Rules'?'active':undefined)
+        li(class=!!~menuParts.indexOf('rules')?'active':undefined)
           a(href='/game/rules') Rules
