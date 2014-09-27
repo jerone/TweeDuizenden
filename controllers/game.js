@@ -62,21 +62,24 @@ exports.start = function (req, res) {
           score: {}
         });
       } else {
-        var messages = [{ msg: 'The name for this game already exists! Please define another name.' }];
-        req.flash(Flash.error, messages);
+        req.flash(Flash.error, {
+          message: 'The name for this game already exists! Please define another name.'
+        });
         
         res.redirect('/game/add');
       }
     });
   } else {
-    var messages = [];
     if (!req.body.name) {
-      messages.push({ msg: 'No name defined!' });
+      req.flash(Flash.warning, {
+        message: 'No name defined!'
+      });
     }
     if (!req.body.players) {
-      messages.push({ msg: 'No players defined!' });
+      req.flash(Flash.warning, {
+        message: 'No players defined!'
+      });
     }
-    req.flash(Flash.warning, messages);
     
     res.redirect('/game/add');
   }
@@ -108,8 +111,10 @@ exports.save = function (req, res) {
       game.save(function (err) {
         if (err) return console.error(err);
         
-        var messages = [{ msg: 'Game is saved.' }];
-        req.flash(Flash.info, messages);
+        req.flash(Flash.info, {
+          message: 'Game is saved.',
+          fadeout: true
+        });
         
         res.redirect('/game/open/' + game.name);
       });

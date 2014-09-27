@@ -4,6 +4,12 @@ var gameController = require('./controllers/game');
 
 module.exports = function (app) {
   
+  // Handle flash;
+  app.use(function (req, res, next) {
+    res.locals.flash = req.flash();
+    next();
+  });
+  
   // Handle current menu item;
   app.use(function (req, res, next) {
     res.locals.menuParts = require('url').parse(req.url).pathname.substring(1).toLowerCase().split('/');

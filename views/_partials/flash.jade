@@ -1,28 +1,47 @@
-if messages.error
-  .alert.alert-danger.alert-dismissible.fade.in
-    button.close(type='button', data-dismiss='alert')
-      span(aria-hidden=true) &times;
-      span.sr-only Close
-    for error in messages.error
-      div= error.msg
-if messages.warning
-  .alert.alert-warning.alert-dismissible.fade.in
-    button.close(type='button', data-dismiss='alert')
-      span(aria-hidden=true) &times;
-      span.sr-only Close
-    for warning in messages.warning
-      div= warning.msg
-if messages.info
-  .alert.alert-info.alert-dismissible.fade.in
-    button.close(type='button', data-dismiss='alert')
-      span(aria-hidden=true) &times;
-      span.sr-only Close
-    for info in messages.info
-      div= info.msg
-if messages.success
-  .alert.alert-success.alert-dismissible.fade.in
-    button.close(type='button', data-dismiss='alert')
-      span(aria-hidden=true) &times;
-      span.sr-only Close
-    for success in messages.success
-      div= success.msg
+mixin fadeout(selector)
+  script.
+      $(function(){
+          window.setTimeout(function(){
+              $("#{selector}").alert("close");
+          }, 3000);
+      });
+
+if flash.error
+  for alert in flash.error
+    .alert.alert-danger.alert-dismissible.fade.in
+      button.close(type='button', data-dismiss='alert')
+        span(aria-hidden=true) &times;
+        span.sr-only Close
+      div= alert.message
+    if alert.fadeout
+      +fadeout('.alert-danger')
+
+if flash.warning
+  for alert in flash.warning
+    .alert.alert-warning.alert-dismissible.fade.in
+      button.close(type='button', data-dismiss='alert')
+        span(aria-hidden=true) &times;
+        span.sr-only Close
+      div= alert.message
+    if alert.fadeout
+      +fadeout('.alert-warning')
+
+if flash.info
+  for alert in flash.info
+    .alert.alert-info.alert-dismissible.fade.in
+      button.close(type='button', data-dismiss='alert')
+        span(aria-hidden=true) &times;
+        span.sr-only Close
+      div= alert.message
+    if alert.fadeout
+      +fadeout('.alert-info')
+
+if flash.success
+  for alert in flash.success
+    .alert.alert-success.alert-dismissible.fade.in
+      button.close(type='button', data-dismiss='alert')
+        span(aria-hidden=true) &times;
+        span.sr-only Close
+      div= alert.message
+    if alert.fadeout
+      +fadeout('.alert-success')
