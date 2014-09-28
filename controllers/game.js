@@ -138,6 +138,7 @@ exports.open = function (req, res) {
           score: game.score || {}
         });
       } else {
+        // TODO
         res.send('no game!!!');
       }
     });

@@ -1,6 +1,6 @@
-﻿var homeController = require('./controllers/home');
-var gameController = require('./controllers/game');
-//var debugController = require('./controllers/debug');
+﻿var homeController = require('./../controllers/home');
+var gameController = require('./../controllers/game');
+//var debugController = require('./../controllers/debug');
 
 module.exports = function (app) {
   
