@@ -1,0 +1,9 @@
+---------------------
+
+git push origin master && git push openshift master
+
+---------------------
+
+SET NODE_ENV=development && nodemon
+
+---------------------
