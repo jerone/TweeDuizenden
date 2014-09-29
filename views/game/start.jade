@@ -33,12 +33,12 @@ block content
                 p.form-control-static.input-sm= players[i % players.length]
               td
                 - var wildOptions = ["-", "A", "K", "Q", "J", 10, 9, 8, 7, 6, 5, 4];
-                select.form-control.input-sm.text-center(name='wild')
+                select.form-control.text-center(name='wild')
                   each wildOption in wildOptions
                     option(selected=wild[i]===wildOption) #{wildOption}
               each player, index in players
                 td
-                  input.form-control.input-sm.text-center(
+                  input.form-control.text-center(
                     name='player-'+index,
                     class='g2000n-value g2000n-player-'+index,
                     type='number',
@@ -52,7 +52,7 @@ block content
                 each player, index in players
                   td
                     .input-group
-                      input.form-control.input-sm.text-center(
+                      input.form-control.text-center(
                         class='g2000n-sum g2000n-player-'+index,
                         type='text',
                         disabled=true,
