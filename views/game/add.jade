@@ -8,13 +8,31 @@ block content
     .form-group
       label.col-sm-2.control-label(for='name')= t('game:add.name.label')
       .col-sm-8
-        input.form-control(name='name', type='text', value=name)
+        input.form-control.placeholder(name='name', type='text', value=name)
     .form-group
       label.col-sm-2.control-label(for='players')= t('game:add.players.label')
       .col-sm-8
-        textarea.form-control(name='players', autofocus=true, rows=5) #{players}
+        textarea.form-control.placeholder(name='players', rows=5) #{players}
     .form-group
       .col-sm-offset-2.col-sm-8
         button.btn.btn-primary(type='submit')
           span.glyphicon.glyphicon-chevron-right
           | #{t('game:add.start.text')}
+
+  script.
+    $(function(){
+        $(".placeholder").each(function(){
+            var that = $(this);
+            that.data("placeholder", that.val());
+        }).focus(function(){
+            var that = $(this);
+            if(that.val() === that.data("placeholder")){
+                that.val('');
+            }
+        }).blur(function(){
+            var that = $(this);
+            if(that.val() === ""){
+                that.val(that.data("placeholder"));
+            }
+        }).triggerHandler("blur");
+    });
