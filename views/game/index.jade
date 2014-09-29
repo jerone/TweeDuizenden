@@ -2,35 +2,35 @@ extends ../_layout
 
 block content
   .page-header
-    h3 Games
+    h3= t('game:index.header.title')
 
   div
-    a.btn.btn-primary(href='/game/add', title='Add a new game.')
+    a.btn.btn-primary(href='/game/add', title=t('game:index.add.title'))
       span.glyphicon.glyphicon-plus
-      | Add new game
+      | #{t('game:index.add.text')}
     if admin
       | &nbsp;
       form(method='POST', action='/game/delete', enctype='application/x-www-form-urlencoded', style='display:inline-block')
         input(type='hidden', name='_method', value='DELETE')
         button.btn.btn-danger(type='submit',
-                              title='Delete all games!',
-                              onclick='return confirm("Are you sure you want to delete all games?");',
+                              title=t('game:index.delete_all.title'),
+                              onclick='return confirm("'+t('game:index.delete_all.confirm')+'");',
                               class=Object.keys(games).length?undefined:'disabled')
           span.glyphicon.glyphicon-trash
-          | Delete all
+          | #{t('game:index.delete_all.text')}
 
   br
 
   table.table
     thead
       tr
-        th Name
+        th= t('game:index.table.name')
         if admin
-          th Id
-        th Created
-        th Updated
-        th Players
-        th Actions
+          th= t('game:index.table.id')
+        th= t('game:index.table.created')
+        th= t('game:index.table.updated')
+        th= t('game:index.table.players')
+        th= t('game:index.table.actions')
     //- Check if object is really empty;
     if Object.keys(games).length
       tbody
@@ -43,19 +43,19 @@ block content
             td #{game.updatedAt.toLocaleDateString('nl-NL')} #{game.updatedAt.toLocaleTimeString('nl-NL')}
             td #{game.players.join(', ')}
             td.text-nowrap
-              a.btn.btn-success(href='/game/open/'+game.name, title='Open this game.')
+              a.btn.btn-success(href='/game/open/'+game.name, title=t('game:index.table.open.title'))
                 span.glyphicon.glyphicon-folder-open
-                span.hidden-xs Open
+                span.hidden-xs= t('game:index.table.open.text')
               if admin
                 | &nbsp;
                 form(method='POST', action='/game/delete/'+game.name, enctype='application/x-www-form-urlencoded', style='display:inline-block')
                   input(type='hidden', name='_method', value='DELETE')
                   button.btn.btn-danger(type='submit',
-                                        title='Delete this game!',
-                                        onclick='return confirm("Are you sure you want to delete this game?");')
+                                        title=t('game:index.table.delete.title'),
+                                        onclick='return confirm("'+t('game:index.table.delete.confirm')+'");')
                     span.glyphicon.glyphicon-trash
     else
       tbody
         tr
           td(colspan=admin ? 6 : 5)
-            p.text-danger There are no games available!
+            p.text-danger= t('game:index.table.empty')

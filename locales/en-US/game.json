@@ -1,0 +1,90 @@
+{
+  "index": {
+    "title": "Game",
+    "header": {
+      "title": "Games"
+    },
+    "add": {
+      "title": "Add a new game.",
+      "text": "Add new game"
+    },
+    "delete_all": {
+      "title": "Delete all games!",
+      "confirm": "Are you sure you want to delete all games?",
+      "text": "Delete all"
+    },
+    "table": {
+      "name": "Name",
+      "id": "Id",
+      "created": "Created",
+      "updated": "Updated",
+      "players": "Players",
+      "actions": "Actions",
+      "empty": "There are no games available!",
+      "open": {
+        "title": "Open this game.",
+        "text": "Open"
+      },
+      "delete": {
+        "title": "Delete this game!",
+        "confirm": "Are you sure you want to delete this game?"
+      }
+    }
+  },
+  "rules": {
+    "title": "Game Rules",
+    "header": {
+      "title": "Rules"
+    },
+    "text__TODO": [    ],
+    "add": {
+      "text": "Start a new game &raquo;"
+    },
+    "view": {
+      "text": "View previous games &raquo;"
+    }
+  },
+  "add": {
+    "title": "Add Game",
+    "header": {
+      "title": "Add Game"
+    },
+    "players": {
+      "label": "Players",
+      "default": "Player 1\nPlayer 2\nPlayer 3"
+    },
+    "name": {
+      "label": "Name"
+    },
+    "start": {
+      "text": "Start Game"
+    }
+  },
+  "start": {
+    "title": "Start Game __name__",
+    "warning": {
+      "no_name": "No name defined!",
+      "no_players": "No players defined!"
+    },
+    "save": {
+      "title": "Save this game.",
+      "text": "Save Game"
+    },
+    "header": {
+      "title": "Start Game"
+    },
+    "table": {
+      "number": "#",
+      "dealer": "Dealer",
+      "wild": "Wild"
+    }
+  },
+  "save": {
+    "info": {
+      "saved": "Game is saved."
+    }
+  },
+  "open": {
+    "title": "Open Game __name__"
+  }
+}

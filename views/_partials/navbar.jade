@@ -2,18 +2,25 @@
   .container
     .navbar-header
       button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
-        span.sr-only Toggle navigation
+        span.sr-only= t('_navbar:header.toggle')
         span.icon-bar
         span.icon-bar
         span.icon-bar
       a.navbar-brand(href='/')
         span.glyphicon.glyphicon-tower
-        | TweeDuizenden
+        | #{t('_navbar:header.title')}
     .collapse.navbar-collapse
       ul.nav.navbar-nav
         li(class=!!~menuParts.indexOf('')?'active':undefined)
-          a(href='/') Home
+          a(href='/')= t('_navbar:nav.home')
         li(class=!!~menuParts.indexOf('game')&&!~menuParts.indexOf('rules')?'active':undefined)
-          a(href='/game') Game
+          a(href='/game')= t('_navbar:nav.game')
         li(class=!!~menuParts.indexOf('rules')?'active':undefined)
-          a(href='/game/rules') Rules
+          a(href='/game/rules')= t('_navbar:nav.rules')
+      ul.nav.navbar-nav.navbar-right
+        li(class=i18n.lng()==='en-US'?'active':undefined)
+          a(href='/?lang=en-US', title=t('_navbar:nav.english'))
+            img(src='/en-US/en-US.gif')
+        li(class=i18n.lng()==='nl-NL'?'active':undefined)
+          a(href='/?lang=nl-NL', title=t('_navbar:nav.dutch'))
+            img(src='/nl-NL/nl-NL.gif')

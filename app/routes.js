@@ -1,4 +1,6 @@
-﻿var homeController = require('./../controllers/home');
+﻿var url = require('url');
+
+var homeController = require('./../controllers/home');
 var gameController = require('./../controllers/game');
 //var debugController = require('./../controllers/debug');
 
@@ -12,8 +14,17 @@ module.exports = function (app) {
   
   // Handle current menu item;
   app.use(function (req, res, next) {
-    res.locals.menuParts = require('url').parse(req.url).pathname.substring(1).toLowerCase().split('/');
+    res.locals.menuParts = url.parse(req.url).pathname.substring(1).toLowerCase().split('/');
     next();
+  });
+  
+  // Handle i18n;
+  app.use(function (req, res, next) {
+    if (req.query.lang) {
+      res.redirect('back');
+    } else {
+      next();
+    }
   });
   
   // Handle home;

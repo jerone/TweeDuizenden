@@ -26,7 +26,7 @@ exports.index = function (req, res) {
     });
     
     res.render('game/index', {
-      title: 'Games',
+      title: req.i18n.t('game:index.title'),
       admin: admin,
       games: gamesMap
     });
@@ -34,14 +34,14 @@ exports.index = function (req, res) {
 };
 
 exports.rules = function (req, res) {
-  res.render('game/rules', { title: 'Game Rules' });
+  res.render('game/rules', { title: req.i18n.t('game:rules.title') });
 };
 
 exports.add = function (req, res) {
   res.render('game/add', {
-    title: 'Add Game',
+    title: req.i18n.t('game:add.title'),
     name: new Date().toLocaleDateString('nl-NL') + ' ' + new Date().toLocaleTimeString('nl-NL'),
-    players: 'Player 1\nPlayer 2\nPlayer 3'
+    players: req.i18n.t('game:add.players.default')
   });
 };
 
@@ -55,7 +55,7 @@ exports.start = function (req, res) {
       
       if (games.length === 0) {
         res.render('game/start', {
-          title: 'Start Game ' + name,
+          title: req.i18n.t('game:start.title', { name: name }),
           name: name,
           players: players,
           wild: ['-'],
@@ -63,7 +63,7 @@ exports.start = function (req, res) {
         });
       } else {
         req.flash(Flash.error, {
-          message: 'The name for this game already exists! Please define another name.'
+          message: req.i18n.t('game:start.error.exists')//--'The name for this game already exists! Please define another name.'
         });
         
         res.redirect('/game/add');
@@ -72,12 +72,12 @@ exports.start = function (req, res) {
   } else {
     if (!req.body.name) {
       req.flash(Flash.warning, {
-        message: 'No name defined!'
+        message: req.i18n.t('game:start.warning.no_name')
       });
     }
     if (!req.body.players) {
       req.flash(Flash.warning, {
-        message: 'No players defined!'
+        message: req.i18n.t('game:start.warning.no_players')
       });
     }
     
@@ -112,7 +112,7 @@ exports.save = function (req, res) {
         if (err) return console.error(err);
         
         req.flash(Flash.info, {
-          message: 'Game is saved.',
+          message: req.i18n.t('game:save.info.saved'),
           fadeout: true
         });
         
@@ -131,7 +131,7 @@ exports.open = function (req, res) {
       
       if (game) {
         res.render('game/start', {
-          title: 'Start Game ' + game.name,
+          title: req.i18n.t('game:open.title', { name: game.name }),
           name: game.name,
           players: game.players,
           wild: game.wild || ['-'],

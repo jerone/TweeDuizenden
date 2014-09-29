@@ -1,0 +1,13 @@
+{
+  "header": {
+    "title": "TweeDuizenden",
+    "toggle": "Toggle navigatie"
+  },
+  "nav": {
+    "home": "Home",
+    "game": "Spel",
+    "rules": "Spelregels",
+    "english": "Engels",
+    "dutch": "Nederlands"
+  }
+}

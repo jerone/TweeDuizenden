@@ -2,19 +2,19 @@ extends ../_layout
 
 block content
   .page-header
-    h3 Add Game
+    h3= t('game:add.header.title')
 
   form.form-horizontal(role='form', method='POST', action='/game/start')
     .form-group
-      label.col-sm-2.control-label(for='name') Name
+      label.col-sm-2.control-label(for='name')= t('game:add.name.label')
       .col-sm-8
         input.form-control(name='name', type='text', value=name)
     .form-group
-      label.col-sm-2.control-label(for='players') Players
+      label.col-sm-2.control-label(for='players')= t('game:add.players.label')
       .col-sm-8
         textarea.form-control(name='players', autofocus=true, rows=5) #{players}
     .form-group
       .col-sm-offset-2.col-sm-8
         button.btn.btn-primary(type='submit')
           span.glyphicon.glyphicon-chevron-right
-          | Start Game
+          | #{t('game:add.start.text')}

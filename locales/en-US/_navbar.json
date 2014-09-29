@@ -1,0 +1,13 @@
+{
+  "header": {
+    "title": "TweeDuizenden",
+    "toggle": "Toggle navigation"
+  },
+  "nav": {
+    "home": "Home",
+    "game": "Game",
+    "rules": "Rules",
+    "english": "English",
+    "dutch": "Dutch"
+  }
+}

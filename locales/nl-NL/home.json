@@ -1,0 +1,32 @@
+{
+  "title": "Home",
+  "header": {
+    "title": "TweeDuizenden",
+    "lead": "Een website om score voor het spel TweeDuizenden bij te houden."
+  },
+  "overview": {
+    "title": "Overzicht",
+    "text": [
+      "Op deze website kan je een nieuw spel beginnen of eerder gespeelde spellen bekijken.",
+      "Gebruik de knop hieronder om een nieuw spel te starten."
+    ]
+  },
+  "rules": {
+    "title": "Spelregels",
+    "text": [
+      "Tweeduizenden is een geavanceerd spel.",
+      "Als u niet bekend met de spelregels, is het aan te raden om deze eerst goed door te nemen."
+    ]
+  },
+  "game": {
+    "rules": {
+      "text": "Lees de spelregels &raquo;"
+    },
+    "add": {
+      "text": "Start nieuw spel &raquo;"
+    },
+    "view": {
+      "text": "Bekijk alle spellen &raquo;"
+    }
+  }
+}

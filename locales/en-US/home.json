@@ -1,0 +1,32 @@
+{
+  "title": "Home",
+  "header": {
+    "title": "TweeDuizenden",
+    "lead": "A website to record scores for a game called TweeDuizenden."
+  },
+  "overview": {
+    "title": "Overview",
+    "text": [
+      "On this website you can start new games or view previous games.",
+      "Use the button below to start a new game."
+    ]
+  },
+  "rules": {
+    "title": "Rules",
+    "text": [
+      "Tweeduizenden is an advanced game.",
+      "If you're not familiar with the rules of this game it's highly recommanded that you read them first."
+    ]
+  },
+  "game": {
+    "rules": {
+      "text": "Read the rules &raquo;"
+    },
+    "add": {
+      "text": "Start new game &raquo;"
+    },
+    "view": {
+      "text": "View previous games &raquo;"
+    }
+  }
+}
