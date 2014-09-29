@@ -30,7 +30,7 @@ block content
               th
                 span= i+1
               td
-                p.form-control-static.input-sm= players[i % players.length]
+                p.form-control-static.input-sm.text-nowrap= players[i % players.length]
               td
                 - var wildOptions = ["-", "A", "K", "Q", "J", 10, 9, 8, 7, 6, 5, 4];
                 select.form-control.text-center(name='wild')
