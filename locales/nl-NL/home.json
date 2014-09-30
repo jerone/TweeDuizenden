@@ -7,7 +7,8 @@
   "overview": {
     "title": "Overzicht",
     "text": [
-      "Op deze website kan je een nieuw spel beginnen of eerder gespeelde spellen bekijken.",
+      "Op deze website kunt u de scores voor het spel TweeDuizenden bijhouden.",
+      "Daarnaast kunt u de scores opslaan en eerder gespeelde spellen bekijken.",
       "Gebruik de knop hieronder om een nieuw spel te starten."
     ]
   },
@@ -15,7 +16,7 @@
     "title": "Spelregels",
     "text": [
       "Tweeduizenden is een geavanceerd spel.",
-      "Als u niet bekend met de spelregels, is het aan te raden om deze eerst goed door te nemen."
+      "Als u niet bekend bent met de spelregels, is het aan te raden om deze eerst goed door te nemen."
     ]
   },
   "game": {
