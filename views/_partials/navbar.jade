@@ -20,7 +20,9 @@
       ul.nav.navbar-nav.navbar-right
         li(class=i18n.lng()==='en-US'?'active':undefined)
           a(href='/?lang=en-US', title=t('_navbar:nav.english'))
-            img(src='/en-US/en-US.gif')
+            img.glyphicon(src='/en-US/en-US.gif')
+            span.visible-xs-inline= t('_navbar:nav.english')
         li(class=i18n.lng()==='nl-NL'?'active':undefined)
           a(href='/?lang=nl-NL', title=t('_navbar:nav.dutch'))
-            img(src='/nl-NL/nl-NL.gif')
+            img.glyphicon(src='/nl-NL/nl-NL.gif')
+            span.visible-xs-inline= t('_navbar:nav.dutch')
