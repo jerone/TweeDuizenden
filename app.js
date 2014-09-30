@@ -11,7 +11,8 @@ var express = require('express'),
     favicon = require('serve-favicon'),
     methodOverride = require('method-override'),
     i18n = require('i18next'),
-    jade = require('jade');
+    jade = require('jade'),
+    EOL = require('os').EOL;
 
 var app = /*module.exports =*/ express();
 var secrets = require('./config/secrets');
@@ -44,7 +45,8 @@ i18n.init({
   }
 });
 i18n.addPostProcessor('multi-line-jade', function (val, key, opts) {
-  return jade.render('p ' + val.replace(/\n\n/g, '\n&nbsp;\n').replace(/\n/g, '\np '));
+  //NOTE: i18next is using \n as fixed new-lines;
+  return jade.render('p ' + val.replace(/\n\n/g, '\n&nbsp;\n').replace(/\n/g, EOL + 'p '));
 });
 i18n.registerAppHelper(app);
 

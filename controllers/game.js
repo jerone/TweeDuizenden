@@ -1,5 +1,6 @@
 var Game = require('../models/Game'),
-    Flash = require('../models/Flash');
+    Flash = require('../models/Flash'),
+    EOL = require('os').EOL;
 require('intl');
 
 exports.api = function (req, res) {
@@ -48,7 +49,7 @@ exports.add = function (req, res) {
 exports.start = function (req, res) {
   if (req.body.name && req.body.players) {
     var name = req.body.name,
-        players = req.body.players.split('\r\n');
+        players = req.body.players.split(EOL);
     
     Game.find({ name: name }, function (err, games) {
       if (err) return console.error(err);
