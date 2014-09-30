@@ -33,11 +33,13 @@ footer {
     Forms
 */
 
+/* Also disable group addon when form control is disabled; */
 .form-control[disabled] + .input-group-addon {
     background-color: #fff;
     cursor: not-allowed;
 }
 
+/* Fix for full width in tables for Chrome; */
 td select.form-control {
     width: auto !important;
     min-width: 100% !important;
@@ -48,6 +50,24 @@ td select.form-control {
     Icons
 */
 
+/* Some space; */
 .glyphicon {
     margin-right: 0.5em;
+}
+
+
+/*
+    Table
+*/
+
+/* Vertical center table content; */
+.table-v-center {
+    > thead > tr > th,
+    > tbody > tr > th,
+    > tfoot > tr > th,
+    > thead > tr > td,
+    > tbody > tr > td,
+    > tfoot > tr > td {
+        vertical-align: middle;
+    }
 }
