@@ -10,8 +10,8 @@ block content
 
   a.btn.btn-primary(href='/game/add')
     span.glyphicon.glyphicon-plus
-    | !{t('game:rules.add.text')}
+    span!= t('game:rules.add.text')
   | &nbsp;
   a.btn.btn-default(href='/game')
     span.glyphicon.glyphicon-stats
-    | !{t('game:rules.view.text')}
+    span!= t('game:rules.view.text')

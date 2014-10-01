@@ -7,7 +7,7 @@ block content
   div
     a.btn.btn-primary(href='/game/add', title=t('game:index.add.title'))
       span.glyphicon.glyphicon-plus
-      | #{t('game:index.add.text')}
+      span= t('game:index.add.text')
     if admin
       | &nbsp;
       form(method='POST', action='/game/delete', enctype='application/x-www-form-urlencoded', style='display:inline-block')
@@ -17,7 +17,7 @@ block content
                               onclick='return confirm("'+t('game:index.delete_all.confirm')+'");',
                               class=Object.keys(games).length?undefined:'disabled')
           span.glyphicon.glyphicon-trash
-          | #{t('game:index.delete_all.text')}
+          span= t('game:index.delete_all.text')
 
   br
 

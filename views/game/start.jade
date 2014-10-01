@@ -7,7 +7,7 @@ block content
       .pull-right
         button.btn.btn-primary(type='submit', title=t('game:start.save.title'))
           span.glyphicon.glyphicon-floppy-disk
-          | #{t('game:start.save.text')}
+          span= t('game:start.save.text')
       h3= t('game:start.header.title')
         | &nbsp;
         small #{name}
@@ -63,7 +63,7 @@ block content
     p.text-right
       button.btn.btn-primary(type='submit', title=t('game:start.save.title'))
         span.glyphicon.glyphicon-floppy-disk
-        | #{t('game:start.save.text')}
+        span= t('game:start.save.text')
 
 
 block scripts

@@ -8,7 +8,7 @@
         span.icon-bar
       a.navbar-brand(href='/')
         span.glyphicon.glyphicon-tower
-        | #{t('_navbar:header.title')}
+        span= t('_navbar:header.title')
     .collapse.navbar-collapse
       ul.nav.navbar-nav
         li(class=!!~menuParts.indexOf('')?'active':undefined)
