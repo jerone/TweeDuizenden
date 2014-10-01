@@ -10,18 +10,19 @@ block content
       span= t('game:index.add.text')
     if admin
       | &nbsp;
-      form(method='POST', action='/game/delete', enctype='application/x-www-form-urlencoded', style='display:inline-block')
+      form#g2000n-delete-all(method='POST', action='/game/delete', enctype='application/x-www-form-urlencoded', style='display:inline-block')
         input(type='hidden', name='_method', value='DELETE')
         button.btn.btn-danger(type='submit',
                               title=t('game:index.delete_all.title'),
                               onclick='return confirm("'+t('game:index.delete_all.confirm')+'");',
+                              disabled=!Object.keys(games).length,
                               class=Object.keys(games).length?undefined:'disabled')
           span.glyphicon.glyphicon-trash
           span= t('game:index.delete_all.text')
 
   br
 
-  table.table.table-v-center
+  table.table.table-v-center#g2000n-table
     thead
       tr
         th= t('game:index.table.name')
@@ -48,7 +49,7 @@ block content
                 span.hidden-xs= t('game:index.table.open.text')
               if admin
                 | &nbsp;
-                form(method='POST', action='/game/delete/'+game.name, enctype='application/x-www-form-urlencoded', style='display:inline-block')
+                form.g2000n-delete(method='POST', action='/game/delete/'+game.name, enctype='application/x-www-form-urlencoded', style='display:inline-block')
                   input(type='hidden', name='_method', value='DELETE')
                   button.btn.btn-danger(type='submit',
                                         title=t('game:index.table.delete.title'),
@@ -59,3 +60,12 @@ block content
         tr
           td(colspan=admin ? 6 : 5)
             p.text-danger= t('game:index.table.empty')
+
+  if admin
+    script(id='empty-template', type="text/template")
+      tr
+        td(colspan=admin ? 6 : 5)
+          p.text-danger= t('game:index.table.empty')
+
+    block scripts
+      script(src='/js/admin.js')

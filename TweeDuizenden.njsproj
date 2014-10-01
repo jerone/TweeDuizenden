@@ -41,7 +41,6 @@
     <Compile Include="public\js\lib\bootstrap.min.js" />
     <Compile Include="public\js\lib\jquery-2.1.1.min.js" />
     <Compile Include="public\js\tweeduizenden.js" />
-    <Compile Include="test\app.js" />
     <Content Include="LICENSE" />
     <Content Include="locales\en-US\app.json" />
     <Content Include="locales\en-US\en-US.gif" />
@@ -101,7 +100,6 @@
     <Folder Include="public\images\" />
     <Folder Include="public\js\" />
     <Folder Include="public\js\lib\" />
-    <Folder Include="test\" />
     <Folder Include="views\" />
     <Folder Include="views\game\" />
     <Folder Include="views\_partials\" />

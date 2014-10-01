@@ -153,13 +153,21 @@ exports.delete = function (req, res) {
     Game.findOneAndRemove({ name: req.params.name }, function (err, game) {
       if (err) return console.error(err);
       
-      res.redirect('/game?admin');
+      if (req.xhr) {
+        res.send({ error: false });
+      } else {
+        res.redirect('/game?admin');
+      }
     });
   } else {
     Game.remove({}, function (err) {
       if (err) return console.error(err);
       
-      res.redirect('/game?admin');
+      if (req.xhr) {
+        res.send({ error: false });
+      } else {
+        res.redirect('/game?admin');
+      }
     });
   }
 };
