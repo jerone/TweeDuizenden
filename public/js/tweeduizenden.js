@@ -1,5 +1,5 @@
 ﻿$(function () {
-
+  
   var sum = function () {
     var that = $(this),
         index = that.data("player-index"),
@@ -17,5 +17,12 @@
   $(".g2000n-value").change(function () {
     $(".g2000n-sum.g2000n-player-" + $(this).data("player-index")).each(sum);
   }).trigger("change");
+  
+  
+  /* Fixed headers in table; */
+  $('table.table').floatThead({
+    useAbsolutePositioning: false,
+    scrollingTop: 50
+  });
 
 });

@@ -19,7 +19,9 @@ block content
       table.table.table-hover.table-condensed
         thead
           tr
-            th= t('game:start.table.number')
+            th
+              div.table-row-min-height
+                span= t('game:start.table.number')
             th= t('game:start.table.dealer')
             th= t('game:start.table.wild')
             each player in players
@@ -67,4 +69,5 @@ block content
 
 
 block scripts
+  script(src='/js/lib/jquery.floatThead.min.js')
   script(src='/js/tweeduizenden.js')

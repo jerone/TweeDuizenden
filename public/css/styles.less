@@ -71,3 +71,20 @@ td select.form-control {
         vertical-align: middle;
     }
 }
+
+/* Floating header background; */
+.floatThead-table thead td,
+.floatThead-table thead th {
+    background-color: #fff;
+}
+
+/* Min height; */
+.table-row-min-height {
+    min-height: 34px;
+    position: relative;
+
+    > * {
+        bottom: 0px;
+        position: absolute;
+    }
+}
