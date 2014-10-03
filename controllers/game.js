@@ -39,32 +39,42 @@ exports.rules = function (req, res) {
 };
 
 exports.add = function (req, res) {
-  res.render('game/add', {
-    title: req.i18n.t('game:add.title'),
-    name: new Date().toLocaleDateString('nl-NL') + ' ' + new Date().toLocaleTimeString('nl-NL'),
-    players: req.i18n.t('game:add.players.default')
-  });
+  if (req.body.addPlayer === 'addPlayer') {
+    var body = req.body;
+    body.playersCount = parseInt(body.playersCount) + 1;
+    body.players.push(req.i18n.t('game:add.players.default', { '#': body.playersCount }));
+    res.render('game/add', body);
+  } else {
+    res.render('game/add', {
+      title: req.i18n.t('game:add.title'),
+      name: new Date().toLocaleDateString('nl-NL') + ' ' + new Date().toLocaleTimeString('nl-NL'),
+      playersCount: 3,
+      players: [req.i18n.t('game:add.players.default', { '#': 1 }),
+                req.i18n.t('game:add.players.default', { '#': 2 }),
+                req.i18n.t('game:add.players.default', { '#': 3 })]
+    });
+  }
 };
 
 exports.start = function (req, res) {
-  if (req.body.name && req.body.players) {
-    var name = req.body.name,
-        players = req.body.players.split(EOL);
-    
-    Game.find({ name: name }, function (err, games) {
+  // coming from /game/add
+  if (req.body.addPlayer === 'addPlayer') {
+    res.redirect(307, '/game/add');
+  } else if (req.body.name && req.body.players.length) {
+    Game.find({ name: req.body.name }, function (err, games) {
       if (err) return console.error(err);
       
       if (games.length === 0) {
         res.render('game/start', {
-          title: req.i18n.t('game:start.title', { name: name }),
-          name: name,
-          players: players,
+          title: req.i18n.t('game:start.title', { name: req.body.name }),
+          name: req.body.name,
+          players: req.body.players,
           wild: ['-'],
           score: {}
         });
       } else {
         req.flash(Flash.error, {
-          message: req.i18n.t('game:start.error.exists')//--'The name for this game already exists! Please define another name.'
+          message: req.i18n.t('game:start.error.exists')
         });
         
         res.redirect('/game/add');
@@ -76,7 +86,7 @@ exports.start = function (req, res) {
         message: req.i18n.t('game:start.warning.no_name')
       });
     }
-    if (!req.body.players) {
+    if (!req.body.players || !req.body.players.length) {
       req.flash(Flash.warning, {
         message: req.i18n.t('game:start.warning.no_players')
       });

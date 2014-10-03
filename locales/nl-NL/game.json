@@ -76,12 +76,16 @@
     "header": {
       "title": "Spel toevoegen"
     },
-    "players": {
-      "label": "Spelers",
-      "default": "Speler 1\nSpeler 2\nSpeler 3"
-    },
     "name": {
       "label": "Naam"
+    },
+    "players": {
+      "label": "Spelers",
+      "default": "Speler __#__"
+    },
+    "addPlayer": {
+      "text": "Speler toevoegen",
+      "title": "Een nieuwe speler toevoegen."
     },
     "start": {
       "text": "Start spel"

@@ -36,7 +36,7 @@
     "header": {
       "title": "Rules"
     },
-    "text__TODO": [    ],
+    "text__TODO": [ ],
     "add": {
       "text": "Start a new game &raquo;"
     },
@@ -49,12 +49,16 @@
     "header": {
       "title": "Add Game"
     },
-    "players": {
-      "label": "Players",
-      "default": "Player 1\nPlayer 2\nPlayer 3"
-    },
     "name": {
       "label": "Name"
+    },
+    "players": {
+      "label": "Players",
+      "default": "Player __#__"
+    },
+    "addPlayer": {
+      "text": "Add Player",
+      "title": "Add a new player."
     },
     "start": {
       "text": "Start Game"

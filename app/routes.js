@@ -33,7 +33,7 @@ module.exports = function (app) {
   // Handle game pages;
   app.route('/game').get(gameController.index);
   app.route('/game/rules').get(gameController.rules);
-  app.route('/game/add').get(gameController.add);
+  app.route('/game/add').get(gameController.add).post(gameController.add);
   app.route('/game/start').get(gameController.start).post(gameController.start);
   app.route('/game/api').get(gameController.api);
   app.route('/game/save').get(gameController.save).post(gameController.save);
