@@ -41,6 +41,7 @@ exports.rules = function (req, res) {
 exports.add = function (req, res) {
   if (req.body.addPlayer === 'addPlayer') {
     var body = req.body;
+    body.title = req.i18n.t('game:add.title');
     body.playersCount = parseInt(body.playersCount) + 1;
     body.players.push(req.i18n.t('game:add.players.default', { '#': body.playersCount }));
     res.render('game/add', body);
