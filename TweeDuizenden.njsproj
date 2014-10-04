@@ -87,6 +87,7 @@
     <Content Include="views\_partials\flash.jade" />
     <Content Include="views\_partials\footer.jade" />
     <Content Include="views\_partials\navbar.jade" />
+    <Content Include="views\_partials\tracking.jade" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\" />
