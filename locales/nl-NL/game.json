@@ -77,7 +77,8 @@
       "title": "Spel toevoegen"
     },
     "name": {
-      "label": "Naam"
+      "label": "Naam",
+      "default": "Spel __date__ __time__"
     },
     "players": {
       "label": "Spelers",

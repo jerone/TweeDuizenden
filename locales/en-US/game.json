@@ -50,7 +50,8 @@
       "title": "Add Game"
     },
     "name": {
-      "label": "Name"
+      "label": "Name",
+      "default": "Game __date__ __time__"
     },
     "players": {
       "label": "Players",

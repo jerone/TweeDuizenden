@@ -48,7 +48,10 @@ exports.add = function (req, res) {
   } else {
     res.render('game/add', {
       title: req.i18n.t('game:add.title'),
-      name: new Date().toLocaleDateString('nl-NL') + ' ' + new Date().toLocaleTimeString('nl-NL'),
+      name: req.i18n.t('game:add.name.default', {
+        date: new Date().toLocaleDateString(req.i18n.lng()),
+        time: new Date().toLocaleTimeString(req.i18n.lng())
+      }),
       playersCount: 3,
       players: [req.i18n.t('game:add.players.default', { '#': 1 }),
                 req.i18n.t('game:add.players.default', { '#': 2 }),
