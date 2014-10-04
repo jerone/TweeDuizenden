@@ -44,9 +44,9 @@ module.exports = function (app) {
   // Handle 404;
   app.use(function (req, res) {
     res.status(400).render('error', {
-      title: '404: File Not Found',
+      title: req.i18n.t('error:404.title'),
       code: 404,
-      message: 'This is not the page you\'re looking for!'
+      message: req.i18n.t('error:404.message')
     });
   });
   

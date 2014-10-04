@@ -1,3 +1,7 @@
 {
+  "404": {
+    "title": "404: Pagina niet gevonden",
+    "message": "Dit is niet de pagina die u zoekt!"
+  },
   "back": "Terug home"
 }
