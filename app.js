@@ -1,18 +1,19 @@
-var express = require('express'),
-    session = require('express-session'),
-    bodyParser = require('body-parser'),
+var bodyParser = require('body-parser'),
+    connectMongo = require('connect-mongo'),
     errorHandler = require('errorhandler'),
-    logger = require('morgan'),
-    MongoStore = require('connect-mongo')({ session: session }),
-    flash = require('connect-flash'),
-    path = require('path'),
-    mongoose = require('mongoose'),
-    less = require('less-middleware'),
+    express = require('express'),
     favicon = require('serve-favicon'),
-    methodOverride = require('method-override'),
+    flash = require('connect-flash'),
     i18n = require('i18next'),
     jade = require('jade'),
-    EOL = require('os').EOL;
+    less = require('less-middleware'),
+    logger = require('morgan'),
+    methodOverride = require('method-override'),
+    mongoose = require('mongoose'),
+    session = require('express-session');
+
+var EOL = require('os').EOL,
+    path = require('path');
 
 var app = /*module.exports =*/ express();
 var secrets = require('./config/secrets');
@@ -60,7 +61,7 @@ app.use(session({
   resave: true,
   saveUninitialized: true,
   secret: secrets.sessionSecret,
-  store: new MongoStore({
+  store: new connectMongo({ session: session })({
     url: secrets.db,
     auto_reconnect: true
   })
