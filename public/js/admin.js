@@ -1,15 +1,15 @@
 ﻿$(function () {
-  
+
   // Delete all;
   $("#g2000n-delete-all").submit(function (e) {
     e.preventDefault();
-    
+
     var form = $(this),
         action = form.attr("action"),
         params = form.serialize(),
         tbody = $("#g2000n-table tbody"),
         rows = tbody.find("tr");
-    
+
     $.post(action, params, "json").done(function (data) {
       if (data.error) {
         console.error(data.error);
@@ -23,20 +23,20 @@
     }).fail(function (data) {
       console.error(data);
     });
-    
+
     return false;
   });
-  
+
   // Delete per game;
   $(".g2000n-delete").submit(function (e) {
     e.preventDefault();
-    
+
     var form = $(this),
         action = form.attr("action"),
         params = form.serialize(),
         tbody = form.parents("tbody"),
         row = form.parents("tr");
-    
+
     $.post(action, params, "json").done(function (data) {
       if (data.error) {
         console.error(data.error);
@@ -52,7 +52,7 @@
     }).fail(function (data) {
       console.error(data);
     });
-    
+
     return false;
   });
 });
