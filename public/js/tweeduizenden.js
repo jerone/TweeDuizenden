@@ -20,9 +20,12 @@
 
 
   /* Fixed headers in table; */
-  $('table.table').floatThead({
+  var floatThead = $("table.table").floatThead({
     useAbsolutePositioning: false,
     scrollingTop: 50
+  });
+  $(".alert").on("closed.bs.alert", function () {
+    floatThead.floatThead("reflow");
   });
 
 
