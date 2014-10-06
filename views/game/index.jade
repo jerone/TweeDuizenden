@@ -40,7 +40,7 @@ block content
             td #{game.name}
             if admin
               td #{game._id}
-            td #{game.createdAt}
+            td #{game.createdAt.toLocaleDateString(i18n.lng())} #{game.createdAt.toLocaleTimeString(i18n.lng())}
             td #{game.updatedAt.toLocaleDateString(i18n.lng())} #{game.updatedAt.toLocaleTimeString(i18n.lng())}
             td #{game.players.join(', ')}
             td.text-nowrap

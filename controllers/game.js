@@ -6,11 +6,11 @@ require('intl');
 exports.api = function (req, res) {
   Game.find({}, function (err, games) {
     var gamesMap = {};
-
+    
     games.forEach(function (game) {
       gamesMap[game._id] = game;
     });
-
+    
     res.send(gamesMap);
   });
 };
@@ -19,13 +19,13 @@ exports.index = function (req, res) {
   var admin = typeof req.query.admin !== 'undefined';
   Game.find({}, function (err, games) {
     if (err) return console.error(err);
-
+    
     var gamesMap = {};
-
+    
     games.forEach(function (game) {
       gamesMap[game._id] = game;
     });
-
+    
     res.render('game/index', {
       title: req.i18n.t('game:index.title'),
       admin: admin,
@@ -49,8 +49,8 @@ exports.add = function (req, res) {
     res.render('game/add', {
       title: req.i18n.t('game:add.title'),
       name: req.i18n.t('game:add.name.default', {
-        date: new Date().toString(),
-        time: ""
+        date: new Date().toLocaleDateString(req.i18n.lng()),
+        time: new Date().toLocaleTimeString(req.i18n.lng())
       }),
       playersCount: 3,
       players: [req.i18n.t('game:add.players.default', { '#': 1 }),
@@ -67,7 +67,7 @@ exports.start = function (req, res) {
   } else if (req.body.name && req.body.players.length) {
     Game.find({ name: req.body.name }, function (err, games) {
       if (err) return console.error(err);
-
+      
       if (games.length === 0) {
         res.render('game/start', {
           title: req.i18n.t('game:start.title', { name: req.body.name }),
@@ -80,7 +80,7 @@ exports.start = function (req, res) {
         req.flash(Flash.error, {
           message: req.i18n.t('game:start.error.exists')
         });
-
+        
         res.redirect('/game/add');
       }
     });
@@ -95,7 +95,7 @@ exports.start = function (req, res) {
         message: req.i18n.t('game:start.warning.no_players')
       });
     }
-
+    
     res.redirect('/game/add');
   }
 };
@@ -105,32 +105,32 @@ exports.save = function (req, res) {
     var name = req.body.name,
         players = req.body.players.split(','),
         wild = req.body.wild;
-
+    
     Game.findOne({ name: name }, function (err, game) {
       if (err) return console.error(err);
-
+      
       if (!game) {
         game = new Game({
           name: name,
           players: players
         });
       }
-
+      
       game.wild = wild;
-
+      
       game.score = {};  // Resetting is required to save the score;
       for (var i = 0; i < players.length; i++) {
         game.score[players[i]] = req.body['player-' + i];
       }
-
+      
       game.save(function (err) {
         if (err) return console.error(err);
-
+        
         req.flash(Flash.info, {
           message: req.i18n.t('game:save.info.saved'),
           fadeout: true
         });
-
+        
         res.redirect('/game/open/' + game.name);
       });
     });
@@ -143,7 +143,7 @@ exports.open = function (req, res) {
   if (req.params.name) {
     Game.findOne({ name: req.params.name }, function (err, game) {
       if (err) return console.error(err);
-
+      
       if (game) {
         res.render('game/start', {
           title: req.i18n.t('game:open.title', { name: game.name }),
@@ -166,7 +166,7 @@ exports.delete = function (req, res) {
   if (req.params.name) {
     Game.findOneAndRemove({ name: req.params.name }, function (err, game) {
       if (err) return console.error(err);
-
+      
       if (req.xhr) {
         res.send({ error: false });
       } else {
@@ -176,7 +176,7 @@ exports.delete = function (req, res) {
   } else {
     Game.remove({}, function (err) {
       if (err) return console.error(err);
-
+      
       if (req.xhr) {
         res.send({ error: false });
       } else {
