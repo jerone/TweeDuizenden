@@ -5,6 +5,9 @@ git push origin master && git push openshift master
 ---------------------
 
 SET NODE_ENV=development && nodemon
+export NODE_ENV=development && nodemon
+node-inspector & nodemon --debug app.js
+export NODE_ENV=development && node-inspector & nodemon --debug app.js
 
 ---------------------
 
