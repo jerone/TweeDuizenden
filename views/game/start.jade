@@ -5,7 +5,7 @@ block content
 
     .page-header
       .pull-right
-        button.btn.btn-primary(type='submit', title=t('game:start.save.title'))
+        button.btn.btn-primary.g2000n-save(type='submit', title=t('game:start.save.title'))
           span.glyphicon.glyphicon-floppy-disk
           span= t('game:start.save.text')
       h3= t('game:start.header.title')
@@ -61,10 +61,9 @@ block content
           - }
 
     p.text-right
-      button.btn.btn-primary(type='submit', title=t('game:start.save.title'))
+      button.btn.btn-primary.g2000n-save(type='submit', title=t('game:start.save.title'))
         span.glyphicon.glyphicon-floppy-disk
         span= t('game:start.save.text')
-
 
 block scripts
   script(src='/js/lib/jquery.floatThead.min.js')
