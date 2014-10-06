@@ -32,7 +32,6 @@
     "i18next": "^1.7.4",
     "intl": "^0.1.4",
     "jade": "^1.7.0",
-    "less": "^1.7.5",
     "less-middleware": "^1.0.4",
     "method-override": "^2.2.0",
     "mongoose": "^3.8.17",
