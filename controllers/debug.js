@@ -1,4 +1,6 @@
-﻿exports.all = function (req, res) {
+﻿require('intl');
+
+exports.all = function (req, res) {
   res.send({
     body: req.body,
     params: req.params,
@@ -13,4 +15,21 @@ exports.params = function (req, res) {
 };
 exports.query = function (req, res) {
   res.send(req.query);
+};
+exports.index = function (req, res) {
+  //var date = "2014-10-07T10:30:00.000Z";
+  var date = new Date();
+  res.render('debug', {
+    date: [
+    date,
+    new Date(date),
+    new Date(date).toLocaleTimeString(),
+    new Date(date).toLocaleString(),
+    new Date(date).toLocaleString('nl'),
+    new Date(date).toLocaleTimeString('nl'),
+    new Date(date).toUTCString(),
+    new Date(new Date(date).toUTCString()),
+    new Date(new Date(date).toUTCString()).toLocaleString('nl'),
+    ""].join('\n')
+  });
 };

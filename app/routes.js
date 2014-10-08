@@ -2,22 +2,22 @@
 
 var homeController = require('./../controllers/home');
 var gameController = require('./../controllers/game');
-//var debugController = require('./../controllers/debug');
+var debugController = require('./../controllers/debug');
 
 module.exports = function (app) {
-  
+
   // Handle flash;
   app.use(function (req, res, next) {
     res.locals.flash = req.flash();
     next();
   });
-  
+
   // Handle current menu item;
   app.use(function (req, res, next) {
     res.locals.menuParts = url.parse(req.url).pathname.substring(1).toLowerCase().split('/');
     next();
   });
-  
+
   // Handle i18n;
   app.use(function (req, res, next) {
     if (req.query.lang) {
@@ -26,10 +26,19 @@ module.exports = function (app) {
       next();
     }
   });
-  
+
   // Handle home;
   app.route('/').get(homeController.index);
-  
+
+
+
+
+
+  app.route('/debug').get(debugController.index);
+
+
+
+
   // Handle game pages;
   app.route('/game').get(gameController.index);
   app.route('/game/rules').get(gameController.rules);
@@ -40,7 +49,7 @@ module.exports = function (app) {
   app.route('/game/open/:name').get(gameController.open);
   app.route('/game/delete').delete(gameController.delete);
   app.route('/game/delete/:name').delete(gameController.delete);
-  
+
   // Handle 404;
   app.use(function (req, res) {
     res.status(400).render('error', {
@@ -49,7 +58,7 @@ module.exports = function (app) {
       message: req.i18n.t('error:404.message')
     });
   });
-  
+
   // Handle 500;
   app.use(function (error, req, res, next) {
     res.status(500).render('error', {
@@ -58,5 +67,5 @@ module.exports = function (app) {
       message: error
     });
   });
-  
+
 };

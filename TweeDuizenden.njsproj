@@ -82,6 +82,7 @@
     <Content Include="views\game\rules.jade" />
     <Content Include="views\game\index.jade" />
     <Content Include="views\game\start.jade" />
+    <Content Include="views\debug.jade" />
     <Content Include="views\home.jade" />
     <Content Include="views\_layout.jade" />
     <Content Include="views\_partials\flash.jade" />
