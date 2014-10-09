@@ -30,14 +30,8 @@ module.exports = function (app) {
   // Handle home;
   app.route('/').get(homeController.index);
 
-
-
-
-
+  // Handel debug;
   app.route('/debug').get(debugController.index);
-
-
-
 
   // Handle game pages;
   app.route('/game').get(gameController.index);

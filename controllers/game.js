@@ -1,5 +1,6 @@
 var Game = require('../models/Game'),
     Flash = require('../models/Flash'),
+    helpers = require('./../lib/helpers'),
     EOL = require('os').EOL;
 require('intl');
 
@@ -46,11 +47,13 @@ exports.add = function (req, res) {
     body.players.push(req.i18n.t('game:add.players.default', { '#': body.playersCount }));
     res.render('game/add', body);
   } else {
+    var timestamp = new Date(),
+        lang = req.i18n.lng();
     res.render('game/add', {
       title: req.i18n.t('game:add.title'),
       name: req.i18n.t('game:add.name.default', {
-        date: new Date().toLocaleDateString(req.i18n.lng()),
-        time: new Date().toLocaleTimeString(req.i18n.lng())
+        date: helpers.getLocaleDateString(timestamp, lang),
+        time: helpers.getLocaleTimeString(timestamp, lang)
       }),
       playersCount: 3,
       players: [req.i18n.t('game:add.players.default', { '#': 1 }),

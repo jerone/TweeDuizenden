@@ -1,4 +1,5 @@
 ﻿require('intl');
+var helpers = require('./../lib/helpers');
 
 exports.all = function (req, res) {
   res.send({
@@ -30,6 +31,12 @@ exports.index = function (req, res) {
     new Date(date).toUTCString(),
     new Date(new Date(date).toUTCString()),
     new Date(new Date(date).toUTCString()).toLocaleString('nl'),
+    new Date(date).getTimezoneOffset() + " -> " + new Date(date).getTimezoneOffset() / 60,
+    new Date(new Date(date).getTime() + (new Date(date).getTimezoneOffset() * 60000)),
+    new Date(new Date(date).getTime() + (new Date(date).getTimezoneOffset() * 60000)).toLocaleString('nl'),
+    new Date(new Date(date).getTime() + (new Date(date).getTimezoneOffset() * 60000) + (60000 * 120)).toLocaleString('nl'),
+    new Date(new Date(date).getTime() + (new Date(date).getTimezoneOffset() * 60000) + (60000 * 120)).toLocaleTimeString('nl'),
+    helpers.getLocaleDateString(date, 'nl') + " " + helpers.getLocaleTimeString(date, 'nl'),
     ""].join('\n')
   });
 };

@@ -17,12 +17,14 @@ var EOL = require('os').EOL,
 
 var app = /*module.exports =*/ express();
 var secrets = require('./config/secrets');
+var helpers = require('./lib/helpers.js');
 
 app.set('port', process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 3000);
 app.set('ipaddr', process.env.OPENSHIFT_NODEJS_IP || process.env.OPENSHIFT_INTERNAL_IP || 'localhost');
 app.set('env', (process.env.NODE_ENV || 'development').trim());  // Fix issue with trailing space;
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+app.locals.helpers = helpers;
 
 mongoose.connect(secrets.db);
 mongoose.connection.on('error', function () {
