@@ -44,12 +44,12 @@ block content
             td #{helpers.getLocaleDateString(game.updatedAt,i18n.lng())} #{helpers.getLocaleTimeString(game.updatedAt,i18n.lng())}
             td #{game.players.join(', ')}
             td.text-nowrap
-              a.btn.btn-success(href='/game/open/'+game.name, title=t('game:index.table.open.title'))
+              a.btn.btn-success(href='/game/open/'+encodeURIComponent(game.name), title=t('game:index.table.open.title'))
                 span.glyphicon.glyphicon-folder-open
                 span.hidden-xs= t('game:index.table.open.text')
               if admin
                 | &nbsp;
-                form.g2000n-delete(method='POST', action='/game/delete/'+game.name, enctype='application/x-www-form-urlencoded', style='display:inline-block')
+                form.g2000n-delete(method='POST', action='/game/delete/'+encodeURIComponent(game.name), enctype='application/x-www-form-urlencoded', style='display:inline-block')
                   input(type='hidden', name='_method', value='DELETE')
                   button.btn.btn-danger(type='submit',
                                         title=t('game:index.table.delete.title'),

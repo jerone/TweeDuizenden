@@ -135,7 +135,7 @@ exports.save = function (req, res) {
           fadeout: true
         });
 
-        res.redirect('/game/open/' + game.name);
+        res.redirect('/game/open/' + encodeURIComponent(game.name));
       });
     });
   } else {
