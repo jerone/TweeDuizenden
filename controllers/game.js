@@ -2,7 +2,6 @@ var Game = require('../models/Game'),
     Flash = require('../models/Flash'),
     helpers = require('./../lib/helpers'),
     EOL = require('os').EOL;
-require('intl');
 
 exports.api = function (req, res) {
   Game.find({}, function (err, games) {
@@ -74,8 +73,10 @@ exports.start = function (req, res) {
       if (games.length === 0) {
         res.render('game/start', {
           title: req.i18n.t('game:start.title', { name: req.body.name }),
-          name: req.body.name,
-          players: req.body.players,
+          name: req.body.name.trim(),
+          players: req.body.players.map(function (player) {
+            return player.trim();
+          }),
           wild: ['-'],
           score: {}
         });
