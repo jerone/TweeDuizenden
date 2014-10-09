@@ -1,4 +1,4 @@
-﻿var url = require('url');
+var url = require('url');
 
 var homeController = require('./../controllers/home');
 var gameController = require('./../controllers/game');

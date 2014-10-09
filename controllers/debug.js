@@ -1,4 +1,4 @@
-﻿require('intl');
+require('intl');
 var helpers = require('./../lib/helpers');
 
 exports.all = function (req, res) {
