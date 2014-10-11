@@ -71,7 +71,7 @@
       "text": "Bekijk vorige spellen &raquo;"
     }
   },
-  "add": {
+  "edit": {
     "title": "Spel toevoegen",
     "header": {
       "title": "Spel toevoegen"
@@ -92,7 +92,7 @@
       "text": "Start spel"
     }
   },
-  "start": {
+  "view": {
     "title": "Start spel __name__",
     "warning": {
       "no_name": "Geen naam opgegeven!",

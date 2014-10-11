@@ -41,28 +41,28 @@ exports.rules = function (req, res) {
 exports.add = function (req, res) {
   if (req.body.addPlayer === 'addPlayer') {
     var body = req.body;
-    body.title = req.i18n.t('game:add.title');
+    body.title = req.i18n.t('game:edit.title');
     body.playersCount = parseInt(body.playersCount) + 1;
-    body.players.push(req.i18n.t('game:add.players.default', { '#': body.playersCount }));
-    res.render('game/add', body);
+    body.players.push(req.i18n.t('game:edit.players.default', { '#': body.playersCount }));
+    res.render('game/edit', body);
   } else {
     var timestamp = new Date(),
         lang = req.i18n.lng();
-    res.render('game/add', {
-      title: req.i18n.t('game:add.title'),
-      name: req.i18n.t('game:add.name.default', {
+    res.render('game/edit', {
+      title: req.i18n.t('game:edit.title'),
+      name: req.i18n.t('game:edit.name.default', {
         date: helpers.getLocaleDateString(timestamp, lang),
         time: helpers.getLocaleTimeString(timestamp, lang)
       }),
       playersCount: 3,
-      players: [req.i18n.t('game:add.players.default', { '#': 1 }),
-                req.i18n.t('game:add.players.default', { '#': 2 }),
-                req.i18n.t('game:add.players.default', { '#': 3 })]
+      players: [req.i18n.t('game:edit.players.default', { '#': 1 }),
+                req.i18n.t('game:edit.players.default', { '#': 2 }),
+                req.i18n.t('game:edit.players.default', { '#': 3 })]
     });
   }
 };
 
-exports.start = function (req, res) {
+exports.view = function (req, res) {
   // coming from /game/add
   if (req.body.addPlayer === 'addPlayer') {
     res.redirect(307, '/game/add');
@@ -71,8 +71,8 @@ exports.start = function (req, res) {
       if (err) return console.error(err);
 
       if (games.length === 0) {
-        res.render('game/start', {
-          title: req.i18n.t('game:start.title', { name: req.body.name }),
+        res.render('game/view', {
+          title: req.i18n.t('game:view.title', { name: req.body.name }),
           name: req.body.name.trim(),
           players: req.body.players.map(function (player) {
             return player.trim();
@@ -82,7 +82,7 @@ exports.start = function (req, res) {
         });
       } else {
         req.flash(Flash.error, {
-          message: req.i18n.t('game:start.error.exists')
+          message: req.i18n.t('game:view.error.exists')
         });
 
         res.redirect('/game/add');
@@ -91,12 +91,12 @@ exports.start = function (req, res) {
   } else {
     if (!req.body.name) {
       req.flash(Flash.warning, {
-        message: req.i18n.t('game:start.warning.no_name')
+        message: req.i18n.t('game:view.warning.no_name')
       });
     }
     if (!req.body.players || !req.body.players.length) {
       req.flash(Flash.warning, {
-        message: req.i18n.t('game:start.warning.no_players')
+        message: req.i18n.t('game:view.warning.no_players')
       });
     }
 
@@ -149,7 +149,7 @@ exports.open = function (req, res) {
       if (err) return console.error(err);
 
       if (game) {
-        res.render('game/start', {
+        res.render('game/view', {
           title: req.i18n.t('game:open.title', { name: game.name }),
           name: game.name,
           players: game.players,

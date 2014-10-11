@@ -44,7 +44,7 @@
       "text": "View previous games &raquo;"
     }
   },
-  "add": {
+  "edit": {
     "title": "Add Game",
     "header": {
       "title": "Add Game"
@@ -65,7 +65,7 @@
       "text": "Start Game"
     }
   },
-  "start": {
+  "view": {
     "title": "Start Game __name__",
     "warning": {
       "no_name": "No name defined!",

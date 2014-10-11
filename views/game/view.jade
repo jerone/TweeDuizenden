@@ -5,10 +5,10 @@ block content
 
     .page-header
       .pull-right
-        button.btn.btn-primary.g2000n-save(type='submit', title=t('game:start.save.title'))
+        button.btn.btn-primary.g2000n-save(type='submit', title=t('game:view.save.title'))
           span.glyphicon.glyphicon-floppy-disk
-          span= t('game:start.save.text')
-      h3= t('game:start.header.title')
+          span= t('game:view.save.text')
+      h3= t('game:view.header.title')
         | &nbsp;
         small #{name}
 
@@ -21,9 +21,9 @@ block content
           tr
             th
               div.table-row-min-height
-                span= t('game:start.table.number')
-            th= t('game:start.table.dealer')
-            th= t('game:start.table.wild')
+                span= t('game:view.table.number')
+            th= t('game:view.table.dealer')
+            th= t('game:view.table.wild')
             each player in players
               th= player
         tbody
@@ -62,9 +62,9 @@ block content
           - }
 
     p.text-right
-      button.btn.btn-primary.g2000n-save(type='submit', title=t('game:start.save.title'))
+      button.btn.btn-primary.g2000n-save(type='submit', title=t('game:view.save.title'))
         span.glyphicon.glyphicon-floppy-disk
-        span= t('game:start.save.text')
+        span= t('game:view.save.text')
 
 block scripts
   script(src='/js/lib/jquery.floatThead.min.js')

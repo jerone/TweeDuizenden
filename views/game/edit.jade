@@ -2,17 +2,17 @@ extends ../_layout
 
 block content
   .page-header
-    h3= t('game:add.header.title')
+    h3= t('game:edit.header.title')
 
-  form.form-horizontal(role='form', method='POST', action='/game/start')
+  form.form-horizontal(role='form', method='POST', action='/game/view')
     //- Form element's default button is the first - not display:none - submit button;
     button(name='submitted', type='submit', value='submitted', style='position: fixed; left: -1000px; top: -1000px')
     .form-group
-      label.col-sm-2.control-label(for='name')= t('game:add.name.label')
+      label.col-sm-2.control-label(for='name')= t('game:edit.name.label')
       .col-sm-8
         input.form-control.placeholder(id='name', name='name', type='text', value=name)
     .form-group
-      label.col-sm-2.control-label(for='players')= t('game:add.players.label')
+      label.col-sm-2.control-label(for='players')= t('game:edit.players.label')
       .col-sm-8
         input(name='playersCount', type='hidden', value=playersCount)
         input.form-control.placeholder(id='players', name='players[]', type='text', value=players[0])
@@ -22,9 +22,9 @@ block content
           .col-sm-offset-2.col-sm-7
             input.form-control.placeholder(name='players[]', type='text', value=players[i])
           .col-sm-1
-            button.btn.btn-primary.btn-block(name='addPlayer', type='submit', value='addPlayer', title=t('game:add.addPlayer.title'))
+            button.btn.btn-primary.btn-block(name='addPlayer', type='submit', value='addPlayer', title=t('game:edit.addPlayer.title'))
               span.glyphicon.glyphicon-plus
-              span.visible-xs-inline= t('game:add.addPlayer.text')
+              span.visible-xs-inline= t('game:edit.addPlayer.text')
         else
           .col-sm-offset-2.col-sm-8
             input.form-control.placeholder(name='players[]', type='text', value=players[i])
@@ -33,7 +33,7 @@ block content
       .col-sm-offset-2.col-sm-8
         button.btn.btn-primary(name='submitted', type='submit', value='submitted')
           span.glyphicon.glyphicon-chevron-right
-          span= t('game:add.start.text')
+          span= t('game:edit.start.text')
 
   script.
     $(function(){

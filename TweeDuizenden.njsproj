@@ -79,10 +79,10 @@
     <Content Include="DEV.md" />
     <Content Include="TODO.md" />
     <Content Include="views\error.jade" />
-    <Content Include="views\game\add.jade" />
+    <Content Include="views\game\edit.jade" />
     <Content Include="views\game\rules.jade" />
     <Content Include="views\game\index.jade" />
-    <Content Include="views\game\start.jade" />
+    <Content Include="views\game\view.jade" />
     <Content Include="views\debug.jade" />
     <Content Include="views\home.jade" />
     <Content Include="views\_layout.jade" />
