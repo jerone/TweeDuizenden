@@ -75,8 +75,10 @@ exports.view = function (req, res) {
           title: req.i18n.t('game:view.title', { name: req.body.name }),
           name: req.body.name.trim(),
           players: req.body.players.map(function (player) {
-            return player.trim();
-          }),
+              return player.trim();
+            }).filter(function (player) {
+              return player;
+            }),
           wild: ['-'],
           score: {}
         });
