@@ -14,7 +14,7 @@
       if (data.error) {
         console.error(data.error);
       } else {
-        rows.fadeOut(function () {
+        rows.fadeOut().promise().done(function () {
           rows.remove();
           tbody.append($("#empty-template").html());
           $("#g2000n-delete-all button").attr("disabled", true).addClass("disabled");
