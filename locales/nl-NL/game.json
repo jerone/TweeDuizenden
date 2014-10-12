@@ -4,6 +4,9 @@
     "header": {
       "title": "Spellen"
     },
+    "error": {
+      "missing": "Dit spel bestaat niet meer!"
+    },
     "add": {
       "title": "Een nieuw spel toevoegen.",
       "text": "Spel toevoegen"
@@ -76,6 +79,10 @@
     "header": {
       "title": "Spel toevoegen"
     },
+    "warning": {
+      "no_name": "Geen naam opgegeven!",
+      "no_players": "Geen spelers opgegeven!"
+    },
     "name": {
       "label": "Naam",
       "default": "Spel __date__ __time__"
@@ -94,13 +101,12 @@
   },
   "view": {
     "title": "Start spel __name__",
-    "warning": {
-      "no_name": "Geen naam opgegeven!",
-      "no_players": "Geen spelers opgegeven!"
+    "info": {
+      "saved": "Spel is opgeslagen."
     },
     "save": {
       "title": "Dit spel bewaren.",
-      "text": "Spel opslaan"
+      "text": "Opslaan"
     },
     "header": {
       "title": "Start spel"
@@ -109,11 +115,6 @@
       "number": "#",
       "dealer": "Deler",
       "wild": "Wilde"
-    }
-  },
-  "save": {
-    "info": {
-      "saved": "Spel is opgeslagen."
     }
   },
   "open": {

@@ -4,7 +4,7 @@ block content
   .page-header
     h3= t('game:edit.header.title')
 
-  form.form-horizontal(role='form', method='POST', action='/game/view')
+  form.form-horizontal(role='form', method='POST', action='/game/save')
     //- Form element's default button is the first - not display:none - submit button;
     button(name='submitted', type='submit', value='submitted', style='position: fixed; left: -1000px; top: -1000px')
     .form-group

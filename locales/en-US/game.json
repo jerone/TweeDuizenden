@@ -4,6 +4,9 @@
     "header": {
       "title": "Games"
     },
+    "error": {
+      "missing": "This game no longer exists!"
+    },
     "add": {
       "title": "Add a new game.",
       "text": "Add new game"
@@ -49,6 +52,10 @@
     "header": {
       "title": "Add Game"
     },
+    "warning": {
+      "no_name": "No name defined!",
+      "no_players": "No players defined!"
+    },
     "name": {
       "label": "Name",
       "default": "Game __date__ __time__"
@@ -67,13 +74,12 @@
   },
   "view": {
     "title": "Start Game __name__",
-    "warning": {
-      "no_name": "No name defined!",
-      "no_players": "No players defined!"
+    "info": {
+      "saved": "Game is saved."
     },
     "save": {
       "title": "Save this game.",
-      "text": "Save Game"
+      "text": "Save"
     },
     "header": {
       "title": "Start Game"
@@ -82,11 +88,6 @@
       "number": "#",
       "dealer": "Dealer",
       "wild": "Wild"
-    }
-  },
-  "save": {
-    "info": {
-      "saved": "Game is saved."
     }
   },
   "open": {

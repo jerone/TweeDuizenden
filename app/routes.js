@@ -37,12 +37,12 @@ module.exports = function (app) {
   app.route('/game').get(gameController.index);
   app.route('/game/rules').get(gameController.rules);
   app.route('/game/add').get(gameController.add).post(gameController.add);
-  app.route('/game/view').get(gameController.view).post(gameController.view);
-  app.route('/game/api').get(gameController.api);
-  app.route('/game/save').get(gameController.save).post(gameController.save);
-  app.route('/game/open/:name').get(gameController.open);
+  app.route('/game/save').post(gameController.save);
+  app.route('/game/view/:name').get(gameController.view);
+  app.route('/game/update').post(gameController.update);
   app.route('/game/delete').delete(gameController.delete);
   app.route('/game/delete/:name').delete(gameController.delete);
+  app.route('/game/api').get(gameController.api);
 
   // Handle 404;
   app.use(function (req, res) {

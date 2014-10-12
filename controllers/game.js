@@ -16,7 +16,6 @@ exports.api = function (req, res) {
 };
 
 exports.index = function (req, res) {
-  var admin = typeof req.query.admin !== 'undefined';
   Game.find({}, function (err, games) {
     if (err) return console.error(err);
 
@@ -28,7 +27,7 @@ exports.index = function (req, res) {
 
     res.render('game/index', {
       title: req.i18n.t('game:index.title'),
-      admin: admin,
+      admin: typeof req.query.admin !== 'undefined',
       games: gamesMap
     });
   });
@@ -62,51 +61,57 @@ exports.add = function (req, res) {
   }
 };
 
-exports.view = function (req, res) {
+exports.save = function (req, res) {
   // coming from /game/add
   if (req.body.addPlayer === 'addPlayer') {
     res.redirect(307, '/game/add');
-  } else if (req.body.name && req.body.players.length) {
-    Game.find({ name: req.body.name }, function (err, games) {
-      if (err) return console.error(err);
-
-      if (games.length === 0) {
-        res.render('game/view', {
-          title: req.i18n.t('game:view.title', { name: req.body.name }),
-          name: req.body.name.trim(),
-          players: req.body.players.map(function (player) {
-              return player.trim();
-            }).filter(function (player) {
-              return player;
-            }),
-          wild: ['-'],
-          score: {}
-        });
-      } else {
-        req.flash(Flash.error, {
-          message: req.i18n.t('game:view.error.exists')
-        });
-
-        res.redirect('/game/add');
-      }
-    });
   } else {
-    if (!req.body.name) {
-      req.flash(Flash.warning, {
-        message: req.i18n.t('game:view.warning.no_name')
-      });
-    }
-    if (!req.body.players || !req.body.players.length) {
-      req.flash(Flash.warning, {
-        message: req.i18n.t('game:view.warning.no_players')
-      });
-    }
+    var name = req.body.name && req.body.name.trim(),
+        players = req.body.players.map(function (player) {
+          return player.trim();
+        }).filter(function (player) {
+          return player;
+        });
+    if (name && players.length) {
+      Game.findOne({ name: name }, function (err, game) {
+        if (err) return console.error(err);
 
-    res.redirect('/game/add');
+        if (!game) {
+          game = new Game();
+        }
+
+        game.name = name;
+        game.players = players;
+
+        game.save(function (err) {
+          if (err) return console.error(err);
+
+          req.flash(Flash.info, {
+            message: req.i18n.t('game:view.info.saved'),
+            fadeout: true
+          });
+
+          res.redirect('/game/view/' + encodeURIComponent(game.name));
+        });
+      });
+    } else {
+      if (!name) {
+        req.flash(Flash.warning, {
+          message: req.i18n.t('game:edit.warning.no_name')
+        });
+      }
+      if (!players.length) {
+        req.flash(Flash.warning, {
+          message: req.i18n.t('game:edit.warning.no_players')
+        });
+      }
+
+      res.redirect('/game/add');
+    }
   }
 };
 
-exports.save = function (req, res) {
+exports.update = function (req, res) {
   if (req.body.name && req.body.players) {
     var name = req.body.name,
         players = req.body.players.split(','),
@@ -115,44 +120,45 @@ exports.save = function (req, res) {
     Game.findOne({ name: name }, function (err, game) {
       if (err) return console.error(err);
 
-      if (!game) {
-        game = new Game({
-          name: name,
-          players: players
+      if (game) {
+        game.wild = wild;
+
+        game.score = {};  // Resetting is required to save the score;
+        for (var i = 0; i < players.length; i++) {
+          game.score[players[i]] = req.body['player-' + i];
+        }
+
+        game.save(function (err) {
+          if (err) return console.error(err);
+
+          req.flash(Flash.info, {
+            message: req.i18n.t('game:view.info.saved'),
+            fadeout: true
+          });
+
+          res.redirect('/game/view/' + encodeURIComponent(game.name));
         });
-      }
-
-      game.wild = wild;
-
-      game.score = {};  // Resetting is required to save the score;
-      for (var i = 0; i < players.length; i++) {
-        game.score[players[i]] = req.body['player-' + i];
-      }
-
-      game.save(function (err) {
-        if (err) return console.error(err);
-
-        req.flash(Flash.info, {
-          message: req.i18n.t('game:save.info.saved'),
-          fadeout: true
+      } else {
+        req.flash(Flash.error, {
+          message: req.i18n.t('game:index.error.missing')
         });
 
-        res.redirect('/game/open/' + encodeURIComponent(game.name));
-      });
+        res.redirect('/game');
+      }
     });
   } else {
-    res.redirect('/game/add');
+    res.redirect('/game');
   }
 };
 
-exports.open = function (req, res) {
+exports.view = function (req, res) {
   if (req.params.name) {
     Game.findOne({ name: req.params.name }, function (err, game) {
       if (err) return console.error(err);
 
       if (game) {
         res.render('game/view', {
-          title: req.i18n.t('game:open.title', { name: game.name }),
+          title: req.i18n.t('game:view.title', { name: game.name }),
           name: game.name,
           players: game.players,
           wild: game.wild || ['-'],
