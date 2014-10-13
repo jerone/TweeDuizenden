@@ -12,28 +12,40 @@ block content
   form.form-horizontal(role='form', method='POST', action='/game/save')
     //- Form element's default button is the first - not display:none - submit button;
     button(name='submitted', type='submit', value='submitted', style='position: fixed; left: -1000px; top: -1000px')
+
     .form-group
       label.col-sm-2.control-label(for='name')= t('game:edit.name.label')
       .col-sm-8
         input.form-control.placeholder(id='name', name='name', type='text', value=name)
-    .form-group
-      label.col-sm-2.control-label(for='players')= t('game:edit.players.label')
-      .col-sm-8
-        input(name='playersCount', type='hidden', value=playersCount)
-        input.form-control(id='players', name='players[]', type='text', value=players[0])
-    - for(var i = 1; i < playersCount; i++){
-      .form-group
-        if playersCount==i+1
-          .col-sm-offset-2.col-sm-7
-            input.form-control(name='players[]', type='text', value=players[i])
+
+    each player, index in players
+      if players.length==1
+        .form-group
+          label.col-sm-2.control-label(for='players')= t('game:edit.players.label')
+          .col-sm-7
+            input.form-control(id='players', name='players[]', type='text', value=players[index])
           .col-sm-1
             button.btn.btn-primary.btn-block(name='addPlayer', type='submit', value='addPlayer', title=t('game:edit.addPlayer.title'))
               span.glyphicon.glyphicon-plus
               span.visible-xs-inline= t('game:edit.addPlayer.text')
-        else
+      else if index==0
+        .form-group
+          label.col-sm-2.control-label(for='players')= t('game:edit.players.label')
+          .col-sm-8
+            input.form-control(id='players', name='players[]', type='text', value=players[index])
+      else if index==players.length-1
+        .form-group
+          .col-sm-offset-2.col-sm-7
+            input.form-control(name='players[]', type='text', value=players[index])
+          .col-sm-1
+            button.btn.btn-primary.btn-block(name='addPlayer', type='submit', value='addPlayer', title=t('game:edit.addPlayer.title'))
+              span.glyphicon.glyphicon-plus
+              span.visible-xs-inline= t('game:edit.addPlayer.text')
+      else
+        .form-group
           .col-sm-offset-2.col-sm-8
-            input.form-control(name='players[]', type='text', value=players[i])
-    - }
+            input.form-control(name='players[]', type='text', value=players[index])
+
     .form-group
       .col-sm-offset-2.col-sm-8
         if isAdd

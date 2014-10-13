@@ -74,8 +74,7 @@
       "default": "Game __date__ __time__"
     },
     "players": {
-      "label": "Players",
-      "default": "Player __#__"
+      "label": "Players"
     },
     "addPlayer": {
       "text": "Add Player",

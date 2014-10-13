@@ -40,12 +40,12 @@ exports.add = function (req, res) {
     var body = req.body;
     body.title = req.i18n.t('game:add.title');
     body.isAdd = true;
-    body.playersCount = parseInt(body.playersCount) + 1;
-    body.players.push(req.i18n.t('game:edit.players.default', { '#': body.playersCount }));
+    body.players.push("");
     res.render('game/edit', body);
   } else {
     var timestamp = new Date(),
         lang = req.i18n.lng();
+
     res.render('game/edit', {
       title: req.i18n.t('game:add.title'),
       isAdd: true,
@@ -53,10 +53,7 @@ exports.add = function (req, res) {
         date: helpers.getLocaleDateString(timestamp, lang),
         time: helpers.getLocaleTimeString(timestamp, lang)
       }),
-      playersCount: 3,
-      players: [req.i18n.t('game:edit.players.default', { '#': 1 }),
-                req.i18n.t('game:edit.players.default', { '#': 2 }),
-                req.i18n.t('game:edit.players.default', { '#': 3 })]
+      players: ["", ""]
     });
   }
 };
@@ -66,8 +63,7 @@ exports.edit = function (req, res) {
     var body = req.body;
     body.title = req.i18n.t('game:edit.title', { name: req.body.name });
     body.isAdd = false;
-    body.playersCount = parseInt(body.playersCount) + 1;
-    body.players.push(req.i18n.t('game:edit.players.default', { '#': body.playersCount }));
+    body.players.push("");
     res.render('game/edit', body);
   } else if (req.params.name) {
     Game.findOne({ name: req.params.name }, function (err, game) {
@@ -78,7 +74,6 @@ exports.edit = function (req, res) {
           title: req.i18n.t('game:edit.title', { name: game.name }),
           isAdd: false,
           name: game.name,
-          playersCount: game.players.length,
           players: game.players
         });
       } else {
@@ -102,6 +97,7 @@ exports.save = function (req, res) {
         }).filter(function (player) {
           return player;
         });
+
     if (name && players.length) {
       Game.findOne({ name: name }, function (err, game) {
         if (err) return console.error(err);

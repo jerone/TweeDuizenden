@@ -101,8 +101,7 @@
       "default": "Spel __date__ __time__"
     },
     "players": {
-      "label": "Spelers",
-      "default": "Speler __#__"
+      "label": "Spelers"
     },
     "addPlayer": {
       "text": "Speler toevoegen",
