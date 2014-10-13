@@ -29,8 +29,7 @@ block content
         tbody
           - for (var i = 0; i < 20; i++) {
             tr.active
-              th
-                span= i+1
+              th= i+1
               td
                 p.form-control-static.input-sm.text-nowrap= players[i % players.length]
               td
@@ -49,9 +48,7 @@ block content
                     value=score[player]&&score[player][i])
             if i!=0
               tr
-                th
-                td
-                td
+                th(colspan=3)
                 each player, index in players
                   td
                     input.form-control.text-center(
