@@ -107,6 +107,15 @@ exports.save = function (req, res) {
         }
 
         game.name = name;
+
+        if (Object.keys(game.score).length) {
+          var score = {};
+          players.forEach(function (player, index) {
+            score[player] = game.score[game.players[index]];
+          });
+          game.score = score;
+        }
+
         game.players = players;
 
         game.save(function (err) {
