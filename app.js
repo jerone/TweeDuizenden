@@ -25,6 +25,9 @@ app.set('env', (process.env.NODE_ENV || 'development').trim());  // Fix issue wi
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.locals.helpers = helpers;
+if (app.get('env') === 'development') {
+  app.locals.pretty = true;
+}
 
 mongoose.connect(secrets.db);
 mongoose.connection.on('error', function () {
