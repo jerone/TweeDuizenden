@@ -35,7 +35,7 @@ block content
     //- Check if object is really empty;
     if Object.keys(games).length
       tbody
-        each game, index in games
+        each game in games
           tr
             td #{game.name}
             if admin
