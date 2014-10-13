@@ -42,6 +42,7 @@ module.exports = function (app) {
   app.route('/game/update').post(gameController.update);
   app.route('/game/delete').delete(gameController.delete);
   app.route('/game/delete/:name').delete(gameController.delete);
+  app.route('/game/edit/:name').get(gameController.edit).post(gameController.edit);
   app.route('/game/api').get(gameController.api);
 
   // Handle 404;

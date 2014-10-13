@@ -49,6 +49,11 @@ block content
                 span.hidden-xs= t('game:index.table.open.text')
               if admin
                 | &nbsp;
+                form(method='POST', action='/game/edit/'+encodeURIComponent(game.name), enctype='application/x-www-form-urlencoded', style='display:inline-block')
+                  button.btn.btn-warning(type='submit',
+                                         title=t('game:index.table.edit.title'))
+                    span.glyphicon.glyphicon-pencil
+                | &nbsp;
                 form.g2000n-delete(method='POST', action='/game/delete/'+encodeURIComponent(game.name), enctype='application/x-www-form-urlencoded', style='display:inline-block')
                   input(type='hidden', name='_method', value='DELETE')
                   button.btn.btn-danger(type='submit',

@@ -31,6 +31,9 @@
       "delete": {
         "title": "Delete this game!",
         "confirm": "Are you sure you want to delete this game?"
+      },
+      "edit": {
+        "title": "Edit this game."
       }
     }
   },
@@ -39,7 +42,7 @@
     "header": {
       "title": "Rules"
     },
-    "text__TODO": [ ],
+    "text__TODO": [],
     "add": {
       "text": "Start a new game &raquo;"
     },
@@ -47,10 +50,20 @@
       "text": "View previous games &raquo;"
     }
   },
-  "edit": {
+  "add": {
     "title": "Add Game",
     "header": {
       "title": "Add Game"
+    },
+    "start": {
+      "title": "Save and start this game.",
+      "text": "Start Game"
+    }
+  },
+  "edit": {
+    "title": "Edit Game __name__",
+    "header": {
+      "title": "Edit Game"
     },
     "warning": {
       "no_name": "No name defined!",
@@ -68,8 +81,9 @@
       "text": "Add Player",
       "title": "Add a new player."
     },
-    "start": {
-      "text": "Start Game"
+    "update": {
+      "title": "Update this game.",
+      "text": "Update Game"
     }
   },
   "view": {

@@ -31,6 +31,9 @@
       "delete": {
         "title": "Verwijder dit spel!",
         "confirm": "Weet u zeker dat u dit spel wilt verwijderen?"
+      },
+      "edit": {
+        "title": "Dit spel bewerken."
       }
     }
   },
@@ -74,10 +77,20 @@
       "text": "Bekijk vorige spellen &raquo;"
     }
   },
-  "edit": {
+  "add": {
     "title": "Spel toevoegen",
     "header": {
       "title": "Spel toevoegen"
+    },
+    "start": {
+      "title": "Spel opslaan en starten.",
+      "text": "Spel starten"
+    }
+  },
+  "edit": {
+    "title": "Spel __name__ bewerken",
+    "header": {
+      "title": "Spel bewerken"
     },
     "warning": {
       "no_name": "Geen naam opgegeven!",
@@ -95,8 +108,9 @@
       "text": "Speler toevoegen",
       "title": "Een nieuwe speler toevoegen."
     },
-    "start": {
-      "text": "Start spel"
+    "update": {
+      "title": "Dit spel bijwerken.",
+      "text": "Spel opslaan"
     }
   },
   "view": {

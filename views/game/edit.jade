@@ -2,7 +2,12 @@ extends ../_layout
 
 block content
   .page-header
-    h3= t('game:edit.header.title')
+    if isAdd
+      h3= t('game:add.header.title')
+    else
+      h3= t('game:view.header.title')
+        | &nbsp;
+        small #{name}
 
   form.form-horizontal(role='form', method='POST', action='/game/save')
     //- Form element's default button is the first - not display:none - submit button;
@@ -15,40 +20,46 @@ block content
       label.col-sm-2.control-label(for='players')= t('game:edit.players.label')
       .col-sm-8
         input(name='playersCount', type='hidden', value=playersCount)
-        input.form-control.placeholder(id='players', name='players[]', type='text', value=players[0])
+        input.form-control(id='players', name='players[]', type='text', value=players[0])
     - for(var i = 1; i < playersCount; i++){
       .form-group
         if playersCount==i+1
           .col-sm-offset-2.col-sm-7
-            input.form-control.placeholder(name='players[]', type='text', value=players[i])
+            input.form-control(name='players[]', type='text', value=players[i])
           .col-sm-1
             button.btn.btn-primary.btn-block(name='addPlayer', type='submit', value='addPlayer', title=t('game:edit.addPlayer.title'))
               span.glyphicon.glyphicon-plus
               span.visible-xs-inline= t('game:edit.addPlayer.text')
         else
           .col-sm-offset-2.col-sm-8
-            input.form-control.placeholder(name='players[]', type='text', value=players[i])
+            input.form-control(name='players[]', type='text', value=players[i])
     - }
     .form-group
       .col-sm-offset-2.col-sm-8
-        button.btn.btn-primary(name='submitted', type='submit', value='submitted')
-          span.glyphicon.glyphicon-chevron-right
-          span= t('game:edit.start.text')
+        if isAdd
+          button.btn.btn-primary(name='submitted', type='submit', value='submitted', title=t('game:add.start.title'))
+            span.glyphicon.glyphicon-chevron-right
+            span= t('game:add.start.text')
+        else
+          button.btn.btn-primary(name='submitted', type='submit', value='submitted', title=t('game:edit.update.title'))
+            span.glyphicon.glyphicon-floppy-disk
+            span= t('game:edit.update.text')
 
-  script.
-    $(function(){
-        $(".placeholder").each(function(){
-            var that = $(this);
-            that.data("placeholder", that.val());
-        }).focus(function(){
-            var that = $(this);
-            if(that.val() === that.data("placeholder")){
-                that.val('');
-            }
-        }).blur(function(){
-            var that = $(this);
-            if(that.val() === ""){
-                that.val(that.data("placeholder"));
-            }
-        }).triggerHandler("blur");
-    });
+  if isAdd
+    script.
+      $(function(){
+          $(".placeholder").each(function(){
+              var that = $(this);
+              that.data("placeholder", that.val());
+          }).focus(function(){
+              var that = $(this);
+              if(that.val() === that.data("placeholder")){
+                  that.val('');
+              }
+          }).blur(function(){
+              var that = $(this);
+              if(that.val() === ""){
+                  that.val(that.data("placeholder"));
+              }
+          }).triggerHandler("blur");
+      });

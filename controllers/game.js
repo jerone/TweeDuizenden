@@ -5,13 +5,13 @@ var Game = require('../models/Game'),
 
 exports.api = function (req, res) {
   Game.find({}, function (err, games) {
-    var gamesMap = {};
+    if (err) return console.error(err);
 
+    var gamesList = {};
     games.forEach(function (game) {
-      gamesMap[game._id] = game;
+      gamesList[game._id] = game;
     });
-
-    res.send(gamesMap);
+    res.send(gamesList);
   });
 };
 
@@ -19,16 +19,14 @@ exports.index = function (req, res) {
   Game.find({}, function (err, games) {
     if (err) return console.error(err);
 
-    var gamesMap = {};
-
+    var gamesList = {};
     games.forEach(function (game) {
-      gamesMap[game._id] = game;
+      gamesList[game._id] = game;
     });
-
     res.render('game/index', {
       title: req.i18n.t('game:index.title'),
       admin: typeof req.query.admin !== 'undefined',
-      games: gamesMap
+      games: gamesList
     });
   });
 };
@@ -40,7 +38,8 @@ exports.rules = function (req, res) {
 exports.add = function (req, res) {
   if (req.body.addPlayer === 'addPlayer') {
     var body = req.body;
-    body.title = req.i18n.t('game:edit.title');
+    body.title = req.i18n.t('game:add.title');
+    body.isAdd = true;
     body.playersCount = parseInt(body.playersCount) + 1;
     body.players.push(req.i18n.t('game:edit.players.default', { '#': body.playersCount }));
     res.render('game/edit', body);
@@ -48,7 +47,8 @@ exports.add = function (req, res) {
     var timestamp = new Date(),
         lang = req.i18n.lng();
     res.render('game/edit', {
-      title: req.i18n.t('game:edit.title'),
+      title: req.i18n.t('game:add.title'),
+      isAdd: true,
       name: req.i18n.t('game:edit.name.default', {
         date: helpers.getLocaleDateString(timestamp, lang),
         time: helpers.getLocaleTimeString(timestamp, lang)
@@ -61,10 +61,40 @@ exports.add = function (req, res) {
   }
 };
 
-exports.save = function (req, res) {
-  // coming from /game/add
+exports.edit = function (req, res) {
   if (req.body.addPlayer === 'addPlayer') {
-    res.redirect(307, '/game/add');
+    var body = req.body;
+    body.title = req.i18n.t('game:edit.title', { name: req.body.name });
+    body.isAdd = false;
+    body.playersCount = parseInt(body.playersCount) + 1;
+    body.players.push(req.i18n.t('game:edit.players.default', { '#': body.playersCount }));
+    res.render('game/edit', body);
+  } else if (req.params.name) {
+    Game.findOne({ name: req.params.name }, function (err, game) {
+      if (err) return console.error(err);
+
+      if (game) {
+        res.render('game/edit', {
+          title: req.i18n.t('game:edit.title', { name: game.name }),
+          isAdd: false,
+          name: game.name,
+          playersCount: game.players.length,
+          players: game.players
+        });
+      } else {
+        // TODO;
+        res.send('no game!!!');
+      }
+    });
+  } else {
+    res.redirect('/game');
+  }
+};
+
+exports.save = function (req, res) {
+  if (req.body.addPlayer === 'addPlayer') {
+    // Coming from `/game/add` or `/game/edit/:name`;
+    res.redirect(307, req.header('referrer'));
   } else {
     var name = req.body.name && req.body.name.trim(),
         players = req.body.players.map(function (player) {
