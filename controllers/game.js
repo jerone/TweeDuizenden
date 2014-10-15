@@ -1,6 +1,6 @@
 var Game = require('../models/Game'),
     Flash = require('../models/Flash'),
-    helpers = require('./../lib/helpers'),
+    helpers = require('./../app/helpers'),
     EOL = require('os').EOL;
 
 exports.api = function (req, res) {
@@ -36,11 +36,18 @@ exports.rules = function (req, res) {
 };
 
 exports.add = function (req, res) {
-  if (req.body.addPlayer === 'addPlayer') {
+  if (req.body.addPlayer !== undefined) {
     var body = req.body;
     body.title = req.i18n.t('game:add.title');
     body.isAdd = true;
-    body.players.push("");
+    body.players.push({ name: "", previousName: "", index: body.players.length });
+    res.render('game/edit', body);
+  } else if (req.body.removePlayer !== undefined) {
+    var index = parseInt(req.body.removePlayer, 10);
+    var body = req.body;
+    body.title = req.i18n.t('game:add.title');
+    body.isAdd = true;
+    body.players.splice(index, 1);
     res.render('game/edit', body);
   } else {
     var timestamp = new Date(),
@@ -53,28 +60,41 @@ exports.add = function (req, res) {
         date: helpers.getLocaleDateString(timestamp, lang),
         time: helpers.getLocaleTimeString(timestamp, lang)
       }),
-      players: ["", ""]
+      players: [{ name: "", previousName: "", index: 0 },
+                { name: "", previousName: "", index: 1 }]
     });
   }
 };
 
 exports.edit = function (req, res) {
-  if (req.body.addPlayer === 'addPlayer') {
+  if (req.body.addPlayer !== undefined) {
     var body = req.body;
     body.title = req.i18n.t('game:edit.title', { name: req.body.name });
     body.isAdd = false;
-    body.players.push("");
+    body.players.push({ name: "", previousName: "", index: body.players.length });
+    res.render('game/edit', body);
+  } else if (req.body.removePlayer !== undefined) {
+    var index = parseInt(req.body.removePlayer, 10);
+    var body = req.body;
+    body.title = req.i18n.t('game:edit.title', { name: req.body.name });
+    body.isAdd = false;
+    body.players.splice(index, 1);
     res.render('game/edit', body);
   } else if (req.params.name) {
     Game.findOne({ name: req.params.name }, function (err, game) {
       if (err) return console.error(err);
 
       if (game) {
+        var playersList = [];
+        game.players.forEach(function (player, index) {
+          playersList.push({ name: player, previousName: player, index: index });
+        });
+
         res.render('game/edit', {
           title: req.i18n.t('game:edit.title', { name: game.name }),
           isAdd: false,
           name: game.name,
-          players: game.players
+          players: playersList
         });
       } else {
         // TODO;
@@ -87,16 +107,15 @@ exports.edit = function (req, res) {
 };
 
 exports.save = function (req, res) {
-  if (req.body.addPlayer === 'addPlayer') {
+  if (req.body.addPlayer !== undefined || req.body.removePlayer !== undefined) {
     // Coming from `/game/add` or `/game/edit/:name`;
     res.redirect(307, req.header('referrer'));
   } else {
     var name = req.body.name && req.body.name.trim(),
         players = req.body.players.map(function (player) {
-          return player.trim();
-        }).filter(function (player) {
+          player.name = player.name.trim();
           return player;
-        });
+        }).filter(function (player) { return player.name; });
 
     if (name && players.length) {
       Game.findOne({ name: name }, function (err, game) {
@@ -110,13 +129,13 @@ exports.save = function (req, res) {
 
         if (Object.keys(game.score).length) {
           var score = {};
-          players.forEach(function (player, index) {
-            score[player] = game.score[game.players[index]];
+          players.forEach(function (player) {
+            score[player.name] = game.score[player.name !== player.previousName ? player.previousName : player.name];
           });
           game.score = score;
         }
 
-        game.players = players;
+        game.players = players.map(function (player) { return player.name; });
 
         game.save(function (err) {
           if (err) return console.error(err);
@@ -158,10 +177,11 @@ exports.update = function (req, res) {
       if (game) {
         game.wild = wild;
 
-        game.score = {};  // Resetting is required to save the score;
+        var score = {};
         for (var i = 0; i < players.length; i++) {
-          game.score[players[i]] = req.body['player-' + i];
+          score[players[i]] = req.body['player-' + i];
         }
+        game.score = score;
 
         game.save(function (err) {
           if (err) return console.error(err);

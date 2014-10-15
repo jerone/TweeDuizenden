@@ -104,8 +104,12 @@
       "label": "Spelers"
     },
     "addPlayer": {
-      "text": "Speler toevoegen",
-      "title": "Een nieuwe speler toevoegen."
+      "title": "Een nieuwe speler toevoegen.",
+      "text": "Speler toevoegen"
+    },
+    "removePlayer": {
+      "title": "Verwijder deze speler.",
+      "text": "Speler verwijderen"
     },
     "update": {
       "title": "Dit spel bijwerken.",

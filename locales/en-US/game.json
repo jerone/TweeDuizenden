@@ -77,8 +77,12 @@
       "label": "Players"
     },
     "addPlayer": {
-      "text": "Add Player",
-      "title": "Add a new player."
+      "title": "Add a new player.",
+      "text": "Add Player"
+    },
+    "removePlayer": {
+      "title": "Remove this player.",
+      "text": "Remove Player"
     },
     "update": {
       "title": "Update this game.",
