@@ -4,7 +4,7 @@ var homeController = require('./../controllers/home');
 var gameController = require('./../controllers/game');
 var debugController = require('./../controllers/debug');
 
-module.exports = function (app) {
+module.exports = function routes(app) {
 
   // Handle flash;
   app.use(function (req, res, next) {

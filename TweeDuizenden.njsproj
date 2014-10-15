@@ -31,12 +31,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.js" />
+    <Compile Include="app\methodOverride.js" />
     <Compile Include="app\routes.js" />
     <Compile Include="config\secrets.js" />
     <Compile Include="controllers\debug.js" />
     <Compile Include="controllers\game.js" />
     <Compile Include="controllers\home.js" />
-    <Compile Include="lib\helpers.js" />
+    <Compile Include="app\helpers.js" />
     <Compile Include="models\Flash.js" />
     <Compile Include="models\Game.js" />
     <Compile Include="public\js\admin.js" />
@@ -95,7 +96,6 @@
     <Folder Include="app\" />
     <Folder Include="config\" />
     <Folder Include="controllers\" />
-    <Folder Include="lib\" />
     <Folder Include="locales\en-US\" />
     <Folder Include="locales\nl-NL\" />
     <Folder Include="models\" />
