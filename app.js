@@ -4,8 +4,6 @@ var bodyParser = require('body-parser'),
     express = require('express'),
     favicon = require('serve-favicon'),
     flash = require('connect-flash'),
-    i18n = require('i18next'),
-    jade = require('jade'),
     less = require('less-middleware'),
     logger = require('morgan'),
     mongoose = require('mongoose'),
@@ -18,6 +16,7 @@ var EOL = require('os').EOL,
 // Require file modules;
 var secrets = require('./config/secrets'),
     helpers = require('./app/helpers.js'),
+    i18n = require('./app/i18n.js'),
     methodOverride = require('./app/methodOverride.js'),
     routes = require('./app/routes.js');
 
@@ -39,29 +38,6 @@ mongoose.connection.on('error', function () {
   console.error('MongoDB Connection Error. Make sure MongoDB is running.');
 });
 
-// i18n;
-i18n.init({
-  resSetPath: 'locales/__lng__/new.__ns__.json',
-  saveMissing: app.get('env') === 'development',
-  debug: app.get('env') === 'development',
-  sendMissingTo: 'fallback',
-  jsonIntend: 2,
-  ignoreRoutes: ['images/', 'public/', 'css/', 'js/', 'favicon.ico'],
-  cookieName: 'lang',
-  detectLngQS: 'lang',
-  supportedLngs: ['en-US', 'nl-NL'],
-  fallbackLng: ['en-US', 'nl-NL'],
-  ns: {
-    namespaces: ['_flash', '_footer', '_navbar', 'app', 'error', 'game', 'home'],
-    defaultNs: 'app'
-  }
-});
-i18n.addPostProcessor('multi-line-jade', function (val, key, opts) {
-  // NOTE: i18next is using \n as fixed new-lines;
-  return jade.render('p ' + val.replace(/\n\n/g, '\n&nbsp;\n').replace(/\n/g, EOL + 'p '));
-});
-i18n.registerAppHelper(app);
-
 // Middleware;
 if (app.get('env') === 'development') {
   app.use(logger('dev'));
@@ -72,7 +48,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({ resave: true, saveUninitialized: true, secret: secrets.sessionSecret }));
 app.use(methodOverride());
 app.use(flash());
-app.use(i18n.handle);
+app.use(i18n(app).handle);
 
 // Dir based middleware;
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

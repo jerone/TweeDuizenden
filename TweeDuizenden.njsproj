@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.js" />
+    <Compile Include="app\i18n.js" />
     <Compile Include="app\methodOverride.js" />
     <Compile Include="app\routes.js" />
     <Compile Include="config\secrets.js" />
