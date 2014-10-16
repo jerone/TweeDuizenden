@@ -1,5 +1,6 @@
 ﻿var i18next = require('i18next'),
-    jade = require('jade');
+    jade = require('jade'),
+    EOL = require('os').EOL;
 
 module.exports = function i18n(app) {
   i18next.init({

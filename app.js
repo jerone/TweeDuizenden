@@ -10,8 +10,7 @@ var bodyParser = require('body-parser'),
     session = require('express-session');
 
 // Require core modules;
-var EOL = require('os').EOL,
-    path = require('path');
+var path = require('path');
 
 // Require file modules;
 var secrets = require('./config/secrets'),
