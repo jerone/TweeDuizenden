@@ -19,14 +19,55 @@ exports.index = function (req, res) {
   Game.find({}, function (err, games) {
     if (err) return console.error(err);
 
-    var gamesList = {};
-    games.forEach(function (game) {
-      gamesList[game._id] = game;
+    var isAdmin = typeof req.query.admin !== 'undefined',
+        orderByDefault = 'name',
+        orderByQuery = req.query.orderBy,
+        orderDirQuery = req.query.orderDir,
+        orderDirSort = orderDirQuery !== 'desc' ? 1 : -1,
+        orderDirFn = function (orderBy) {
+          var href = '/game?orderBy=' + orderBy + '&orderDir=';
+          if ((orderByQuery === orderBy && orderDirQuery !== 'desc') || !orderByQuery) {
+            href += 'desc';
+          } else {
+            href += 'asc';
+          }
+          if (isAdmin) {
+            href += '&admin';
+          }
+
+          var icon = '';
+          if (orderByQuery === orderBy || (!orderByQuery && orderBy === orderByDefault)) {
+            if (orderDirQuery === 'desc') {
+              icon = 'glyphicon-arrow-up';
+            } else {
+              icon = 'glyphicon-arrow-down';
+            }
+          }
+
+          return { href: href, icon: icon };
+        },
+        orderDirs = {
+          name: orderDirFn('name'),
+          _id: orderDirFn('_id'),
+          createdAt: orderDirFn('createdAt'),
+          updatedAt: orderDirFn('updatedAt')
+        };
+
+    games.sort(function (a, b) {
+      if (a[orderByQuery] < b[orderByQuery]) return orderDirSort * -1;
+      if (a[orderByQuery] > b[orderByQuery]) return orderDirSort * 1;
+      if (orderByQuery !== orderByDefault) {
+        if (a[orderByDefault] < b[orderByDefault]) return -1;
+        if (a[orderByDefault] > b[orderByDefault]) return 1;
+      }
+      return 0;
     });
+
     res.render('game/index', {
       title: req.i18n.t('game:index.title'),
-      admin: typeof req.query.admin !== 'undefined',
-      games: gamesList
+      admin: isAdmin,
+      orderDir: orderDirs,
+      games: games
     });
   });
 };

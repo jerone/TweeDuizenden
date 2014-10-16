@@ -25,15 +25,24 @@ block content
   table.table.table-v-center#g2000n-table
     thead
       tr
-        th= t('game:index.table.name')
+        th
+          a(href=orderDir.name.href)= t('game:index.table.name')
+            span.glyphicon(class=orderDir.name.icon)
         if admin
-          th= t('game:index.table.id')
-        th= t('game:index.table.created')
-        th= t('game:index.table.updated')
+          th
+            a(href=orderDir._id.href)= t('game:index.table.id')
+              span.glyphicon(class=orderDir._id.icon)
+        th
+          a(href=orderDir.createdAt.href)= t('game:index.table.created')
+            span.glyphicon(class=orderDir.createdAt.icon)
+        th
+          a(href=orderDir.updatedAt.href)= t('game:index.table.updated')
+            span.glyphicon(class=orderDir.updatedAt.icon)
         th= t('game:index.table.players')
         th= t('game:index.table.actions')
+
     //- Check if object is really empty;
-    if Object.keys(games).length
+    if games.length
       tbody
         each game in games
           tr
