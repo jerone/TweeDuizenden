@@ -50,8 +50,14 @@ exports.index = function (req, res) {
         };
 
     games.sort(function (a, b) {
-      if (a[orderByQuery] < b[orderByQuery]) return orderDirSort * -1;
-      if (a[orderByQuery] > b[orderByQuery]) return orderDirSort * 1;
+      if (typeof a[orderByQuery] === 'string') {
+        // `localeCompare` doesn't work;
+        if (a[orderByQuery].toLowerCase() < b[orderByQuery].toLowerCase()) return orderDirSort * -1;
+        if (a[orderByQuery].toLowerCase() > b[orderByQuery].toLowerCase()) return orderDirSort * 1;
+      } else {
+        if (a[orderByQuery] < b[orderByQuery]) return orderDirSort * -1;
+        if (a[orderByQuery] > b[orderByQuery]) return orderDirSort * 1;
+      }
       if (orderByQuery !== orderByDefault) {
         if (a[orderByDefault] < b[orderByDefault]) return -1;
         if (a[orderByDefault] > b[orderByDefault]) return 1;
