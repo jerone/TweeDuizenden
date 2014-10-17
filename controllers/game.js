@@ -6,12 +6,7 @@ var Game = require('../models/Game'),
 exports.api = function (req, res) {
   Game.find({}, function (err, games) {
     if (err) return console.error(err);
-
-    var gamesList = {};
-    games.forEach(function (game) {
-      gamesList[game._id] = game;
-    });
-    res.send(gamesList);
+    res.send(games);
   });
 };
 
@@ -48,6 +43,7 @@ exports.index = function (req, res) {
         },
         orderDirs = {
           name: orderDirFn('name'),
+          type: orderDirFn('type'),
           _id: orderDirFn('_id'),
           createdAt: orderDirFn('createdAt'),
           updatedAt: orderDirFn('updatedAt')
@@ -67,7 +63,8 @@ exports.index = function (req, res) {
       title: req.i18n.t('game:index.title'),
       admin: isAdmin,
       orderDir: orderDirs,
-      games: games
+      games: games,
+      gameTypes: Game.getGameTypes(req.i18n)
     });
   });
 };
@@ -81,13 +78,15 @@ exports.add = function (req, res) {
     var body = req.body;
     body.title = req.i18n.t('game:add.title');
     body.isAdd = true;
-    body.players.push({ name: "", previousName: "", index: body.players.length });
+    body.gameTypes = Game.getGameTypes(req.i18n);
+    body.players.push({ name: '', previousName: '', index: body.players.length });
     res.render('game/edit', body);
   } else if (req.body.removePlayer !== undefined) {
     var index = parseInt(req.body.removePlayer, 10);
     var body = req.body;
     body.title = req.i18n.t('game:add.title');
     body.isAdd = true;
+    body.gameTypes = Game.getGameTypes(req.i18n);
     body.players.splice(index, 1);
     res.render('game/edit', body);
   } else {
@@ -101,8 +100,10 @@ exports.add = function (req, res) {
         date: helpers.getLocaleDateString(timestamp, lang),
         time: helpers.getLocaleTimeString(timestamp, lang)
       }),
-      players: [{ name: "", previousName: "", index: 0 },
-                { name: "", previousName: "", index: 1 }]
+      type: Game.gameTypesDefault,
+      gameTypes: Game.getGameTypes(req.i18n),
+      players: [{ name: '', previousName: '', index: 0 },
+                { name: '', previousName: '', index: 1 }]
     });
   }
 };
@@ -112,13 +113,15 @@ exports.edit = function (req, res) {
     var body = req.body;
     body.title = req.i18n.t('game:edit.title', { name: req.body.name });
     body.isAdd = false;
-    body.players.push({ name: "", previousName: "", index: body.players.length });
+    body.gameTypes = Game.getGameTypes(req.i18n);
+    body.players.push({ name: '', previousName: '', index: body.players.length });
     res.render('game/edit', body);
   } else if (req.body.removePlayer !== undefined) {
     var index = parseInt(req.body.removePlayer, 10);
     var body = req.body;
     body.title = req.i18n.t('game:edit.title', { name: req.body.name });
     body.isAdd = false;
+    body.gameTypes = Game.getGameTypes(req.i18n);
     body.players.splice(index, 1);
     res.render('game/edit', body);
   } else if (req.params.name) {
@@ -135,6 +138,8 @@ exports.edit = function (req, res) {
           title: req.i18n.t('game:edit.title', { name: game.name }),
           isAdd: false,
           name: game.name,
+          type: game.type,
+          gameTypes: Game.getGameTypes(req.i18n),
           players: playersList
         });
       } else {
@@ -167,6 +172,8 @@ exports.save = function (req, res) {
         }
 
         game.name = name;
+
+        game.type = req.body.type;
 
         if (Object.keys(game.score).length) {
           var score = {};
@@ -209,14 +216,13 @@ exports.save = function (req, res) {
 exports.update = function (req, res) {
   if (req.body.name && req.body.players) {
     var name = req.body.name,
-        players = req.body.players.split(','),
-        wild = req.body.wild;
+        players = req.body.players.split(',');
 
     Game.findOne({ name: name }, function (err, game) {
       if (err) return console.error(err);
 
       if (game) {
-        game.wild = wild;
+        game.wild = game.type === 'tweeduizenden' ? req.body.wild : [];
 
         var score = {};
         for (var i = 0; i < players.length; i++) {
@@ -256,6 +262,7 @@ exports.view = function (req, res) {
         res.render('game/view', {
           title: req.i18n.t('game:view.title', { name: game.name }),
           name: game.name,
+          type: game.type,
           players: game.players,
           wild: game.wild || ['-'],
           score: game.score || {}

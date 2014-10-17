@@ -1,4 +1,10 @@
 {
+  "common": {
+    "types": {
+      "tweeduizenden": "TweeDuizenden",
+      "skipbo": "Skip-Bo"
+    }
+  },
   "index": {
     "title": "Game",
     "header": {
@@ -19,6 +25,7 @@
     "table": {
       "name": "Name",
       "id": "Id",
+      "type": "Type",
       "created": "Created",
       "updated": "Updated",
       "players": "Players",
@@ -42,7 +49,7 @@
     "header": {
       "title": "Rules"
     },
-    "text__TODO": [],
+    "text__TODO": [ ],
     "add": {
       "text": "Start a new game &raquo;"
     },
@@ -72,6 +79,9 @@
     "name": {
       "label": "Name",
       "default": "Game __date__ __time__"
+    },
+    "type": {
+      "label": "Type"
     },
     "players": {
       "label": "Players"

@@ -23,20 +23,22 @@ block content
               div.table-row-min-height
                 span= t('game:view.table.number')
             th= t('game:view.table.dealer')
-            th= t('game:view.table.wild')
+            if type==='tweeduizenden'
+              th= t('game:view.table.wild')
             each player in players
               th= player
         tbody
-          - for (var i = 0; i < 20; i++) {
+          - for (var i = 0; i < (type==='tweeduizenden'?20:9); i++) {
             tr.active
               th= i+1
               td
                 p.form-control-static.input-sm.text-nowrap= players[i % players.length]
-              td
-                - var wildOptions = ["-", "A", "K", "Q", "J", "10", "9", "8", "7", "6", "5", "4"];
-                select.form-control.text-center(name='wild')
-                  each wildOption in wildOptions
-                    option(selected=wild[i]===wildOption) #{wildOption}
+              if type==='tweeduizenden'
+                td
+                  - var wildOptions = ["-", "A", "K", "Q", "J", "10", "9", "8", "7", "6", "5", "4"];
+                  select.form-control.text-center(name='wild')
+                    each wildOption in wildOptions
+                      option(selected=wild[i]===wildOption) #{wildOption}
               each player, index in players
                 td
                   input.form-control.text-center(
@@ -48,7 +50,7 @@ block content
                     value=score[player]&&score[player][i])
             if i!=0
               tr
-                th(colspan=3)
+                th(colspan=type==='tweeduizenden'?3:2)
                 each player, index in players
                   td
                     input.form-control.text-center(

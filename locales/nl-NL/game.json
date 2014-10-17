@@ -1,4 +1,10 @@
 {
+  "common": {
+    "types": {
+      "tweeduizenden": "TweeDuizenden",
+      "skipbo": "Skip-Bo"
+    }
+  },
   "index": {
     "title": "Spel",
     "header": {
@@ -19,6 +25,7 @@
     "table": {
       "name": "Naam",
       "id": "Id",
+      "type": "Spelsoort",
       "created": "Aangemaakt",
       "updated": "Bijgewerkt",
       "players": "Spelers",
@@ -99,6 +106,9 @@
     "name": {
       "label": "Naam",
       "default": "Spel __date__ __time__"
+    },
+    "type": {
+      "label": "Spelsoort"
     },
     "players": {
       "label": "Spelers"

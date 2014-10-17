@@ -18,6 +18,15 @@ block content
       .col-sm-8
         input.form-control.placeholder(id='name', name='name', type='text', value=name)
 
+    .form-group
+      label.col-sm-2.control-label(for='type')= t('game:edit.type.label')
+      .col-sm-8
+        .btn-group(data-toggle="buttons")
+          each gameTypeValue, gameTypeKey in gameTypes
+            label.btn.btn-default(class=type===gameTypeKey?'active':'')
+              input(type='radio', name='type' checked=type===gameTypeKey, value=gameTypeKey)
+              | #{gameTypeValue}
+
     each player, index in players
       if players.length==1
         .form-group
