@@ -1,5 +1,6 @@
 var Game = require('../models/Game'),
     Flash = require('../models/Flash'),
+    PlayerEdit = require('../models/PlayerEdit'),
     helpers = require('./../app/helpers'),
     EOL = require('os').EOL,
     util = require('util');
@@ -80,7 +81,7 @@ exports.add = function (req, res) {
     body.isAdd = true;
     body.isPlayerAction = 1;
     body.gameTypes = Game.getGameTypes(req.i18n);
-    body.players.push({ name: '', previousName: '', index: body.players.length });
+    body.players.push(new PlayerEdit('', body.players.length));
     res.render('game/edit', body);
   } else if (req.body.removePlayer !== undefined) {
     var index = parseInt(req.body.removePlayer, 10);
@@ -100,8 +101,7 @@ exports.add = function (req, res) {
           time: helpers.getLocaleTimeString(timestamp, lang)
         }),
         type = Game.gameTypesDefault,
-        players = [{ name: '', previousName: '', index: 0 },
-                   { name: '', previousName: '', index: 1 }];
+        players = [new PlayerEdit('', 0), new PlayerEdit('', 1)];
 
     if (req.query.name) {
       name = req.query.name;
@@ -113,7 +113,7 @@ exports.add = function (req, res) {
     if (req.query.players) {
       players = [];
       req.query.players.split(',').forEach(function (player, index) {
-        players.push({ name: player, previousName: player, index: index });
+        players.push(new PlayerEdit(player, index));
       });
     }
 
@@ -136,7 +136,7 @@ exports.edit = function (req, res) {
     body.isAdd = false;
     body.isPlayerAction = 1;
     body.gameTypes = Game.getGameTypes(req.i18n);
-    body.players.push({ name: '', previousName: '', index: body.players.length });
+    body.players.push(new PlayerEdit('', body.players.length));
     res.render('game/edit', body);
   } else if (req.body.removePlayer !== undefined) {
     var index = parseInt(req.body.removePlayer, 10);
@@ -152,9 +152,9 @@ exports.edit = function (req, res) {
       if (err) return console.error(err);
 
       if (game) {
-        var playersList = [];
+        var players = [];
         game.players.forEach(function (player, index) {
-          playersList.push({ name: player, previousName: player, index: index });
+          players.push(new PlayerEdit(player, index));
         });
 
         res.render('game/edit', {
@@ -164,7 +164,7 @@ exports.edit = function (req, res) {
           name: game.name,
           type: game.type,
           gameTypes: Game.getGameTypes(req.i18n),
-          players: playersList
+          players: players
         });
       } else {
         req.flash(Flash.error, {

@@ -41,6 +41,7 @@
     <Compile Include="app\helpers.js" />
     <Compile Include="models\Flash.js" />
     <Compile Include="models\Game.js" />
+    <Compile Include="models\PlayerEdit.js" />
     <Compile Include="public\js\admin.js" />
     <Compile Include="public\js\lib\bootstrap.min.js" />
     <Compile Include="public\js\lib\jquery-2.1.1.min.js" />
