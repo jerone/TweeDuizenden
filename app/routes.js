@@ -1,8 +1,8 @@
 var url = require('url');
 
-var homeController = require('./../controllers/home');
-var gameController = require('./../controllers/game');
-var debugController = require('./../controllers/debug');
+var homeController = require('./../controllers/home'),
+    gameController = require('./../controllers/game'),
+    debugController = require('./../controllers/debug');
 
 module.exports = function routes(app) {
 
@@ -37,12 +37,12 @@ module.exports = function routes(app) {
   app.route('/game').get(gameController.index);
   app.route('/game/rules').get(gameController.rules);
   app.route('/game/add').get(gameController.add).post(gameController.add);
+  app.route('/game/edit/:name').get(gameController.edit).post(gameController.edit);
   app.route('/game/save').post(gameController.save);
   app.route('/game/view/:name').get(gameController.view);
   app.route('/game/update').post(gameController.update);
   app.route('/game/delete').delete(gameController.delete);
   app.route('/game/delete/:name').delete(gameController.delete);
-  app.route('/game/edit/:name').get(gameController.edit).post(gameController.edit);
   app.route('/game/api').get(gameController.api);
 
   // Handle 404;

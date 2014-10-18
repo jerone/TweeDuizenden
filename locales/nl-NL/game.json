@@ -3,15 +3,15 @@
     "types": {
       "tweeduizenden": "TweeDuizenden",
       "skipbo": "Skip-Bo"
+    },
+    "error": {
+      "missing": "Dit spel bestaat niet meer!"
     }
   },
   "index": {
     "title": "Spel",
     "header": {
       "title": "Spellen"
-    },
-    "error": {
-      "missing": "Dit spel bestaat niet meer!"
     },
     "add": {
       "title": "Een nieuw spel toevoegen.",

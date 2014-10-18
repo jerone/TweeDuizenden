@@ -3,15 +3,15 @@
     "types": {
       "tweeduizenden": "TweeDuizenden",
       "skipbo": "Skip-Bo"
+    },
+    "error": {
+      "missing": "This game no longer exists!"
     }
   },
   "index": {
     "title": "Game",
     "header": {
       "title": "Games"
-    },
-    "error": {
-      "missing": "This game no longer exists!"
     },
     "add": {
       "title": "Add a new game.",

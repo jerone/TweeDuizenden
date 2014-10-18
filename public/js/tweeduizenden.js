@@ -31,7 +31,7 @@
 
   /* Confirm leaving page; */
   function onbeforeunload() {
-    return "You are about to navigate away from this page.\n\nIf you leave this page all scrores that you have entered will be lost!\n\nUse the save button to save all scores."
+    return "You are about to navigate away from this page.\n\nIf you leave this page all scrores that you have entered will be lost!\n\nUse the save button to save all scores.";
   }
   $(".g2000n-save").click(function () {
     window.onbeforeunload = null;
@@ -39,6 +39,5 @@
   $(".g2000n-value").change(function () {
     window.onbeforeunload = onbeforeunload;
   });
-
 
 });

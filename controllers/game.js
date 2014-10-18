@@ -4,13 +4,6 @@ var Game = require('../models/Game'),
     EOL = require('os').EOL,
     util = require('util');
 
-exports.api = function (req, res) {
-  Game.find({}, function (err, games) {
-    if (err) return console.error(err);
-    res.send(games);
-  });
-};
-
 exports.index = function (req, res) {
   Game.find({}, function (err, games) {
     if (err) return console.error(err);
@@ -174,8 +167,11 @@ exports.edit = function (req, res) {
           players: playersList
         });
       } else {
-        // TODO;
-        res.send('no game!!!');
+        req.flash(Flash.error, {
+          message: req.i18n.t('game:common.error.missing')
+        });
+
+        res.redirect('/game');
       }
     });
   } else {
@@ -244,62 +240,6 @@ exports.save = function (req, res) {
   }
 };
 
-exports.update = function (req, res) {
-  if (req.body.clone !== undefined) {
-    if (req.body.name) {
-      Game.findOne({ name: req.body.name }, function (err, game) {
-        if (err) return console.error(err);
-
-        if (game) {
-          res.redirect(util.format('/game/add?name=%s&type=%s&players=%s',
-            encodeURIComponent(game.name),
-            encodeURIComponent(game.type),
-            game.players.map(function (player) { return encodeURIComponent(player); }).join(',')));
-        }
-      });
-    } else {
-      res.redirect('/game/add');
-    }
-  } else {
-    if (req.body.name && req.body.players) {
-      var players = req.body.players.split(',');
-
-      Game.findOne({ name: req.body.name }, function (err, game) {
-        if (err) return console.error(err);
-
-        if (game) {
-          game.wild = game.type === 'tweeduizenden' ? req.body.wild : [];
-
-          var score = {};
-          for (var i = 0; i < players.length; i++) {
-            score[players[i]] = req.body['player-' + i];
-          }
-          game.score = score;
-
-          game.save(function (err) {
-            if (err) return console.error(err);
-
-            req.flash(Flash.info, {
-              message: req.i18n.t('game:view.info.saved'),
-              fadeout: true
-            });
-
-            res.redirect('/game/view/' + encodeURIComponent(game.name));
-          });
-        } else {
-          req.flash(Flash.error, {
-            message: req.i18n.t('game:index.error.missing')
-          });
-
-          res.redirect('/game');
-        }
-      });
-    } else {
-      res.redirect('/game');
-    }
-  }
-};
-
 exports.view = function (req, res) {
   if (req.params.name) {
     Game.findOne({ name: req.params.name }, function (err, game) {
@@ -315,12 +255,75 @@ exports.view = function (req, res) {
           score: game.score || {}
         });
       } else {
-        // TODO
-        res.send('no game!!!');
+        req.flash(Flash.error, {
+          message: req.i18n.t('game:common.error.missing')
+        });
+
+        res.redirect('/game');
       }
     });
   } else {
     res.redirect('/game');
+  }
+};
+
+exports.update = function (req, res) {
+  if (req.body.clone !== undefined) {
+    if (req.body.name) {
+      Game.findOne({ name: req.body.name }, function (err, game) {
+        if (err) return console.error(err);
+
+        if (game) {
+          res.redirect(util.format('/game/add?name=%s&type=%s&players=%s',
+            encodeURIComponent(game.name),
+            encodeURIComponent(game.type),
+            game.players.map(function (player) { return encodeURIComponent(player); }).join(',')));
+        } else {
+          req.flash(Flash.error, {
+            message: req.i18n.t('game:common.error.missing')
+          });
+
+          res.redirect('/game/add');
+        }
+      });
+    } else {
+      res.redirect('/game/add');
+    }
+  } else {
+    if (req.body.name) {
+      Game.findOne({ name: req.body.name }, function (err, game) {
+        if (err) return console.error(err);
+
+        if (game) {
+          game.wild = game.type === 'tweeduizenden' ? req.body.wild : [];
+
+          var score = {};
+          for (var i = 0; i < game.players.length; i++) {
+            score[game.players[i]] = req.body['player-' + i];
+          }
+          game.score = score;
+
+          game.save(function (err) {
+            if (err) return console.error(err);
+
+            req.flash(Flash.info, {
+              message: req.i18n.t('game:view.info.saved'),
+              fadeout: true
+            });
+
+            res.redirect('/game/view/' + encodeURIComponent(game.name));
+          });
+        } else {
+          req.flash(Flash.error, {
+            message: req.i18n.t('game:common.error.missing')
+          });
+
+          res.redirect('/game');
+        }
+      });
+    } else {
+      res.redirect('/game');
+    }
   }
 };
 
@@ -346,4 +349,11 @@ exports.delete = function (req, res) {
       }
     });
   }
+};
+
+exports.api = function (req, res) {
+  Game.find({}, function (err, games) {
+    if (err) return console.error(err);
+    res.send(games);
+  });
 };
