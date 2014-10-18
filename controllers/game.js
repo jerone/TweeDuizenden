@@ -205,7 +205,8 @@ exports.save = function (req, res) {
         if (Object.keys(game.score).length) {
           var score = {};
           players.forEach(function (player) {
-            score[player.name] = game.score[player.name !== player.previousName ? player.previousName : player.name];
+            var name = player.name !== player.previousName ? player.previousName : player.name;
+            score[player.name] = game.score[name];
           });
           game.score = score;
         }
