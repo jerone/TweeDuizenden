@@ -16,7 +16,7 @@ block content
     .form-group
       label.col-sm-2.control-label(for='name')= t('game:edit.name.label')
       .col-sm-8
-        input.form-control.placeholder(id='name', name='name', type='text', value=name)
+        input.form-control.placeholder(id='name', name='name', type='text', value=name, autofocus=isPlayerAction===0)
 
     .form-group
       label.col-sm-2.control-label(for='type')= t('game:edit.type.label')
@@ -56,7 +56,7 @@ block content
         .form-group
           .col-sm-offset-2.col-sm-8
             .input-group
-              input.form-control(name='players['+index+'][name]',         type='text',   value=player.name)
+              input.form-control(name='players['+index+'][name]',         type='text',   value=player.name, autofocus=isPlayerAction===1)
               input.form-control(name='players['+index+'][previousName]', type='hidden', value=player.previousName)
               input.form-control(name='players['+index+'][index]',        type='hidden', value=player.index)
               span.input-group-btn

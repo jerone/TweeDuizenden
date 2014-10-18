@@ -84,6 +84,7 @@ exports.add = function (req, res) {
     var body = req.body;
     body.title = req.i18n.t('game:add.title');
     body.isAdd = true;
+    body.isPlayerAction = 1;
     body.gameTypes = Game.getGameTypes(req.i18n);
     body.players.push({ name: '', previousName: '', index: body.players.length });
     res.render('game/edit', body);
@@ -92,6 +93,7 @@ exports.add = function (req, res) {
     var body = req.body;
     body.title = req.i18n.t('game:add.title');
     body.isAdd = true;
+    body.isPlayerAction = -1;
     body.gameTypes = Game.getGameTypes(req.i18n);
     body.players.splice(index, 1);
     res.render('game/edit', body);
@@ -102,6 +104,7 @@ exports.add = function (req, res) {
     res.render('game/edit', {
       title: req.i18n.t('game:add.title'),
       isAdd: true,
+      isPlayerAction: 0,
       name: req.i18n.t('game:edit.name.default', {
         date: helpers.getLocaleDateString(timestamp, lang),
         time: helpers.getLocaleTimeString(timestamp, lang)
@@ -119,6 +122,7 @@ exports.edit = function (req, res) {
     var body = req.body;
     body.title = req.i18n.t('game:edit.title', { name: req.body.name });
     body.isAdd = false;
+    body.isPlayerAction = 1;
     body.gameTypes = Game.getGameTypes(req.i18n);
     body.players.push({ name: '', previousName: '', index: body.players.length });
     res.render('game/edit', body);
@@ -127,6 +131,7 @@ exports.edit = function (req, res) {
     var body = req.body;
     body.title = req.i18n.t('game:edit.title', { name: req.body.name });
     body.isAdd = false;
+    body.isPlayerAction = -1;
     body.gameTypes = Game.getGameTypes(req.i18n);
     body.players.splice(index, 1);
     res.render('game/edit', body);
@@ -143,6 +148,7 @@ exports.edit = function (req, res) {
         res.render('game/edit', {
           title: req.i18n.t('game:edit.title', { name: game.name }),
           isAdd: false,
+          isPlayerAction: 0,
           name: game.name,
           type: game.type,
           gameTypes: Game.getGameTypes(req.i18n),
