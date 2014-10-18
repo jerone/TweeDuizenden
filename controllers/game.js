@@ -15,13 +15,13 @@ exports.index = function (req, res) {
     if (err) return console.error(err);
 
     var isAdmin = typeof req.query.admin !== 'undefined',
-        orderByDefault = 'name',
+        orderByDefault = 'createdAt',
         orderByQuery = req.query.orderBy,
         orderDirQuery = req.query.orderDir,
         orderDirSort = orderDirQuery !== 'desc' ? 1 : -1,
         orderDirFn = function (orderBy) {
           var href = '/game?orderBy=' + orderBy + '&orderDir=';
-          if ((orderByQuery === orderBy && orderDirQuery !== 'desc') || !orderByQuery) {
+          if ((!orderByQuery && orderBy === orderByDefault) || (orderByQuery === orderBy && orderDirQuery !== 'desc')) {
             href += 'desc';
           } else {
             href += 'asc';
@@ -31,20 +31,20 @@ exports.index = function (req, res) {
           }
 
           var icon = '';
-          if (orderByQuery === orderBy || (!orderByQuery && orderBy === orderByDefault)) {
-            if (orderDirQuery === 'desc') {
-              icon = 'glyphicon-arrow-up';
-            } else {
+          if ((!orderByQuery && orderBy === orderByDefault) || (orderByQuery === orderBy)) {
+            if (orderDirQuery !== 'desc') {
               icon = 'glyphicon-arrow-down';
+            } else {
+              icon = 'glyphicon-arrow-up';
             }
           }
 
           return { href: href, icon: icon };
         },
         orderDirs = {
+          _id: orderDirFn('_id'),
           name: orderDirFn('name'),
           type: orderDirFn('type'),
-          _id: orderDirFn('_id'),
           createdAt: orderDirFn('createdAt'),
           updatedAt: orderDirFn('updatedAt')
         };
