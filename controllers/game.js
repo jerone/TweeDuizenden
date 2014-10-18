@@ -1,7 +1,8 @@
 var Game = require('../models/Game'),
     Flash = require('../models/Flash'),
     helpers = require('./../app/helpers'),
-    EOL = require('os').EOL;
+    EOL = require('os').EOL,
+    util = require('util');
 
 exports.api = function (req, res) {
   Game.find({}, function (err, games) {
@@ -98,21 +99,39 @@ exports.add = function (req, res) {
     body.players.splice(index, 1);
     res.render('game/edit', body);
   } else {
-    var timestamp = new Date(),
-        lang = req.i18n.lng();
+    var isPlayerAction = 0,
+        timestamp = new Date(),
+        lang = req.i18n.lng(),
+        name = req.i18n.t('game:edit.name.default', {
+          date: helpers.getLocaleDateString(timestamp, lang),
+          time: helpers.getLocaleTimeString(timestamp, lang)
+        }),
+        type = Game.gameTypesDefault,
+        players = [{ name: '', previousName: '', index: 0 },
+                   { name: '', previousName: '', index: 1 }];
+
+    if (req.query.name) {
+      name = req.query.name;
+      isPlayerAction = 2;
+    }
+    if (req.query.type) {
+      type = req.query.type;
+    }
+    if (req.query.players) {
+      players = [];
+      req.query.players.split(',').forEach(function (player, index) {
+        players.push({ name: player, previousName: player, index: index });
+      });
+    }
 
     res.render('game/edit', {
       title: req.i18n.t('game:add.title'),
       isAdd: true,
-      isPlayerAction: 0,
-      name: req.i18n.t('game:edit.name.default', {
-        date: helpers.getLocaleDateString(timestamp, lang),
-        time: helpers.getLocaleTimeString(timestamp, lang)
-      }),
-      type: Game.gameTypesDefault,
+      isPlayerAction: isPlayerAction,
+      name: name,
+      type: type,
       gameTypes: Game.getGameTypes(req.i18n),
-      players: [{ name: '', previousName: '', index: 0 },
-                { name: '', previousName: '', index: 1 }]
+      players: players
     });
   }
 };
@@ -226,42 +245,58 @@ exports.save = function (req, res) {
 };
 
 exports.update = function (req, res) {
-  if (req.body.name && req.body.players) {
-    var name = req.body.name,
-        players = req.body.players.split(',');
+  if (req.body.clone !== undefined) {
+    if (req.body.name) {
+      Game.findOne({ name: req.body.name }, function (err, game) {
+        if (err) return console.error(err);
 
-    Game.findOne({ name: name }, function (err, game) {
-      if (err) return console.error(err);
-
-      if (game) {
-        game.wild = game.type === 'tweeduizenden' ? req.body.wild : [];
-
-        var score = {};
-        for (var i = 0; i < players.length; i++) {
-          score[players[i]] = req.body['player-' + i];
+        if (game) {
+          res.redirect(util.format('/game/add?name=%s&type=%s&players=%s',
+            encodeURIComponent(game.name),
+            encodeURIComponent(game.type),
+            game.players.map(function (player) { return encodeURIComponent(player); }).join(',')));
         }
-        game.score = score;
+      });
+    } else {
+      res.redirect('/game/add');
+    }
+  } else {
+    if (req.body.name && req.body.players) {
+      var players = req.body.players.split(',');
 
-        game.save(function (err) {
-          if (err) return console.error(err);
+      Game.findOne({ name: req.body.name }, function (err, game) {
+        if (err) return console.error(err);
 
-          req.flash(Flash.info, {
-            message: req.i18n.t('game:view.info.saved'),
-            fadeout: true
+        if (game) {
+          game.wild = game.type === 'tweeduizenden' ? req.body.wild : [];
+
+          var score = {};
+          for (var i = 0; i < players.length; i++) {
+            score[players[i]] = req.body['player-' + i];
+          }
+          game.score = score;
+
+          game.save(function (err) {
+            if (err) return console.error(err);
+
+            req.flash(Flash.info, {
+              message: req.i18n.t('game:view.info.saved'),
+              fadeout: true
+            });
+
+            res.redirect('/game/view/' + encodeURIComponent(game.name));
+          });
+        } else {
+          req.flash(Flash.error, {
+            message: req.i18n.t('game:index.error.missing')
           });
 
-          res.redirect('/game/view/' + encodeURIComponent(game.name));
-        });
-      } else {
-        req.flash(Flash.error, {
-          message: req.i18n.t('game:index.error.missing')
-        });
-
-        res.redirect('/game');
-      }
-    });
-  } else {
-    res.redirect('/game');
+          res.redirect('/game');
+        }
+      });
+    } else {
+      res.redirect('/game');
+    }
   }
 };
 

@@ -86,7 +86,7 @@ block content
             span.glyphicon.glyphicon-floppy-disk
             span= t('game:edit.update.text')
 
-  if isAdd
+  if isAdd && isPlayerAction!==2
     script.
       $(function(){
           $(".placeholder").each(function(){

@@ -49,7 +49,7 @@
     "header": {
       "title": "Rules"
     },
-    "text__TODO": [ ],
+    "text__TODO": [],
     "add": {
       "text": "Start a new game &raquo;"
     },
@@ -115,6 +115,10 @@
       "number": "#",
       "dealer": "Dealer",
       "wild": "Wild"
+    },
+    "clone": {
+      "title": "Clone this game.",
+      "text": "Clone Game"
     }
   },
   "open": {

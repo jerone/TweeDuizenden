@@ -142,6 +142,10 @@
       "number": "#",
       "dealer": "Deler",
       "wild": "Wilde"
+    },
+    "clone": {
+      "title": "Kloon dit spel.",
+      "text": "Spel klonen"
     }
   },
   "open": {

@@ -64,6 +64,9 @@ block content
       button.btn.btn-primary.g2000n-save(type='submit', title=t('game:view.save.title'))
         span.glyphicon.glyphicon-floppy-disk
         span= t('game:view.save.text')
+      button.btn.btn-success(type='submit', name='clone', title=t('game:view.clone.title'))
+        span.glyphicon.glyphicon-repeat
+        span= t('game:view.clone.text')
 
 block scripts
   script(src='/js/lib/jquery.floatThead.min.js')
