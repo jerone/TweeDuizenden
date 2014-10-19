@@ -74,7 +74,8 @@
     },
     "warning": {
       "no_name": "No name defined!",
-      "no_players": "No players defined!"
+      "no_players": "No players defined!",
+      "name": "This name already exists!"
     },
     "name": {
       "label": "Name",

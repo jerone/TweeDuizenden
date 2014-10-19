@@ -101,7 +101,8 @@
     },
     "warning": {
       "no_name": "Geen naam opgegeven!",
-      "no_players": "Geen spelers opgegeven!"
+      "no_players": "Geen spelers opgegeven!",
+      "name": "Deze naam bestaat reeds!"
     },
     "name": {
       "label": "Naam",

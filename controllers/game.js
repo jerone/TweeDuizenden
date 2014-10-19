@@ -93,46 +93,56 @@ exports.add = function (req, res) {
     body.players.splice(index, 1);
     res.render('game/edit', body);
   } else {
-    var isPlayerAction = 0,
-        timestamp = new Date(),
-        lang = req.i18n.lng(),
-        name = req.i18n.t('game:edit.name.default', {
-          date: helpers.getLocaleDateString(timestamp, lang),
-          time: helpers.getLocaleTimeString(timestamp, lang)
-        }),
-        type = Game.gameTypesDefault,
-        players = [new PlayerEdit('', 0), new PlayerEdit('', 1)];
+    if (req.body.name !== undefined) {
+      var body = req.body;
+      body.title = req.i18n.t('game:add.title');
+      body.isAdd = true;
+      body.isPlayerAction = 2;
+      body.gameTypes = Game.getGameTypes(req.i18n);
+      res.render('game/edit', body);
+    } else {
+      var isPlayerAction = 0,
+          timestamp = new Date(),
+          lang = req.i18n.lng(),
+          name = req.i18n.t('game:edit.name.default', {
+            date: helpers.getLocaleDateString(timestamp, lang),
+            time: helpers.getLocaleTimeString(timestamp, lang)
+          }),
+          type = Game.gameTypesDefault,
+          players = [new PlayerEdit('', 0), new PlayerEdit('', 1)];
 
-    if (req.query.name) {
-      name = req.query.name;
-      isPlayerAction = 2;
-    }
-    if (req.query.type) {
-      type = req.query.type;
-    }
-    if (req.query.players) {
-      players = [];
-      req.query.players.split(',').forEach(function (player, index) {
-        players.push(new PlayerEdit(player, index));
+      if (req.query.name) {
+        name = req.query.name;
+        isPlayerAction = 2;
+      }
+      if (req.query.type) {
+        type = req.query.type;
+      }
+      if (req.query.players) {
+        players = [];
+        req.query.players.split(',').forEach(function (player, index) {
+          players.push(new PlayerEdit(player, index));
+        });
+      }
+
+      res.render('game/edit', {
+        title: req.i18n.t('game:add.title'),
+        isAdd: true,
+        isPlayerAction: isPlayerAction,
+        previousName: '',
+        name: name,
+        type: type,
+        gameTypes: Game.getGameTypes(req.i18n),
+        players: players
       });
     }
-
-    res.render('game/edit', {
-      title: req.i18n.t('game:add.title'),
-      isAdd: true,
-      isPlayerAction: isPlayerAction,
-      name: name,
-      type: type,
-      gameTypes: Game.getGameTypes(req.i18n),
-      players: players
-    });
   }
 };
 
 exports.edit = function (req, res) {
   if (req.body.addPlayer !== undefined) {
     var body = req.body;
-    body.title = req.i18n.t('game:edit.title', { name: req.body.name });
+    body.title = req.i18n.t('game:edit.title', { name: req.params.name });
     body.isAdd = false;
     body.isPlayerAction = 1;
     body.gameTypes = Game.getGameTypes(req.i18n);
@@ -141,7 +151,7 @@ exports.edit = function (req, res) {
   } else if (req.body.removePlayer !== undefined) {
     var index = parseInt(req.body.removePlayer, 10);
     var body = req.body;
-    body.title = req.i18n.t('game:edit.title', { name: req.body.name });
+    body.title = req.i18n.t('game:edit.title', { name: req.params.name });
     body.isAdd = false;
     body.isPlayerAction = -1;
     body.gameTypes = Game.getGameTypes(req.i18n);
@@ -152,20 +162,31 @@ exports.edit = function (req, res) {
       if (err) return console.error(err);
 
       if (game) {
-        var players = [];
-        game.players.forEach(function (player, index) {
-          players.push(new PlayerEdit(player, index));
-        });
+        if (req.body.name !== undefined && req.body.previousName !== undefined &&
+            req.body.name !== req.body.previousName) {
+          var body = req.body;
+          body.title = req.i18n.t('game:edit.title', { name: req.params.name });
+          body.isAdd = false;
+          body.isPlayerAction = 0;
+          body.gameTypes = Game.getGameTypes(req.i18n);
+          res.render('game/edit', body);
+        } else {
+          var players = [];
+          game.players.forEach(function (player, index) {
+            players.push(new PlayerEdit(player, index));
+          });
 
-        res.render('game/edit', {
-          title: req.i18n.t('game:edit.title', { name: game.name }),
-          isAdd: false,
-          isPlayerAction: 0,
-          name: game.name,
-          type: game.type,
-          gameTypes: Game.getGameTypes(req.i18n),
-          players: players
-        });
+          res.render('game/edit', {
+            title: req.i18n.t('game:edit.title', { name: game.name }),
+            isAdd: false,
+            isPlayerAction: 0,
+            previousName: game.name,
+            name: game.name,
+            type: game.type,
+            gameTypes: Game.getGameTypes(req.i18n),
+            players: players
+          });
+        }
       } else {
         req.flash(Flash.error, {
           message: req.i18n.t('game:common.error.missing')
@@ -181,49 +202,100 @@ exports.edit = function (req, res) {
 
 exports.save = function (req, res) {
   if (req.body.addPlayer !== undefined || req.body.removePlayer !== undefined) {
-    // Coming from `/game/add` or `/game/edit/:name`;
     res.redirect(307, req.header('referrer'));
   } else {
     var name = req.body.name && req.body.name.trim(),
+        previousName = req.body.previousName,
         players = req.body.players.map(function (player) {
           player.name = player.name.trim();
           return player;
         }).filter(function (player) { return player.name; });
 
     if (name && players.length) {
-      Game.findOne({ name: name }, function (err, game) {
-        if (err) return console.error(err);
-
-        if (!game) {
-          game = new Game();
-        }
-
-        game.name = name;
-
-        game.type = req.body.type;
-
-        if (Object.keys(game.score).length) {
-          var score = {};
-          players.forEach(function (player) {
-            var name = player.name !== player.previousName ? player.previousName : player.name;
-            score[player.name] = game.score[name];
-          });
-          game.score = score;
-        }
-
-        game.players = players.map(function (player) { return player.name; });
-
-        game.save(function (err) {
+      if (previousName) {
+        Game.findOne({ name: previousName }, function (err, game) {
           if (err) return console.error(err);
 
-          req.flash(Flash.info, {
-            message: req.i18n.t('game:view.info.saved'),
-            fadeout: true
-          });
+          if (game) {
+            Game.findOne({ name: name }, function (err, gameExisting) {
+              if (err) return console.error(err);
 
-          res.redirect('/game/view/' + encodeURIComponent(game.name));
+              if (gameExisting && previousName !== name) {
+                req.flash(Flash.warning, {
+                  message: req.i18n.t('game:edit.warning.name')
+                });
+
+                res.redirect(307, req.header('referrer'));
+                return;
+              }
+
+              game.name = name;
+
+              game.type = req.body.type;
+
+              if (Object.keys(game.score).length) {
+                var score = {};
+                players.forEach(function (player) {
+                  var name = player.name !== player.previousName ? player.previousName : player.name;
+                  score[player.name] = game.score[name];
+                });
+                game.score = score;
+              }
+
+              game.players = players.map(function (player) { return player.name; });
+
+              game.save(function (err) {
+                if (err) return console.error(err);
+
+                req.flash(Flash.info, {
+                  message: req.i18n.t('game:view.info.saved'),
+                  fadeout: true
+                });
+
+                res.redirect('/game/view/' + encodeURIComponent(game.name));
+              });
+            });
+          } else {
+            req.flash(Flash.error, {
+              message: req.i18n.t('game:common.error.missing')
+            });
+
+            res.redirect('/game/add');
+          }
         });
-      });
+      } else {
+        Game.findOne({ name: name }, function (err, gameExisting) {
+          if (err) return console.error(err);
+
+          if (gameExisting) {
+            req.flash(Flash.warning, {
+              message: req.i18n.t('game:edit.warning.name')
+            });
+
+            res.redirect(307, req.header('referrer'));
+            return;
+          }
+
+          var game = new Game();
+
+          game.name = name;
+
+          game.type = req.body.type;
+
+          game.players = players.map(function (player) { return player.name; });
+
+          game.save(function (err) {
+            if (err) return console.error(err);
+
+            req.flash(Flash.info, {
+              message: req.i18n.t('game:view.info.saved'),
+              fadeout: true
+            });
+
+            res.redirect('/game/view/' + encodeURIComponent(game.name));
+          });
+        });
+      }
     } else {
       if (!name) {
         req.flash(Flash.warning, {

@@ -12,6 +12,8 @@ block content
   form.form-horizontal(role='form', method='POST', action='/game/save')
     //- The default submit button of a form is the first - not display:none; - submit button;
     button(name='submitted', type='submit', value='submitted', style='position: fixed; left: -1000px; top: -1000px')
+    if !isAdd
+      input(name='previousName' type='hidden', value=previousName)
 
     .form-group
       label.col-sm-2.control-label(for='name')= t('game:edit.name.label')
