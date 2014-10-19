@@ -6,42 +6,13 @@ mixin fadeout(selector)
           }, 3000);
       });
 
-if flash.error
-  for alert in flash.error
-    .alert.alert-danger.alert-dismissible.fade.in
+for flashed, type in flash
+  - var alertClass = 'alert-' + type;
+  for alert in flashed
+    .alert.alert-dismissible.fade.in(class=alertClass)
       button.close(type='button', data-dismiss='alert', title=t('_flash:close.title'))
         span(aria-hidden=true) &times;
         span.sr-only= t('_flash:close.text')
       div= alert.message
     if alert.fadeout
-      +fadeout('.alert-danger')
-
-if flash.warning
-  for alert in flash.warning
-    .alert.alert-warning.alert-dismissible.fade.in
-      button.close(type='button', data-dismiss='alert', title=t('_flash:close.title'))
-        span(aria-hidden=true) &times;
-        span.sr-only= t('_flash:close.text')
-      div= alert.message
-    if alert.fadeout
-      +fadeout('.alert-warning')
-
-if flash.info
-  for alert in flash.info
-    .alert.alert-info.alert-dismissible.fade.in
-      button.close(type='button', data-dismiss='alert', title=t('_flash:close.title'))
-        span(aria-hidden=true) &times;
-        span.sr-only= t('_flash:close.text')
-      div= alert.message
-    if alert.fadeout
-      +fadeout('.alert-info')
-
-if flash.success
-  for alert in flash.success
-    .alert.alert-success.alert-dismissible.fade.in
-      button.close(type='button', data-dismiss='alert', title=t('_flash:close.title'))
-        span(aria-hidden=true) &times;
-        span.sr-only= t('_flash:close.text')
-      div= alert.message
-    if alert.fadeout
-      +fadeout('.alert-success')
+      +fadeout(alertClass)
