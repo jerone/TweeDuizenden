@@ -6,9 +6,9 @@ var Game = require('../models/Game'),
     url = require('url'),
     util = require('util');
 
-exports.index = function (req, res) {
+exports.index = function (req, res, next) {
   Game.find({}, function (err, games) {
-    if (err) return console.error(err);
+    if (err) return next(err);
 
     var queryParams = qs.parse(url.parse(req.url).query),
         orderByDefault = 'createdAt',
@@ -71,11 +71,11 @@ exports.index = function (req, res) {
   });
 };
 
-exports.rules = function (req, res) {
+exports.rules = function (req, res, next) {
   res.render('game/rules', { title: req.i18n.t('game:rules.title') });
 };
 
-exports.add = function (req, res) {
+exports.add = function (req, res, next) {
   if (req.body.addPlayer !== undefined) {
     var body = req.body;
     body.title = req.i18n.t('game:add.title');
@@ -139,7 +139,7 @@ exports.add = function (req, res) {
   }
 };
 
-exports.edit = function (req, res) {
+exports.edit = function (req, res, next) {
   if (req.body.addPlayer !== undefined) {
     var body = req.body;
     body.title = req.i18n.t('game:edit.title', { name: req.params.name });
@@ -159,7 +159,7 @@ exports.edit = function (req, res) {
     res.render('game/edit', body);
   } else if (req.params.name) {
     Game.findOne({ name: req.params.name }, function (err, game) {
-      if (err) return console.error(err);
+      if (err) return next(err);
 
       if (game) {
         if (req.body.name !== undefined && req.body.previousName !== undefined &&
@@ -200,7 +200,7 @@ exports.edit = function (req, res) {
   }
 };
 
-exports.save = function (req, res) {
+exports.save = function (req, res, next) {
   if (req.body.addPlayer !== undefined || req.body.removePlayer !== undefined) {
     res.redirect(307, req.header('referrer'));
   } else {
@@ -214,11 +214,11 @@ exports.save = function (req, res) {
     if (name && players.length) {
       if (previousName) {
         Game.findOne({ name: previousName }, function (err, game) {
-          if (err) return console.error(err);
+          if (err) return next(err);
 
           if (game) {
             Game.findOne({ name: name }, function (err, gameExisting) {
-              if (err) return console.error(err);
+              if (err) return next(err);
 
               if (gameExisting && previousName !== name) {
                 req.flash(Flash.warning, {
@@ -245,7 +245,7 @@ exports.save = function (req, res) {
               game.players = players.map(function (player) { return player.name; });
 
               game.save(function (err) {
-                if (err) return console.error(err);
+                if (err) return next(err);
 
                 req.flash(Flash.info, {
                   message: req.i18n.t('game:view.info.saved'),
@@ -265,7 +265,7 @@ exports.save = function (req, res) {
         });
       } else {
         Game.findOne({ name: name }, function (err, gameExisting) {
-          if (err) return console.error(err);
+          if (err) return next(err);
 
           if (gameExisting) {
             req.flash(Flash.warning, {
@@ -285,7 +285,7 @@ exports.save = function (req, res) {
           game.players = players.map(function (player) { return player.name; });
 
           game.save(function (err) {
-            if (err) return console.error(err);
+            if (err) return next(err);
 
             req.flash(Flash.info, {
               message: req.i18n.t('game:view.info.saved'),
@@ -313,10 +313,10 @@ exports.save = function (req, res) {
   }
 };
 
-exports.view = function (req, res) {
+exports.view = function (req, res, next) {
   if (req.params.name) {
     Game.findOne({ name: req.params.name }, function (err, game) {
-      if (err) return console.error(err);
+      if (err) return next(err);
 
       if (game) {
         res.render('game/view', {
@@ -340,11 +340,11 @@ exports.view = function (req, res) {
   }
 };
 
-exports.update = function (req, res) {
+exports.update = function (req, res, next) {
   if (req.body.clone !== undefined) {
     if (req.body.name) {
       Game.findOne({ name: req.body.name }, function (err, game) {
-        if (err) return console.error(err);
+        if (err) return next(err);
 
         if (game) {
           res.redirect(util.format('/game/add?name=%s&type=%s&players=%s',
@@ -365,7 +365,7 @@ exports.update = function (req, res) {
   } else {
     if (req.body.name) {
       Game.findOne({ name: req.body.name }, function (err, game) {
-        if (err) return console.error(err);
+        if (err) return next(err);
 
         if (game) {
           game.wild = game.type === 'tweeduizenden' ? req.body.wild : [];
@@ -377,7 +377,7 @@ exports.update = function (req, res) {
           game.score = score;
 
           game.save(function (err) {
-            if (err) return console.error(err);
+            if (err) return next(err);
 
             req.flash(Flash.info, {
               message: req.i18n.t('game:view.info.saved'),
@@ -400,10 +400,10 @@ exports.update = function (req, res) {
   }
 };
 
-exports.delete = function (req, res) {
+exports.delete = function (req, res, next) {
   if (req.params.name) {
     Game.findOneAndRemove({ name: req.params.name }, function (err, game) {
-      if (err) return console.error(err);
+      if (err) return next(err);
 
       if (req.xhr) {
         res.send({ error: false });
@@ -413,7 +413,7 @@ exports.delete = function (req, res) {
     });
   } else {
     Game.remove({}, function (err) {
-      if (err) return console.error(err);
+      if (err) return next(err);
 
       if (req.xhr) {
         res.send({ error: false });
@@ -424,9 +424,9 @@ exports.delete = function (req, res) {
   }
 };
 
-exports.api = function (req, res) {
+exports.api = function (req, res, next) {
   Game.find({}, function (err, games) {
-    if (err) return console.error(err);
-    res.send(games);
+    if (err) return next(err);
+    res.jsonp(games);
   });
 };
