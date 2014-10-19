@@ -2,26 +2,25 @@ var Game = require('../models/Game'),
     Flash = require('../models/Flash'),
     PlayerEdit = require('../models/PlayerEdit'),
     EOL = require('os').EOL,
+    qs = require('querystring'),
+    url = require('url'),
     util = require('util');
 
 exports.index = function (req, res) {
   Game.find({}, function (err, games) {
     if (err) return console.error(err);
 
-    var isAdmin = typeof req.query.admin !== 'undefined',
+    var queryParams = qs.parse(url.parse(req.url).query),
         orderByDefault = 'createdAt',
         orderByQuery = req.query.orderBy,
         orderDirQuery = req.query.orderDir,
         orderDirSort = orderDirQuery !== 'desc' ? 1 : -1,
         orderDirFn = function (orderBy) {
-          var href = '/game?orderBy=' + orderBy + '&orderDir=';
+          queryParams.orderBy = orderBy;
           if ((!orderByQuery && orderBy === orderByDefault) || (orderByQuery === orderBy && orderDirQuery !== 'desc')) {
-            href += 'desc';
+            queryParams.orderDir = 'desc';
           } else {
-            href += 'asc';
-          }
-          if (isAdmin) {
-            href += '&admin';
+            queryParams.orderDir = 'asc';
           }
 
           var icon = '';
@@ -33,7 +32,10 @@ exports.index = function (req, res) {
             }
           }
 
-          return { href: href, icon: icon };
+          return {
+            href: '/game?' + qs.stringify(queryParams),
+            icon: icon
+          };
         },
         orderDirs = {
           _id: orderDirFn('_id'),
@@ -61,7 +63,7 @@ exports.index = function (req, res) {
 
     res.render('game/index', {
       title: req.i18n.t('game:index.title'),
-      admin: isAdmin,
+      admin: typeof req.query.admin !== 'undefined',
       orderDir: orderDirs,
       games: games,
       gameTypes: Game.getGameTypes(req.i18n)
