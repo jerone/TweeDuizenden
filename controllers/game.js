@@ -1,7 +1,6 @@
 var Game = require('../models/Game'),
     Flash = require('../models/Flash'),
     PlayerEdit = require('../models/PlayerEdit'),
-    helpers = require('./../app/helpers'),
     EOL = require('os').EOL,
     util = require('util');
 
@@ -103,10 +102,9 @@ exports.add = function (req, res) {
     } else {
       var isPlayerAction = 0,
           timestamp = new Date(),
-          lang = req.i18n.lng(),
           name = req.i18n.t('game:edit.name.default', {
-            date: helpers.getLocaleDateString(timestamp, lang),
-            time: helpers.getLocaleTimeString(timestamp, lang)
+            date: res.locals.helpers.getLocaleDateString(timestamp),
+            time: res.locals.helpers.getLocaleTimeString(timestamp)
           }),
           type = Game.gameTypesDefault,
           players = [new PlayerEdit('', 0), new PlayerEdit('', 1)];

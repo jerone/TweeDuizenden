@@ -28,7 +28,6 @@ app.set('ipaddr', process.env.OPENSHIFT_NODEJS_IP || process.env.OPENSHIFT_INTER
 app.set('env', (process.env.NODE_ENV || 'development').trim());  // Fix issue with trailing spaces;
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-app.locals.helpers = helpers;
 app.locals.pretty = app.get('env') === 'development';
 
 // Database;
@@ -48,6 +47,7 @@ app.use(session({ resave: true, saveUninitialized: true, secret: secrets.session
 app.use(methodOverride());
 app.use(flash());
 app.use(i18n(app).handle);
+app.use(helpers());
 
 // Dir based middleware;
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

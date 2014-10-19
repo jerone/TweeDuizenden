@@ -1,5 +1,3 @@
-var url = require('url');
-
 var homeController = require('./../controllers/home'),
     gameController = require('./../controllers/game'),
     debugController = require('./../controllers/debug');
@@ -9,12 +7,6 @@ module.exports = function routes(app) {
   // Handle flash;
   app.use(function (req, res, next) {
     res.locals.flash = req.flash();
-    next();
-  });
-
-  // Handle current menu item;
-  app.use(function (req, res, next) {
-    res.locals.menuParts = url.parse(req.url).pathname.substring(1).toLowerCase().split('/');
     next();
   });
 

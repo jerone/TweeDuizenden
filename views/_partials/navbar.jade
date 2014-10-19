@@ -11,11 +11,11 @@
         span= t('_navbar:header.title')
     .collapse.navbar-collapse
       ul.nav.navbar-nav
-        li(class=!!~menuParts.indexOf('')?'active':undefined)
+        li(class=helpers.isActiveMenu('')?'active':undefined)
           a(href='/')= t('_navbar:nav.home')
-        li(class=!!~menuParts.indexOf('game')&&!~menuParts.indexOf('rules')?'active':undefined)
+        li(class=helpers.isActiveMenu('game','!rules')?'active':undefined)
           a(href='/game')= t('_navbar:nav.game')
-        li(class=!!~menuParts.indexOf('rules')?'active':undefined)
+        li(class=helpers.isActiveMenu('rules')?'active':undefined)
           a(href='/game/rules')= t('_navbar:nav.rules')
       ul.nav.navbar-nav.navbar-right
         li(class=i18n.lng()==='en-US'?'active':undefined)

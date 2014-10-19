@@ -53,8 +53,8 @@ block content
               td #{game._id}
             td #{game.name}
             td #{gameTypes[game.type]}
-            td #{helpers.getLocaleDateString(game.createdAt,i18n.lng())} #{helpers.getLocaleTimeString(game.createdAt,i18n.lng())}
-            td #{helpers.getLocaleDateString(game.updatedAt,i18n.lng())} #{helpers.getLocaleTimeString(game.updatedAt,i18n.lng())}
+            td #{helpers.getLocaleDateString(game.createdAt)} #{helpers.getLocaleTimeString(game.createdAt)}
+            td #{helpers.getLocaleDateString(game.updatedAt)} #{helpers.getLocaleTimeString(game.updatedAt)}
             td #{game.players.join(', ')}
             td.text-nowrap
               a.btn.btn-success(href='/game/view/'+encodeURIComponent(game.name), title=t('game:index.table.open.title'))
