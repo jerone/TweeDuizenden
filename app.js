@@ -24,7 +24,7 @@ var app = express();
 
 // Settings;
 app.set('port', process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 3000);
-app.set('ipaddr', process.env.OPENSHIFT_NODEJS_IP || process.env.OPENSHIFT_INTERNAL_IP || 'localhost');
+app.set('ipaddr', process.env.OPENSHIFT_NODEJS_IP || process.env.OPENSHIFT_INTERNAL_IP || '0.0.0.0');
 app.set('env', (process.env.NODE_ENV || 'development').trim());  // Fix issue with trailing spaces;
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
