@@ -1,5 +1,8 @@
 ﻿$(function () {
 
+  /*
+   * Counting;
+   */
   var sum = function () {
     var that = $(this),
         index = that.data("player-index"),
@@ -19,17 +22,25 @@
   }).trigger("change");
 
 
-  /* Fixed headers in table; */
-  var floatThead = $("table.table").floatThead({
-    useAbsolutePositioning: false,
-    scrollingTop: 50
-  });
+  /*
+   * Fixed headers in table;
+   *
+   * Use this until `position:sticky` is supported in tables;
+   * See http://caniuse.com/#feat=css-sticky
+   */
+  var floatThead = $("table.table").floatThead();
   $(".alert").on("closed.bs.alert", function () {
+    floatThead.floatThead("reflow");
+  });
+  // Required for tablets when opening the keyboard;
+  $('input').on('focus blur', function () {
     floatThead.floatThead("reflow");
   });
 
 
-  /* Confirm leaving page; */
+  /*
+   * Confirm leaving page;
+   */
   function onbeforeunload() {
     return "You are about to navigate away from this page.\n\nIf you leave this page all scrores that you have entered will be lost!\n\nUse the save button to save all scores.";
   }

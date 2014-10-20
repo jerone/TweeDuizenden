@@ -321,6 +321,7 @@ exports.view = function (req, res, next) {
       if (game) {
         res.render('game/view', {
           title: req.i18n.t('game:view.title', { name: game.name }),
+          navbarNotFixed: true,
           name: game.name,
           type: game.type,
           players: game.players,
