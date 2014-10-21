@@ -18,7 +18,7 @@ block content
     .form-group
       label.col-sm-2.control-label(for='name')= t('game:edit.name.label')
       .col-sm-8
-        input.form-control.placeholder(id='name', name='name', type='text', value=name, autofocus=isPlayerAction===0)
+        input.form-control.placeholder#name(name='name', type='text', value=name, autofocus=isPlayerAction===0)
 
     .form-group
       label.col-sm-2.control-label(for='type')= t('game:edit.type.label')
@@ -26,7 +26,7 @@ block content
         .btn-group(data-toggle="buttons")
           each gameTypeValue, gameTypeKey in gameTypes
             label.btn.btn-default(class=type===gameTypeKey?'active':'')
-              input(type='radio', name='type' checked=type===gameTypeKey, value=gameTypeKey)
+              input(type='radio', name='type', checked=type===gameTypeKey, value=gameTypeKey)
               | #{gameTypeValue}
 
     each player, index in players
@@ -35,9 +35,9 @@ block content
           label.col-sm-2.control-label(for='players')= t('game:edit.players.label')
           .col-sm-8
             .input-group
-              input.form-control(id='players', name='players['+index+'][name]',         type='text',   value=player.name)
-              input.form-control(              name='players['+index+'][previousName]', type='hidden', value=player.previousName)
-              input.form-control(              name='players['+index+'][index]',        type='hidden', value=player.index)
+              input.form-control#players(name='players['+index+'][name]',         type='text',   value=player.name)
+              input.form-control(        name='players['+index+'][previousName]', type='hidden', value=player.previousName)
+              input.form-control(        name='players['+index+'][index]',        type='hidden', value=player.index)
               span.input-group-btn
                 button.btn.btn-primary.btn-block(name='addPlayer', type='submit', value=index, title=t('game:edit.addPlayer.title'))
                   span.glyphicon.glyphicon-plus
@@ -47,9 +47,9 @@ block content
           label.col-sm-2.control-label(for='players')= t('game:edit.players.label')
           .col-sm-8
             .input-group
-              input.form-control(id='players', name='players['+index+'][name]',         type='text',   value=player.name)
-              input.form-control(              name='players['+index+'][previousName]', type='hidden', value=player.previousName)
-              input.form-control(              name='players['+index+'][index]',        type='hidden', value=player.index)
+              input.form-control#players(name='players['+index+'][name]',         type='text',   value=player.name)
+              input.form-control(        name='players['+index+'][previousName]', type='hidden', value=player.previousName)
+              input.form-control(        name='players['+index+'][index]',        type='hidden', value=player.index)
               span.input-group-btn
                 button.btn.btn-danger.btn-block(name='removePlayer', type='submit', value=index, title=t('game:edit.removePlayer.title'))
                   span.glyphicon.glyphicon-minus
