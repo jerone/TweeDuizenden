@@ -80,7 +80,7 @@ block content
     .form-group
       .col-sm-offset-2.col-sm-8
         if isAdd
-          button.btn.btn-primary(name='submitted', type='submit', value='submitted', title=t('game:add.start.title'))
+          button.btn.btn-primary(name='submitted', type='submit', value='submitted', title=t('game:add.start.title'), data-loading-text=t('game:add.start.loading'))
             span.glyphicon.glyphicon-chevron-right
             span= t('game:add.start.text')
         else

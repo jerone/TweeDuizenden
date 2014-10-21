@@ -91,7 +91,8 @@
     },
     "start": {
       "title": "Spel opslaan en starten.",
-      "text": "Spel starten"
+      "text": "Spel starten",
+      "loading": "Starten..."
     }
   },
   "edit": {
@@ -134,7 +135,8 @@
     },
     "save": {
       "title": "Dit spel bewaren.",
-      "text": "Opslaan"
+      "text": "Opslaan",
+      "loading": "Opslaan..."
     },
     "header": {
       "title": "Start spel"

@@ -64,7 +64,8 @@
     },
     "start": {
       "title": "Save and start this game.",
-      "text": "Start Game"
+      "text": "Start Game",
+      "loading": "Starting..."
     }
   },
   "edit": {
@@ -107,7 +108,8 @@
     },
     "save": {
       "title": "Save this game.",
-      "text": "Save"
+      "text": "Save",
+      "loading": "Saving..."
     },
     "header": {
       "title": "Start Game"

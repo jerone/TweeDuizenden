@@ -43,6 +43,7 @@ footer {
 }
 
 
+
 /*
     Forms
 */
@@ -60,6 +61,7 @@ td select.form-control {
 }
 
 
+
 /*
     Icons
 */
@@ -68,6 +70,33 @@ td select.form-control {
 .glyphicon + span {
     margin-left: 0.5em;
 }
+
+/* Button loading; */
+.glyphicon-refresh-animate {
+    animation: spin .9s infinite linear;
+    -webkit-animation: spinWebkit .9s infinite linear;
+}
+
+@keyframes spin {
+    from {
+        transform: scale(1) rotate(0deg);
+    }
+
+    to {
+        transform: scale(1) rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spinWebkit {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
 
 
 /*

@@ -10,11 +10,10 @@ block content
       span= t('game:index.add.text')
     if admin
       | &nbsp;
-      form#g2000n-delete-all(method='POST', action='/game/delete', enctype='application/x-www-form-urlencoded', style='display:inline-block')
+      form#g2000n-delete-all(method='POST', action='/game/delete', enctype='application/x-www-form-urlencoded', style='display:inline-block', data-confirm=t('game:index.delete_all.confirm'))
         input(type='hidden', name='_method', value='DELETE')
         button.btn.btn-danger(type='submit',
                               title=t('game:index.delete_all.title'),
-                              onclick='return confirm("'+t('game:index.delete_all.confirm')+'");',
                               disabled=!Object.keys(games).length,
                               class=Object.keys(games).length?undefined:'disabled')
           span.glyphicon.glyphicon-trash
@@ -67,11 +66,10 @@ block content
                                          title=t('game:index.table.edit.title'))
                     span.glyphicon.glyphicon-pencil
                 | &nbsp;
-                form.g2000n-delete(method='POST', action='/game/delete/'+encodeURIComponent(game.name), enctype='application/x-www-form-urlencoded', style='display:inline-block')
+                form.g2000n-delete(method='POST', action='/game/delete/'+encodeURIComponent(game.name), enctype='application/x-www-form-urlencoded', style='display:inline-block', data-confirm=t('game:index.table.delete.confirm'))
                   input(type='hidden', name='_method', value='DELETE')
                   button.btn.btn-danger(type='submit',
-                                        title=t('game:index.table.delete.title'),
-                                        onclick='return confirm("'+t('game:index.table.delete.confirm')+'");')
+                                        title=t('game:index.table.delete.title'))
                     span.glyphicon.glyphicon-trash
     else
       tbody
@@ -86,4 +84,4 @@ block content
           p.text-danger= t('game:index.table.empty')
 
 block scripts
-  script(src='/js/admin.js')
+  script(src='/js/index.js')

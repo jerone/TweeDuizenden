@@ -42,11 +42,12 @@
     <Compile Include="models\Flash.js" />
     <Compile Include="models\Game.js" />
     <Compile Include="models\PlayerEdit.js" />
-    <Compile Include="public\js\admin.js" />
+    <Compile Include="public\js\common.js" />
+    <Compile Include="public\js\index.js" />
     <Compile Include="public\js\lib\bootstrap.min.js" />
     <Compile Include="public\js\lib\jquery-2.1.1.min.js" />
     <Compile Include="public\js\lib\jquery.floatThead.min.js" />
-    <Compile Include="public\js\tweeduizenden.js" />
+    <Compile Include="public\js\view.js" />
     <Content Include=".editorconfig" />
     <Content Include=".gitignore" />
     <Content Include=".jshintrc" />
