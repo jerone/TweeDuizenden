@@ -1,3 +1,5 @@
+'use strict';
+
 var Game = require('../models/Game'),
     Flash = require('../models/Flash'),
     PlayerEdit = require('../models/PlayerEdit'),

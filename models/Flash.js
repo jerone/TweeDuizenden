@@ -1,4 +1,6 @@
-﻿var Flash = {
+﻿'use strict';
+
+var Flash = {
   error: 'danger',
   warning: 'warning',
   info: 'info',

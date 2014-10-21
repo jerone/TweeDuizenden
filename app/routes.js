@@ -1,3 +1,5 @@
+'use strict';
+
 var homeController = require('./../controllers/home'),
     gameController = require('./../controllers/game'),
     debugController = require('./../controllers/debug');

@@ -1,3 +1,5 @@
+'use strict';
+
 // Require dependency modules;
 var bodyParser = require('body-parser'),
     errorHandler = require('errorhandler'),
@@ -52,8 +54,8 @@ app.use(helpers());
 // Dir based middleware;
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(less(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'public'), { maxAge: 1000 * 60 * 60 * 24 * 7 }));
-app.use(express.static(path.join(__dirname, 'locales'), { maxAge: 1000 * 60 * 60 * 24 * 7 }));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'locales')));
 
 // Routes;
 routes(app);

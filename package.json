@@ -4,9 +4,12 @@
   "author": "jerone <jeronevw@hotmail.com>",
   "homepage": "https://github.com/jerone/TweeDuizenden",
   "version": "0.1.0",
-  "license": "ISC",
+  "license": "MIT",
   "keywords": [
-    "game"
+    "game",
+    "games",
+    "card game",
+    "card games"
   ],
   "bugs": {
     "url": "https://github.com/jerone/TweeDuizenden/issues"
@@ -18,9 +21,6 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js"
-  },
-  "directories": {
-    "test": "test"
   },
   "dependencies": {
     "body-parser": "^1.9.0",

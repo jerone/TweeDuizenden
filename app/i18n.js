@@ -1,4 +1,6 @@
-﻿var i18next = require('i18next'),
+﻿'use strict';
+
+var i18next = require('i18next'),
     jade = require('jade'),
     EOL = require('os').EOL;
 

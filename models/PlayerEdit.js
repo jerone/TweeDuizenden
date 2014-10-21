@@ -1,4 +1,6 @@
-﻿function PlayerEdit(name, index) {
+﻿'use strict';
+
+function PlayerEdit(name, index) {
   this.name = name || '';
   this.previousName = this.name;
   this.index = index || 0;

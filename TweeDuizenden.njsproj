@@ -47,6 +47,10 @@
     <Compile Include="public\js\lib\jquery-2.1.1.min.js" />
     <Compile Include="public\js\lib\jquery.floatThead.min.js" />
     <Compile Include="public\js\tweeduizenden.js" />
+    <Content Include=".editorconfig" />
+    <Content Include=".gitignore" />
+    <Content Include=".jshintrc" />
+    <Content Include=".nodemonignore" />
     <Content Include="LICENSE" />
     <Content Include="locales\en-US\app.json" />
     <Content Include="locales\en-US\en-US.gif" />

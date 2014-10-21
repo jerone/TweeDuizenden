@@ -1,3 +1,5 @@
+'use strict';
+
 require('intl');
 var helpers = require('./../app/helpers');
 

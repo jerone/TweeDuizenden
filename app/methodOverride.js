@@ -1,4 +1,6 @@
-﻿var methodOverride = require('method-override');
+﻿'use strict';
+
+var methodOverride = require('method-override');
 
 module.exports = function methodOverrideCustom() {
   return methodOverride(function (req, res) {
