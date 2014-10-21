@@ -2,7 +2,7 @@ mixin fadeout(selector)
   script.
       $(function(){
           window.setTimeout(function(){
-              $("#{selector}").alert("close");
+              $(".#{selector}").alert("close");
           }, 3000);
       });
 
