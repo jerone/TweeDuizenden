@@ -44,6 +44,7 @@ block content
                     name='player-'+index,
                     class='g2000n-value g2000n-player-'+index,
                     type='number',
+                    step=type==='tweeduizenden'?5:1,
                     autocomplete='off',
                     data-player-index=index,
                     value=score[player]&&score[player][i])
