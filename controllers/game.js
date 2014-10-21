@@ -406,20 +406,20 @@ exports.update = function (req, res, next) {
 exports.delete = function (req, res, next) {
   if (req.params.name) {
     Game.findOneAndRemove({ name: req.params.name }, function (err, game) {
-      if (err) return next(err);
-
       if (req.xhr) {
-        res.send({ error: false });
+        res.send({ error: (err || false) });
+      } else if (err) {
+        return next(err);
       } else {
         res.redirect('/game?admin');
       }
     });
   } else {
     Game.remove({}, function (err) {
-      if (err) return next(err);
-
       if (req.xhr) {
-        res.send({ error: false });
+        res.send({ error: (err || false) });
+      } else if (err) {
+        return next(err);
       } else {
         res.redirect('/game?admin');
       }
