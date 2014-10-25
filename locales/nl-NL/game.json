@@ -133,6 +133,12 @@
     "info": {
       "saved": "Spel is opgeslagen."
     },
+    "created": {
+      "text": "Spel aangemaakt:"
+    },
+    "updated": {
+      "text": "Laatst bijgewerkt:"
+    },
     "save": {
       "title": "Dit spel bewaren.",
       "text": "Opslaan",

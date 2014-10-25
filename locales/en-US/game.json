@@ -106,6 +106,12 @@
     "info": {
       "saved": "Game is saved."
     },
+    "created": {
+      "text": "Game created:"
+    },
+    "updated": {
+      "text": "Last updated:"
+    },
     "save": {
       "title": "Save this game.",
       "text": "Save",

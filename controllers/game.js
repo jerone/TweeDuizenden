@@ -5,6 +5,7 @@ var Game = require('../models/Game'),
     PlayerEdit = require('../models/PlayerEdit'),
     EOL = require('os').EOL,
     qs = require('querystring'),
+    moment = require('moment'),
     url = require('url'),
     util = require('util');
 
@@ -324,6 +325,16 @@ exports.view = function (req, res, next) {
         res.render('game/view', {
           title: req.i18n.t('game:view.title', { name: game.name }),
           navbarNotFixed: true,
+          created: {
+            datetime: res.locals.helpers.getLocaleDateString(game.createdAt) + ' ' +
+                      res.locals.helpers.getLocaleTimeString(game.createdAt),
+            ago: moment(game.createdAt).locale(req.i18n.lng()).fromNow()
+          },
+          updated: {
+            datetime: res.locals.helpers.getLocaleDateString(game.updatedAt) + ' ' +
+                      res.locals.helpers.getLocaleTimeString(game.updatedAt),
+            ago: moment(game.updatedAt).locale(req.i18n.lng()).fromNow()
+          },
           name: game.name,
           type: game.type,
           players: game.players,
