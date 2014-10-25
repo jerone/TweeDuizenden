@@ -86,7 +86,8 @@
       "label": "Type"
     },
     "players": {
-      "label": "Players"
+      "label": "Players",
+      "title": "Players"
     },
     "addPlayer": {
       "title": "Add a new player.",

@@ -113,7 +113,8 @@
       "label": "Spelsoort"
     },
     "players": {
-      "label": "Spelers"
+      "label": "Spelers",
+      "title": "Spelers"
     },
     "addPlayer": {
       "title": "Een nieuwe speler toevoegen.",

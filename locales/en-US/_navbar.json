@@ -7,7 +7,15 @@
     "home": "Home",
     "game": "Game",
     "rules": "Rules",
-    "english": "English",
-    "dutch": "Dutch"
+    "english": {
+      "alt": "EN",
+      "text": "English",
+      "title": "English"
+    },
+    "dutch": {
+      "alt": "NL",
+      "text": "Dutch",
+      "title": "Dutch"
+    }
   }
 }

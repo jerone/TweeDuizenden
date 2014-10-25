@@ -3,15 +3,15 @@ extends ../_layout
 block content
   .page-header
     if isAdd
-      h3= t('game:add.header.title')
+      h1= t('game:add.header.title')
     else
-      h3= t('game:view.header.title')
+      h1= t('game:view.header.title')
         | &nbsp;
         small #{name}
 
   form.form-horizontal(role='form', method='POST', action='/game/save')
     //- The default submit button of a form is the first - not display:none; - submit button;
-    button(name='submitted', type='submit', value='submitted', style='position: fixed; left: -1000px; top: -1000px')
+    button(name='submitted', type='submit', value='submitted', style='position: fixed; left: -1000px; top: -1000px')= t('game:edit.update.text')
     if !isAdd
       input(name='previousName' type='hidden', value=previousName)
 
@@ -25,31 +25,31 @@ block content
       .col-sm-8
         .btn-group(data-toggle="buttons")
           each gameTypeValue, gameTypeKey in gameTypes
-            label.btn.btn-default(class=type===gameTypeKey?'active':'')
-              input(type='radio', name='type', checked=type===gameTypeKey, value=gameTypeKey)
+            label.btn.btn-default(class=type===gameTypeKey?'active':'', for='type-'+gameTypeKey)
+              input(id='type-'+gameTypeKey, type='radio', name='type', value=gameTypeKey, checked=type===gameTypeKey)
               | #{gameTypeValue}
 
     each player, index in players
       if players.length==1
         .form-group
-          label.col-sm-2.control-label(for='players')= t('game:edit.players.label')
+          label.col-sm-2.control-label(for='player-0')= t('game:edit.players.label')
           .col-sm-8
             .input-group
-              input.form-control#players(name='players['+index+'][name]',         type='text',   value=player.name)
-              input.form-control(        name='players['+index+'][previousName]', type='hidden', value=player.previousName)
-              input.form-control(        name='players['+index+'][index]',        type='hidden', value=player.index)
+              input.form-control(name='players['+index+'][name]',         type='text',   value=player.name, id='player-'+index, title=t('game:edit.players.title'))
+              input.form-control(name='players['+index+'][previousName]', type='hidden', value=player.previousName)
+              input.form-control(name='players['+index+'][index]',        type='hidden', value=player.index)
               span.input-group-btn
                 button.btn.btn-primary.btn-block(name='addPlayer', type='submit', value=index, title=t('game:edit.addPlayer.title'))
                   span.glyphicon.glyphicon-plus
                   span.visible-xs-inline= t('game:edit.addPlayer.text')
       else if index==0
         .form-group
-          label.col-sm-2.control-label(for='players')= t('game:edit.players.label')
+          label.col-sm-2.control-label(for='player-0')= t('game:edit.players.label')
           .col-sm-8
             .input-group
-              input.form-control#players(name='players['+index+'][name]',         type='text',   value=player.name)
-              input.form-control(        name='players['+index+'][previousName]', type='hidden', value=player.previousName)
-              input.form-control(        name='players['+index+'][index]',        type='hidden', value=player.index)
+              input.form-control(name='players['+index+'][name]',         type='text',   value=player.name, id='player-'+index, title=t('game:edit.players.title'))
+              input.form-control(name='players['+index+'][previousName]', type='hidden', value=player.previousName)
+              input.form-control(name='players['+index+'][index]',        type='hidden', value=player.index)
               span.input-group-btn
                 button.btn.btn-danger.btn-block(name='removePlayer', type='submit', value=index, title=t('game:edit.removePlayer.title'))
                   span.glyphicon.glyphicon-minus
@@ -58,7 +58,7 @@ block content
         .form-group
           .col-sm-offset-2.col-sm-8
             .input-group
-              input.form-control(name='players['+index+'][name]',         type='text',   value=player.name, autofocus=isPlayerAction===1)
+              input.form-control(name='players['+index+'][name]',         type='text',   value=player.name, id='player-'+index, title=t('game:edit.players.title'), autofocus=isPlayerAction===1)
               input.form-control(name='players['+index+'][previousName]', type='hidden', value=player.previousName)
               input.form-control(name='players['+index+'][index]',        type='hidden', value=player.index)
               span.input-group-btn
@@ -69,7 +69,7 @@ block content
         .form-group
           .col-sm-offset-2.col-sm-8
             .input-group
-              input.form-control(name='players['+index+'][name]',         type='text',   value=player.name)
+              input.form-control(name='players['+index+'][name]',         type='text',   value=player.name, id='player-'+index, title=t('game:edit.players.title'))
               input.form-control(name='players['+index+'][previousName]', type='hidden', value=player.previousName)
               input.form-control(name='players['+index+'][index]',        type='hidden', value=player.index)
               span.input-group-btn
