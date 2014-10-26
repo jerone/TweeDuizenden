@@ -1,9 +1,10 @@
 'use strict';
 
-var url = require('url');
+var qs = require('querystring'),
+    url = require('url');
 require('intl');
 
-function helpers(name) {
+function helpers() {
   return function (req, res, next) {
 
     /*
@@ -40,13 +41,37 @@ function helpers(name) {
       });
     }
 
-    res.locals.helpers = {
+    // `originalUrl` usually is `req.header('referrer')` or `req.url`;
+    function redirect(status, path, query, originalUrl) {
+      if (isNaN(status)) {
+        originalUrl = query;
+        query = path;
+        path = status;
+      }
+      var queryParams = {};
+      if (originalUrl) {
+        queryParams = qs.parse(url.parse(originalUrl).query);
+      }
+      Object.keys(query).forEach(function (key) {
+        queryParams[key] = query[key];
+      });
+      var queryParamsString = qs.stringify(queryParams);
+      if (queryParamsString) path = path + '?' + queryParamsString;
+      res.redirect(path);
+    }
+
+    var helpers = {
       getLocaleDateString : getLocaleDateString,
       getLocaleTimeString : getLocaleTimeString,
-      isActiveMenu : isActiveMenu
+      isActiveMenu : isActiveMenu,
+      redirect: redirect
     };
-
-    next();
+    if (res) {
+      res.locals.helpers = helpers;
+      next && next();
+    } else {
+      return helpers;
+    }
   };
 }
-module.exports = helpers
+module.exports = helpers;

@@ -361,10 +361,11 @@ exports.update = function (req, res, next) {
         if (err) return next(err);
 
         if (game) {
-          res.redirect(util.format('/game/add?name=%s&type=%s&players=%s',
-            encodeURIComponent(game.name),
-            encodeURIComponent(game.type),
-            game.players.map(function (player) { return encodeURIComponent(player); }).join(',')));
+          res.locals.helpers.redirect('/game/add', {
+            name: encodeURIComponent(game.name),
+            type: encodeURIComponent(game.type),
+            players: game.players.map(function (player) { return encodeURIComponent(player); }).join(',')
+          });
         } else {
           req.flash(Flash.error, {
             message: req.i18n.t('game:common.error.missing')
@@ -398,7 +399,7 @@ exports.update = function (req, res, next) {
               fadeout: true
             });
 
-            res.redirect('/game/view/' + encodeURIComponent(game.name));
+            res.locals.helpers.redirect('/game/view/' + encodeURIComponent(game.name), {}, req.header('referrer'));
           });
         } else {
           req.flash(Flash.error, {
@@ -416,13 +417,13 @@ exports.update = function (req, res, next) {
 
 exports.delete = function (req, res, next) {
   if (req.params.name) {
-    Game.findOneAndRemove({ name: req.params.name }, function (err, game) {
+    Game.findOneAndRemove({ name: req.params.name }, function (err) {
       if (req.xhr) {
         res.send({ error: (err || false) });
       } else if (err) {
         return next(err);
       } else {
-        res.redirect('/game?admin');
+        res.locals.helpers.redirect('/game', { admin: true }, req.header('referrer'));
       }
     });
   } else {
@@ -432,7 +433,7 @@ exports.delete = function (req, res, next) {
       } else if (err) {
         return next(err);
       } else {
-        res.redirect('/game?admin');
+        res.locals.helpers.redirect('/game', { admin: true }, req.header('referrer'));
       }
     });
   }
