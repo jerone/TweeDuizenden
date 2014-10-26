@@ -41,6 +41,46 @@
 
 
   /*
+   * Save;
+   */
+  $('#g2000n-update').submit(function (e) {
+    var form = $(this),
+        action = form.attr('action'),
+        params = form.serialize();
+
+    if (form.data('cancel') !== true) {
+      form.data('cancel', false);
+
+      disableButtons(form.find('.g2000n-save'));
+
+      window.setTimeout(function () {
+        $.post(action, params, 'json').done(function (data) {
+          if (data.error) {
+            console.error(data.error);
+          } else {
+            $('.g2000n-updated').attr('title', data.updated.datetime).text(data.updated.ago);
+          }
+        }).fail(function (data) {
+          console.error(data);
+        }).always(function () {
+          restoreButtons(form.find('.g2000n-save'));
+        });
+      }, 500);  // Little visual style;
+
+      return false;
+    }
+  });
+  $('.g2000n-clone').click(function () {
+    $(this).parents('form').first().data('cancel', true);
+  });
+  // Auto save;
+  window.setInterval(function () {
+    $('#g2000n-update').submit();
+  }, 5 * 60 * 1000);
+
+
+
+  /*
    * Confirm leaving page;
    */
   function onbeforeunload() {

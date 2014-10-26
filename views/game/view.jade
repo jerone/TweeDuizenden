@@ -1,7 +1,7 @@
 extends ../_layout
 
 block content
-  form(role='form', method='POST', action='/game/update')
+  form#g2000n-update(role='form', method='POST', action='/game/update')
 
     .page-header
       h1= t('game:view.header.title')
@@ -16,7 +16,7 @@ block content
         small
           strong= t('game:view.updated.text')
           | &nbsp;
-          span(title=updated.datetime)= updated.ago
+          span.g2000n-updated(title=updated.datetime)= updated.ago
       .pull-right
         button.btn.btn-primary.g2000n-save(type='submit', title=t('game:view.save.title'), data-loading-text=t('game:view.save.loading'))
           span.glyphicon.glyphicon-floppy-disk
@@ -75,7 +75,7 @@ block content
       button.btn.btn-primary.g2000n-save(type='submit', title=t('game:view.save.title'), data-loading-text=t('game:view.save.loading'))
         span.glyphicon.glyphicon-floppy-disk
         span= t('game:view.save.text')
-      button.btn.btn-success(type='submit', name='clone', title=t('game:view.clone.title'))
+      button.btn.btn-success.g2000n-clone(type='submit', name='clone', title=t('game:view.clone.title'))
         span.glyphicon.glyphicon-repeat
         span= t('game:view.clone.text')
 

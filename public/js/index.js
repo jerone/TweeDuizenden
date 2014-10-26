@@ -26,10 +26,10 @@
       }).fail(function (data) {
         console.error(data);
       }).always(function () {
-        restoreButton(form.find('.btn'));
+        restoreButtons(form.find('.btn'));
       });
     } else {
-      restoreButton(form.find('.btn'));
+      restoreButtons(form.find('.btn'));
     }
 
     return false;
@@ -65,10 +65,10 @@
       }).fail(function (data) {
         console.error(data);
       }).always(function () {
-        restoreButton(form.find('.btn'));
+        restoreButtons(form.find('.btn'));
       });
     } else {
-      restoreButton(form.find('.btn'));
+      restoreButtons(form.find('.btn'));
     }
 
     return false;

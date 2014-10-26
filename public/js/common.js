@@ -4,6 +4,16 @@
    * Show loader when clicked;
    */
   $('.btn:not(label)').click(function (e) {
+    disableButtons($(this));
+  });
+
+});
+
+/*
+ * Disable buttons;
+ */
+function disableButtons(btns) {
+  return btns.not('.disabled').each(function () {
     var btn = $(this);
     btn.addClass('disabled');
 
@@ -28,13 +38,13 @@
       text.text(loadingText);
     }
   });
-});
+}
 
 /*
-   * Restore button;
-   */
-function restoreButton(btns) {
-  return btns.each(function () {
+ * Restore buttons;
+ */
+function restoreButtons(btns) {
+  return btns.filter('.disabled').each(function () {
     var btn = $(this),
         icon = btn.find('.glyphicon'),
         glyphicon = btn.data('prev-glyphicon');

@@ -380,7 +380,8 @@ exports.update = function (req, res, next) {
   } else {
     if (req.body.name) {
       Game.findOne({ name: req.body.name }, function (err, game) {
-        if (err) return next(err);
+        if (req.xhr && err) res.send({ error: err });
+        else if (err) return next(err);
 
         if (game) {
           game.wild = game.type === 'tweeduizenden' ? req.body.wild : [];
@@ -392,14 +393,27 @@ exports.update = function (req, res, next) {
           game.score = score;
 
           game.save(function (err) {
-            if (err) return next(err);
+            if (req.xhr && err) {
+              res.send({ error: err });
+            } else if (req.xhr) {
+              res.send({
+                error: false,
+                updated: {
+                  datetime: res.locals.helpers.getLocaleDateString(game.updatedAt) + ' ' +
+                            res.locals.helpers.getLocaleTimeString(game.updatedAt),
+                  ago: moment(game.updatedAt).locale(req.i18n.lng()).fromNow()
+                }
+              });
+            } else if (err) {
+              return next(err);
+            } else {
+              req.flash(Flash.info, {
+                message: req.i18n.t('game:view.info.saved'),
+                fadeout: true
+              });
 
-            req.flash(Flash.info, {
-              message: req.i18n.t('game:view.info.saved'),
-              fadeout: true
-            });
-
-            res.locals.helpers.redirect('/game/view/' + encodeURIComponent(game.name), {}, req.header('referrer'));
+              res.locals.helpers.redirect('/game/view/' + encodeURIComponent(game.name), {}, req.header('referrer'));
+            }
           });
         } else {
           req.flash(Flash.error, {
