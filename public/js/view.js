@@ -95,6 +95,13 @@
 
 
   /*
+   * Tooltips;
+   */
+  $('[data-toggle=tooltip]').tooltip();
+
+
+
+  /*
    * Confirm leaving page;
    */
   function onbeforeunload() {
