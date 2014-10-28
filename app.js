@@ -4,9 +4,7 @@
 var bodyParser = require('body-parser'),
     errorHandler = require('errorhandler'),
     express = require('express'),
-    favicon = require('serve-favicon'),
     flash = require('connect-flash'),
-    less = require('less-middleware'),
     logger = require('morgan'),
     mongoose = require('mongoose'),
     session = require('express-session');
@@ -19,6 +17,7 @@ var secrets = require('./config/secrets'),
     helpers = require('./app/helpers.js'),
     i18n = require('./app/i18n.js'),
     methodOverride = require('./app/methodOverride.js'),
+    routesStatic = require('./app/routesStatic.js'),
     routes = require('./app/routes.js');
 
 // Init;
@@ -51,11 +50,8 @@ app.use(flash());
 app.use(i18n(app).handle);
 app.use(helpers());
 
-// Dir based middleware;
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(less(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'locales')));
+// Static routes;
+routesStatic(app);
 
 // Routes;
 routes(app);

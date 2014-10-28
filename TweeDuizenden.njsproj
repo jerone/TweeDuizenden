@@ -34,6 +34,7 @@
     <Compile Include="app\i18n.js" />
     <Compile Include="app\methodOverride.js" />
     <Compile Include="app\routes.js" />
+    <Compile Include="app\routesStatic.js" />
     <Compile Include="config\secrets.js" />
     <Compile Include="controllers\debug.js" />
     <Compile Include="controllers\game.js" />
