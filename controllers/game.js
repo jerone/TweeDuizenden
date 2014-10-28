@@ -328,11 +328,13 @@ exports.view = function (req, res, next) {
           created: {
             datetime: res.locals.helpers.getLocaleDateString(game.createdAt) + ' ' +
                       res.locals.helpers.getLocaleTimeString(game.createdAt),
+            timestamp: game.createdAt.getTime(),
             ago: moment(game.createdAt).locale(req.i18n.lng()).fromNow()
           },
           updated: {
             datetime: res.locals.helpers.getLocaleDateString(game.updatedAt) + ' ' +
                       res.locals.helpers.getLocaleTimeString(game.updatedAt),
+            timestamp: game.updatedAt.getTime(),
             ago: moment(game.updatedAt).locale(req.i18n.lng()).fromNow()
           },
           name: game.name,
@@ -401,6 +403,7 @@ exports.update = function (req, res, next) {
                 updated: {
                   datetime: res.locals.helpers.getLocaleDateString(game.updatedAt) + ' ' +
                             res.locals.helpers.getLocaleTimeString(game.updatedAt),
+                  timestamp: game.updatedAt.getTime(),
                   ago: moment(game.updatedAt).locale(req.i18n.lng()).fromNow()
                 }
               });

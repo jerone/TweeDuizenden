@@ -16,4 +16,8 @@ module.exports = function routesStatic(app) {
 
   app.use(express.static(path.join('.', 'locales'), { maxAge: '7d' }));
 
+  app.use('/js/vendor/moment.min.js',
+    express.static(path.join('.', 'node_modules', 'moment', 'min', 'moment-with-locales.min.js'),
+      { maxAge: '7d' }));
+
 };

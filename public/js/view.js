@@ -58,7 +58,7 @@
           if (data.error) {
             console.error(data.error);
           } else {
-            $('.g2000n-updated').attr('title', data.updated.datetime).text(data.updated.ago);
+            $('.g2000n-updated').data('timestamp', data.updated.timestamp).attr('title', data.updated.datetime).text(data.updated.ago);
             window.onbeforeunload = null;
           }
         }).fail(function (data) {
@@ -78,6 +78,19 @@
   window.setInterval(function () {
     $('#g2000n-update').submit();
   }, 5 * 60 * 1000);
+
+
+
+  /*
+   * Auto time;
+   */
+  var lng = $('html').attr('lang');
+  window.setInterval(function () {
+    $('[data-timestamp]').each(function () {
+      var that = $(this);
+      that.text(moment(that.data('timestamp')).locale(lng).fromNow());
+    });
+  }, 60 * 1000);
 
 
 

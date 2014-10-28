@@ -11,12 +11,12 @@ block content
         small
           strong= t('game:view.created.text')
           | &nbsp;
-          span(title=created.datetime)= created.ago
+          span(title=created.datetime, data-timestamp=created.timestamp)= created.ago
         br
         small
           strong= t('game:view.updated.text')
           | &nbsp;
-          span.g2000n-updated(title=updated.datetime)= updated.ago
+          span.g2000n-updated(title=updated.datetime, data-timestamp=updated.timestamp)= updated.ago
       .pull-right
         button.btn.btn-primary.g2000n-save(type='submit', title=t('game:view.save.title'), data-loading-text=t('game:view.save.loading'))
           span.glyphicon.glyphicon-floppy-disk
@@ -81,4 +81,5 @@ block content
 
 block scripts
   script(src='/js/lib/jquery.floatThead.min.js')
+  script(src='/js/vendor/moment.min.js')
   script(src='/js/view.js')
