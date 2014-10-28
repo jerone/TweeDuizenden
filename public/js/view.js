@@ -59,6 +59,7 @@
             console.error(data.error);
           } else {
             $('.g2000n-updated').attr('title', data.updated.datetime).text(data.updated.ago);
+            window.onbeforeunload = null;
           }
         }).fail(function (data) {
           console.error(data);
