@@ -102,6 +102,50 @@
 
 
   /*
+   * Standings;
+   */
+  $('.g2000n-standings').removeClass('hidden');
+  $('#standingsModal').on('show.bs.modal', function (e) {
+    var standings = $('#standingsList').empty(),
+        index = -1,
+        totals = [];
+    while (true) {
+      index++;
+
+      var inputs = $('.g2000n-value.g2000n-player-' + index);
+      if (!inputs.length) { break; }
+
+      var total = 0;
+      inputs.each(function () {
+        if (this.value && !isNaN(this.value)) {
+          total += parseInt(this.value, 10);
+        }
+      });
+
+      var player = $('#g2000n-player-name-' + index).text();
+      totals.push({ player: player, score: total });
+    }
+
+    totals.sort(function (a, b) { return b.score - a.score; });
+
+    $.each(totals, function (index, total) {
+      var winner = 'list-group-item-danger';
+      if (total.score >= 2000) {
+        if (index === 0 || total.score === totals[0].score) {
+          winner = 'list-group-item-success';
+        } else {
+          winner = 'list-group-item-warning';
+        }
+      }
+
+      standings.append(
+        $('<li/>').addClass('list-group-item ' + winner).text(total.player).prepend(
+          $('<span/>').addClass('badge').text(total.score)));
+    });
+  });
+
+
+  /*
    * Confirm leaving page;
    */
   function onbeforeunload() {

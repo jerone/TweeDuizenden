@@ -156,6 +156,17 @@
     "clone": {
       "title": "Kloon dit spel.",
       "text": "Spel klonen"
+    },
+    "standings": {
+      "title": "Toon (tussen)stand",
+      "text": "Stand",
+      "modal": {
+        "title": "(Tussen)stand",
+        "close": {
+          "title": "Sluiten",
+          "text": "Sluiten"
+        }
+      }
     }
   },
   "open": {

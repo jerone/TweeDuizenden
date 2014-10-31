@@ -129,6 +129,17 @@
     "clone": {
       "title": "Clone this game.",
       "text": "Clone Game"
+    },
+    "standings": {
+      "title": "Show standings",
+      "text": "Standings",
+      "modal": {
+        "title": "Standings",
+        "close": {
+          "title": "Close",
+          "text": "Close"
+        }
+      }
     }
   },
   "open": {
