@@ -35,8 +35,6 @@
     return false;
   });
 
-
-
   /*
    * Delete per game;
    */

@@ -10,11 +10,19 @@ block content
       .pull-left
         dl.dl-horizontal
           dt= t('game:view.created.text')
-          dd(title=created.datetime, data-timestamp=created.timestamp, data-toggle='tooltip', data-placement='right')= created.ago
+          dd(title=created.datetime,
+             data-timestamp=created.timestamp,
+             data-toggle='tooltip',
+             data-placement='right')= created.ago
           dt= t('game:view.updated.text')
-          dd.g2000n-updated(title=updated.datetime, data-timestamp=updated.timestamp, data-toggle='tooltip', data-placement='right')= updated.ago
+          dd.g2000n-updated(title=updated.datetime,
+                            data-timestamp=updated.timestamp,
+                            data-toggle='tooltip',
+                            data-placement='right')= updated.ago
       .pull-right
-        button.btn.btn-primary.g2000n-save(type='submit', title=t('game:view.save.title'), data-loading-text=t('game:view.save.loading'))
+        button.btn.btn-primary.g2000n-save(type='submit',
+                                           title=t('game:view.save.title'),
+                                           data-loading-text=t('game:view.save.loading'))
           span.glyphicon.glyphicon-floppy-disk
           span= t('game:view.save.text')
       br.clearfix2
@@ -41,15 +49,15 @@ block content
                 p.form-control-static.input-sm.text-nowrap= players[i % players.length]
               if type==='tweeduizenden'
                 td
-                  - var wildOptions = ["-", "A", "K", "Q", "J", "10", "9", "8", "7", "6", "5", "4"];
+                  - var wildOptions = ['-', 'A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4'];
                   select.form-control.text-center(name='wild')
                     each wildOption in wildOptions
                       option(selected=wild[i]===wildOption) #{wildOption}
               each player, index in players
                 td
                   input.form-control.text-center(
-                    name='player-'+index,
-                    class='g2000n-value g2000n-player-'+index,
+                    name='player-#{index}',
+                    class='g2000n-value g2000n-player-#{index}',
                     type='number',
                     step=type==='tweeduizenden'?5:1,
                     autocomplete='off',
@@ -61,35 +69,50 @@ block content
                 each player, index in players
                   td
                     input.form-control.text-center(
-                      class='g2000n-sum g2000n-player-'+index,
+                      class='g2000n-sum g2000n-player-#{index}',
                       type='number',
                       disabled=true,
                       data-player-index=index)
           - }
 
     p.text-right
-      button.btn.btn-warning.g2000n-standings.hidden(type='button', name='standings', title=t('game:view.standings.title'), data-toggle='modal', data-target='#standingsModal')
+      button.btn.btn-warning.g2000n-standings.hidden(type='button',
+                                                     name='standings',
+                                                     data-toggle='modal',
+                                                     data-target='#standingsModal',
+                                                     title=t('game:view.standings.title'))
         span.glyphicon.glyphicon-stats
         span= t('game:view.standings.text')
-      button.btn.btn-success.g2000n-clone(type='submit', name='clone', title=t('game:view.clone.title'))
+      button.btn.btn-success.g2000n-clone(type='submit',
+                                          name='clone',
+                                          title=t('game:view.clone.title'))
         span.glyphicon.glyphicon-repeat
         span= t('game:view.clone.text')
-      button.btn.btn-primary.g2000n-save(type='submit', title=t('game:view.save.title'), data-loading-text=t('game:view.save.loading'))
+      button.btn.btn-primary.g2000n-save(type='submit',
+                                         title=t('game:view.save.title'),
+                                         data-loading-text=t('game:view.save.loading'))
         span.glyphicon.glyphicon-floppy-disk
         span= t('game:view.save.text')
 
-  #standingsModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='standingsModalTitle', aria-hidden='true')
+  #standingsModal.modal.fade(tabindex='-1',
+                             role='dialog',
+                             aria-labelledby='standingsModalTitle',
+                             aria-hidden='true')
     .modal-dialog
       .modal-content
         .modal-header
-          button.close(type='button', data-dismiss='modal', title=t('game:view.standings.modal.close.title'))
+          button.close(type='button',
+                       data-dismiss='modal',
+                       title=t('game:view.standings.modal.close.title'))
             span(aria-hidden='true') &times;
             span.sr-only= t('game:view.standings.modal.close.text')
           h4#standingsModalTitle.modal-title= t('game:view.standings.modal.title')
         .modal-body
           ul#standingsList.list-group
         .modal-footer
-          button.btn.btn-default(type='button', data-dismiss='modal', title=t('game:view.standings.modal.close.title'))= t('game:view.standings.modal.close.text')
+          button.btn.btn-default(type='button',
+                                 data-dismiss='modal',
+                                 title=t('game:view.standings.modal.close.title'))= t('game:view.standings.modal.close.text')
 
 
 block scripts

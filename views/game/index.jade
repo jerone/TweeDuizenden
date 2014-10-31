@@ -16,9 +16,9 @@ block content
                                          data-confirm=t('game:index.delete_all.confirm'))
         input(type='hidden', name='_method', value='DELETE')
         button.btn.btn-danger(type='submit',
-                              title=t('game:index.delete_all.title'),
                               disabled=!Object.keys(games).length,
-                              class=Object.keys(games).length?undefined:'disabled')
+                              class=Object.keys(games).length?undefined:'disabled',
+                              title=t('game:index.delete_all.title'))
           span.glyphicon.glyphicon-trash
           span= t('game:index.delete_all.text')
 

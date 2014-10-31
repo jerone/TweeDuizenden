@@ -3,25 +3,22 @@
   /*
    * Counting;
    */
-  var sum = function () {
-    var that = $(this),
-        index = that.data('player-index'),
-        row = that.parents('tr'),
-        prev = parseInt(row.prev().find('.g2000n-player-' + index).val(), 10),
-        preprev = parseInt(row.prev().prev().find('.g2000n-player-' + index).val(), 10);
-    if (!isNaN(prev) && !isNaN(preprev)) {
-      that.val(prev + preprev);
-      that.parent().toggleClass('has-success', prev + preprev >= 2000);
-    } else {
-      that.val('');
-    }
-  };
-
   $('.g2000n-value').change(function () {
-    $('.g2000n-sum.g2000n-player-' + $(this).data('player-index')).each(sum);
+    $('.g2000n-sum.g2000n-player-' + $(this).data('player-index')).each(function sum() {
+      var that = $(this),
+          index = that.data('player-index'),
+          row = that.parents('tr'),
+          prev = row.prev().find('.g2000n-player-' + index).val(),
+          preprev = row.prev().prev().find('.g2000n-player-' + index).val();
+      if (!isNaN(prev) && !isNaN(preprev)) {
+        var total = parseInt(prev, 10) + parseInt(preprev, 10);
+        that.val(total);
+        that.parent().toggleClass('has-success', total >= 2000);
+      } else {
+        that.val('');
+      }
+    });
   }).trigger('change');
-
-
 
   /*
    * Fixed headers in table;
@@ -38,12 +35,10 @@
     floatThead.floatThead('reflow');
   });
 
-
-
   /*
    * Save;
    */
-  $('#g2000n-update').submit(function (e) {
+  $('#g2000n-update').submit(function () {
     var form = $(this),
         action = form.attr('action'),
         params = form.serialize();
@@ -79,8 +74,6 @@
     $('#g2000n-update').submit();
   }, 5 * 60 * 1000);
 
-
-
   /*
    * Auto time;
    */
@@ -92,20 +85,16 @@
     });
   }, 60 * 1000);
 
-
-
   /*
    * Tooltips;
    */
   $('[data-toggle=tooltip]').tooltip();
 
-
-
   /*
    * Standings;
    */
   $('.g2000n-standings').removeClass('hidden');
-  $('#standingsModal').on('show.bs.modal', function (e) {
+  $('#standingsModal').on('show.bs.modal', function () {
     var standings = $('#standingsList').empty(),
         index = -1,
         totals = [];
@@ -143,7 +132,6 @@
           $('<span/>').addClass('badge').text(total.score)));
     });
   });
-
 
   /*
    * Confirm leaving page;

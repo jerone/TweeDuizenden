@@ -3,15 +3,13 @@
 var Game = require('../models/Game'),
     Flash = require('../models/Flash'),
     PlayerEdit = require('../models/PlayerEdit'),
-    EOL = require('os').EOL,
     qs = require('querystring'),
     moment = require('moment'),
-    url = require('url'),
-    util = require('util');
+    url = require('url');
 
 exports.index = function (req, res, next) {
   Game.find({}, function (err, games) {
-    if (err) return next(err);
+    if (err) { return next(err); }
 
     var queryParams = qs.parse(url.parse(req.url).query),
         orderByDefault = 'createdAt',
@@ -51,15 +49,15 @@ exports.index = function (req, res, next) {
     games.sort(function (a, b) {
       if (typeof a[orderByQuery] === 'string') {
         // `localeCompare` doesn't work;
-        if (a[orderByQuery].toLowerCase() < b[orderByQuery].toLowerCase()) return orderDirSort * -1;
-        if (a[orderByQuery].toLowerCase() > b[orderByQuery].toLowerCase()) return orderDirSort * 1;
+        if (a[orderByQuery].toLowerCase() < b[orderByQuery].toLowerCase()) { return orderDirSort * -1; }
+        if (a[orderByQuery].toLowerCase() > b[orderByQuery].toLowerCase()) { return orderDirSort * 1; }
       } else {
-        if (a[orderByQuery] < b[orderByQuery]) return orderDirSort * -1;
-        if (a[orderByQuery] > b[orderByQuery]) return orderDirSort * 1;
+        if (a[orderByQuery] < b[orderByQuery]) { return orderDirSort * -1; }
+        if (a[orderByQuery] > b[orderByQuery]) { return orderDirSort * 1; }
       }
       if (orderByQuery !== orderByDefault) {
-        if (a[orderByDefault] < b[orderByDefault]) return -1;
-        if (a[orderByDefault] > b[orderByDefault]) return 1;
+        if (a[orderByDefault] < b[orderByDefault]) { return -1; }
+        if (a[orderByDefault] > b[orderByDefault]) { return 1; }
       }
       return 0;
     });
@@ -74,36 +72,33 @@ exports.index = function (req, res, next) {
   });
 };
 
-exports.rules = function (req, res, next) {
+exports.rules = function (req, res) {
   res.render('game/rules', { title: req.i18n.t('game:rules.title') });
 };
 
-exports.add = function (req, res, next) {
+exports.add = function (req, res) {
   if (req.body.addPlayer !== undefined) {
-    var body = req.body;
-    body.title = req.i18n.t('game:add.title');
-    body.isAdd = true;
-    body.isPlayerAction = 1;
-    body.gameTypes = Game.getGameTypes(req.i18n);
-    body.players.push(new PlayerEdit('', body.players.length));
-    res.render('game/edit', body);
+    req.body.title = req.i18n.t('game:add.title');
+    req.body.isAdd = true;
+    req.body.isPlayerAction = 1;
+    req.body.gameTypes = Game.getGameTypes(req.i18n);
+    req.body.players.push(new PlayerEdit('', req.body.players.length));
+    res.render('game/edit', req.body);
   } else if (req.body.removePlayer !== undefined) {
     var index = parseInt(req.body.removePlayer, 10);
-    var body = req.body;
-    body.title = req.i18n.t('game:add.title');
-    body.isAdd = true;
-    body.isPlayerAction = -1;
-    body.gameTypes = Game.getGameTypes(req.i18n);
-    body.players.splice(index, 1);
-    res.render('game/edit', body);
+    req.body.title = req.i18n.t('game:add.title');
+    req.body.isAdd = true;
+    req.body.isPlayerAction = -1;
+    req.body.gameTypes = Game.getGameTypes(req.i18n);
+    req.body.players.splice(index, 1);
+    res.render('game/edit', req.body);
   } else {
     if (req.body.name !== undefined) {
-      var body = req.body;
-      body.title = req.i18n.t('game:add.title');
-      body.isAdd = true;
-      body.isPlayerAction = 2;
-      body.gameTypes = Game.getGameTypes(req.i18n);
-      res.render('game/edit', body);
+      req.body.title = req.i18n.t('game:add.title');
+      req.body.isAdd = true;
+      req.body.isPlayerAction = 2;
+      req.body.gameTypes = Game.getGameTypes(req.i18n);
+      res.render('game/edit', req.body);
     } else {
       var isPlayerAction = 0,
           timestamp = new Date(),
@@ -144,35 +139,32 @@ exports.add = function (req, res, next) {
 
 exports.edit = function (req, res, next) {
   if (req.body.addPlayer !== undefined) {
-    var body = req.body;
-    body.title = req.i18n.t('game:edit.title', { name: req.params.name });
-    body.isAdd = false;
-    body.isPlayerAction = 1;
-    body.gameTypes = Game.getGameTypes(req.i18n);
-    body.players.push(new PlayerEdit('', body.players.length));
-    res.render('game/edit', body);
+    req.body.title = req.i18n.t('game:edit.title', { name: req.params.name });
+    req.body.isAdd = false;
+    req.body.isPlayerAction = 1;
+    req.body.gameTypes = Game.getGameTypes(req.i18n);
+    req.body.players.push(new PlayerEdit('', req.body.players.length));
+    res.render('game/edit', req.body);
   } else if (req.body.removePlayer !== undefined) {
     var index = parseInt(req.body.removePlayer, 10);
-    var body = req.body;
-    body.title = req.i18n.t('game:edit.title', { name: req.params.name });
-    body.isAdd = false;
-    body.isPlayerAction = -1;
-    body.gameTypes = Game.getGameTypes(req.i18n);
-    body.players.splice(index, 1);
-    res.render('game/edit', body);
+    req.body.title = req.i18n.t('game:edit.title', { name: req.params.name });
+    req.body.isAdd = false;
+    req.body.isPlayerAction = -1;
+    req.body.gameTypes = Game.getGameTypes(req.i18n);
+    req.body.players.splice(index, 1);
+    res.render('game/edit', req.body);
   } else if (req.params.name) {
     Game.findOne({ name: req.params.name }, function (err, game) {
-      if (err) return next(err);
+      if (err) { return next(err); }
 
       if (game) {
         if (req.body.name !== undefined && req.body.previousName !== undefined &&
             req.body.name !== req.body.previousName) {
-          var body = req.body;
-          body.title = req.i18n.t('game:edit.title', { name: req.params.name });
-          body.isAdd = false;
-          body.isPlayerAction = 0;
-          body.gameTypes = Game.getGameTypes(req.i18n);
-          res.render('game/edit', body);
+          req.body.title = req.i18n.t('game:edit.title', { name: req.params.name });
+          req.body.isAdd = false;
+          req.body.isPlayerAction = 0;
+          req.body.gameTypes = Game.getGameTypes(req.i18n);
+          res.render('game/edit', req.body);
         } else {
           var players = [];
           game.players.forEach(function (player, index) {
@@ -217,11 +209,11 @@ exports.save = function (req, res, next) {
     if (name && players.length) {
       if (previousName) {
         Game.findOne({ name: previousName }, function (err, game) {
-          if (err) return next(err);
+          if (err) { return next(err); }
 
           if (game) {
             Game.findOne({ name: name }, function (err, gameExisting) {
-              if (err) return next(err);
+              if (err) { return next(err); }
 
               if (gameExisting && previousName !== name) {
                 req.flash(Flash.warning, {
@@ -248,7 +240,7 @@ exports.save = function (req, res, next) {
               game.players = players.map(function (player) { return player.name; });
 
               game.save(function (err) {
-                if (err) return next(err);
+                if (err) { return next(err); }
 
                 req.flash(Flash.info, {
                   message: req.i18n.t('game:view.info.saved'),
@@ -268,7 +260,7 @@ exports.save = function (req, res, next) {
         });
       } else {
         Game.findOne({ name: name }, function (err, gameExisting) {
-          if (err) return next(err);
+          if (err) { return next(err); }
 
           if (gameExisting) {
             req.flash(Flash.warning, {
@@ -288,7 +280,7 @@ exports.save = function (req, res, next) {
           game.players = players.map(function (player) { return player.name; });
 
           game.save(function (err) {
-            if (err) return next(err);
+            if (err) { return next(err); }
 
             req.flash(Flash.info, {
               message: req.i18n.t('game:view.info.saved'),
@@ -319,7 +311,7 @@ exports.save = function (req, res, next) {
 exports.view = function (req, res, next) {
   if (req.params.name) {
     Game.findOne({ name: req.params.name }, function (err, game) {
-      if (err) return next(err);
+      if (err) { return next(err); }
 
       if (game) {
         res.render('game/view', {
@@ -360,7 +352,7 @@ exports.update = function (req, res, next) {
   if (req.body.clone !== undefined) {
     if (req.body.name) {
       Game.findOne({ name: req.body.name }, function (err, game) {
-        if (err) return next(err);
+        if (err) { return next(err); }
 
         if (game) {
           res.locals.helpers.redirect('/game/add', {
@@ -382,8 +374,8 @@ exports.update = function (req, res, next) {
   } else {
     if (req.body.name) {
       Game.findOne({ name: req.body.name }, function (err, game) {
-        if (req.xhr && err) res.send({ error: err });
-        else if (err) return next(err);
+        if (req.xhr && err) { return res.send({ error: err }); }
+        if (err) { return next(err); }
 
         if (game) {
           game.wild = game.type === 'tweeduizenden' ? req.body.wild : [];
@@ -458,7 +450,7 @@ exports.delete = function (req, res, next) {
 
 exports.api = function (req, res, next) {
   Game.find({}, function (err, games) {
-    if (err) return next(err);
+    if (err) { return next(err); }
     res.jsonp(games);
   });
 };

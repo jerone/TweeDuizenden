@@ -3,7 +3,7 @@
   /*
    * Show loader when clicked;
    */
-  $('a.btn,.btn[type=submit]').click(function (e) {
+  $('a.btn,.btn[type=submit]').click(function () {
     disableButtons($(this));
   });
 

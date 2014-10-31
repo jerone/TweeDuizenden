@@ -22,7 +22,7 @@ module.exports = function i18n(app) {
     }
   });
 
-  i18next.addPostProcessor('multi-line-jade', function (val, key, opts) {
+  i18next.addPostProcessor('multi-line-jade', function (val/*, key, opts*/) {
     // NOTE: i18next is using \n as fixed new-lines;
     return jade.render('p ' + val.replace(/\n\n/g, '\n&nbsp;\n').replace(/\n/g, EOL + 'p '));
   });

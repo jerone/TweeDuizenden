@@ -56,7 +56,7 @@ function helpers() {
         queryParams[key] = query[key];
       });
       var queryParamsString = qs.stringify(queryParams);
-      if (queryParamsString) path = path + '?' + queryParamsString;
+      if (queryParamsString) { path = path + '?' + queryParamsString; }
       res.redirect(path);
     }
 
