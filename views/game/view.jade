@@ -1,7 +1,7 @@
 extends ../_layout
 
 block content
-  form#g2000n-update(role='form', method='POST', action='/game/update')
+  form#g2000n-update(role='form', method='POST', action='/game/update', novalidate)
 
     .page-header
       h1= t('game:view.header.title')
