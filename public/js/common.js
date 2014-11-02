@@ -1,68 +1,75 @@
-﻿$(function () {
+﻿'use strict';
+
+(function () {
+  $(function () {
+
+    /*
+     * Show loader when clicked;
+     */
+    $('a.btn,.btn[type=submit]').click(function () {
+      disableButtons($(this));
+    });
+
+  });
 
   /*
-   * Show loader when clicked;
+   * Disable buttons;
    */
-  $('a.btn,.btn[type=submit]').click(function () {
-    disableButtons($(this));
-  });
+  function disableButtons(btns) {
+    return btns.not('.disabled').each(function () {
+      var btn = $(this);
+      btn.addClass('disabled');
 
-});
-
-/*
- * Disable buttons;
- */
-function disableButtons(btns) {
-  return btns.not('.disabled').each(function () {
-    var btn = $(this);
-    btn.addClass('disabled');
-
-    var icon = btn.find('.glyphicon');
-    if (icon.length) {
-      var glyphicon = btn.data('prev-glyphicon');
-      if (!glyphicon) {
-        glyphicon = Array.prototype.slice.call(icon.get(0).classList, 0).filter(function (clss) {
-          return clss.indexOf('glyphicon-') > -1;
-        })[0];
-        btn.data('prev-glyphicon', glyphicon);
+      var icon = btn.find('.glyphicon');
+      if (icon.length) {
+        var glyphicon = btn.data('prev-glyphicon');
+        if (!glyphicon) {
+          glyphicon = Array.prototype.slice.call(icon.get(0).classList, 0).filter(function (clss) {
+            return clss.indexOf('glyphicon-') > -1;
+          })[0];
+          btn.data('prev-glyphicon', glyphicon);
+        }
+        if (glyphicon !== 'glyphicon-refresh') {
+          icon.removeClass(glyphicon);
+          icon.addClass('glyphicon-refresh');
+        }
+        icon.addClass('glyphicon-refresh-animate');
       }
-      if (glyphicon !== 'glyphicon-refresh') {
-        icon.removeClass(glyphicon);
-        icon.addClass('glyphicon-refresh');
+
+      var text = icon.length ? icon.next() : btn,
+          loadingText = btn.data('loading-text');
+      if (loadingText) {
+        btn.data('restore-text', text.text());
+        text.text(loadingText);
       }
-      icon.addClass('glyphicon-refresh-animate');
-    }
+    });
+  }
+  window.disableButtons = disableButtons;
 
-    var text = icon.length ? icon.next() : btn,
-        loadingText = btn.data('loading-text');
-    if (loadingText) {
-      btn.data('restore-text', text.text());
-      text.text(loadingText);
-    }
-  });
-}
-
-/*
- * Restore buttons;
- */
-function restoreButtons(btns) {
-  return btns.filter('.disabled').each(function () {
-    var btn = $(this),
-        icon = btn.find('.glyphicon');
-    if (icon.length) {
-      var glyphicon = btn.data('prev-glyphicon');
-      if (glyphicon && glyphicon !== 'glyphicon-refresh') {
-        icon.addClass(glyphicon);
-        icon.removeClass('glyphicon-refresh');
+  /*
+   * Restore buttons;
+   */
+  function restoreButtons(btns) {
+    return btns.filter('.disabled').each(function () {
+      var btn = $(this),
+          icon = btn.find('.glyphicon');
+      if (icon.length) {
+        var glyphicon = btn.data('prev-glyphicon');
+        if (glyphicon && glyphicon !== 'glyphicon-refresh') {
+          icon.addClass(glyphicon);
+          icon.removeClass('glyphicon-refresh');
+        }
+        icon.removeClass('glyphicon-refresh-animate');
       }
-      icon.removeClass('glyphicon-refresh-animate');
-    }
-    btn.removeClass('disabled');
+      btn.removeClass('disabled');
 
-    var text = icon.length ? icon.next() : btn,
-        restoreText = btn.data('restore-text');
-    if (restoreText) {
-      text.text(restoreText);
-    }
-  });
-}
+      var text = icon.length ? icon.next() : btn,
+          restoreText = btn.data('restore-text');
+      if (restoreText) {
+        text.text(restoreText);
+      }
+    });
+  }
+  window.restoreButtons = restoreButtons;
+
+})();
