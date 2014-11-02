@@ -1,6 +1,7 @@
 'use strict';
 
 var Game = require('../models/Game'),
+    GameTypes = require('../models/GameTypes'),
     Flash = require('../models/Flash'),
     PlayerEdit = require('../models/PlayerEdit'),
     qs = require('querystring'),
@@ -67,7 +68,7 @@ exports.index = function (req, res, next) {
       admin: typeof req.query.admin !== 'undefined',
       orderDir: orderDirs,
       games: games,
-      gameTypes: Game.getGameTypes(req.i18n)
+      gameTypes: GameTypes.toI18n(req.i18n)
     });
   });
 };
@@ -81,7 +82,7 @@ exports.add = function (req, res) {
     req.body.title = req.i18n.t('game:add.title');
     req.body.isAdd = true;
     req.body.isPlayerAction = 1;
-    req.body.gameTypes = Game.getGameTypes(req.i18n);
+    req.body.gameTypes = GameTypes.toI18n(req.i18n);
     req.body.players.push(new PlayerEdit('', req.body.players.length));
     res.render('game/edit', req.body);
   } else if (req.body.removePlayer !== undefined) {
@@ -89,7 +90,7 @@ exports.add = function (req, res) {
     req.body.title = req.i18n.t('game:add.title');
     req.body.isAdd = true;
     req.body.isPlayerAction = -1;
-    req.body.gameTypes = Game.getGameTypes(req.i18n);
+    req.body.gameTypes = GameTypes.toI18n(req.i18n);
     req.body.players.splice(index, 1);
     res.render('game/edit', req.body);
   } else {
@@ -97,7 +98,7 @@ exports.add = function (req, res) {
       req.body.title = req.i18n.t('game:add.title');
       req.body.isAdd = true;
       req.body.isPlayerAction = 2;
-      req.body.gameTypes = Game.getGameTypes(req.i18n);
+      req.body.gameTypes = GameTypes.toI18n(req.i18n);
       res.render('game/edit', req.body);
     } else {
       var isPlayerAction = 0,
@@ -106,7 +107,7 @@ exports.add = function (req, res) {
             date: res.locals.helpers.getLocaleDateString(timestamp),
             time: res.locals.helpers.getLocaleTimeString(timestamp)
           }),
-          type = Game.gameTypesDefault,
+          type = GameTypes.getDefault().key,
           players = [new PlayerEdit('', 0), new PlayerEdit('', 1)];
 
       if (req.query.name) {
@@ -130,7 +131,7 @@ exports.add = function (req, res) {
         previousName: '',
         name: name,
         type: type,
-        gameTypes: Game.getGameTypes(req.i18n),
+        gameTypes: GameTypes.toI18n(req.i18n),
         players: players
       });
     }
@@ -142,7 +143,7 @@ exports.edit = function (req, res, next) {
     req.body.title = req.i18n.t('game:edit.title', { name: req.params.name });
     req.body.isAdd = false;
     req.body.isPlayerAction = 1;
-    req.body.gameTypes = Game.getGameTypes(req.i18n);
+    req.body.gameTypes = GameTypes.toI18n(req.i18n);
     req.body.players.push(new PlayerEdit('', req.body.players.length));
     res.render('game/edit', req.body);
   } else if (req.body.removePlayer !== undefined) {
@@ -150,7 +151,7 @@ exports.edit = function (req, res, next) {
     req.body.title = req.i18n.t('game:edit.title', { name: req.params.name });
     req.body.isAdd = false;
     req.body.isPlayerAction = -1;
-    req.body.gameTypes = Game.getGameTypes(req.i18n);
+    req.body.gameTypes = GameTypes.toI18n(req.i18n);
     req.body.players.splice(index, 1);
     res.render('game/edit', req.body);
   } else if (req.params.name) {
@@ -163,7 +164,7 @@ exports.edit = function (req, res, next) {
           req.body.title = req.i18n.t('game:edit.title', { name: req.params.name });
           req.body.isAdd = false;
           req.body.isPlayerAction = 0;
-          req.body.gameTypes = Game.getGameTypes(req.i18n);
+          req.body.gameTypes = GameTypes.toI18n(req.i18n);
           res.render('game/edit', req.body);
         } else {
           var players = [];
@@ -178,7 +179,7 @@ exports.edit = function (req, res, next) {
             previousName: game.name,
             name: game.name,
             type: game.type,
-            gameTypes: Game.getGameTypes(req.i18n),
+            gameTypes: GameTypes.toI18n(req.i18n),
             players: players
           });
         }
@@ -330,7 +331,7 @@ exports.view = function (req, res, next) {
             ago: moment(game.updatedAt).locale(req.i18n.lng()).fromNow()
           },
           name: game.name,
-          type: game.type,
+          type: GameTypes.getByKey(game.type),
           players: game.players,
           wild: game.wild || ['-'],
           score: game.score || {}
@@ -378,7 +379,7 @@ exports.update = function (req, res, next) {
         if (err) { return next(err); }
 
         if (game) {
-          game.wild = game.type === 'tweeduizenden' ? req.body.wild : [];
+          game.wild = GameTypes.getByKey(game.type).wild ? req.body.wild : [];
 
           var score = {};
           for (var i = 0; i < game.players.length; i++) {

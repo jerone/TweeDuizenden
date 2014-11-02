@@ -42,6 +42,7 @@
     <Compile Include="app\helpers.js" />
     <Compile Include="models\Flash.js" />
     <Compile Include="models\Game.js" />
+    <Compile Include="models\GameTypes.js" />
     <Compile Include="models\PlayerEdit.js" />
     <Compile Include="public\js\common.js" />
     <Compile Include="public\js\index.js" />

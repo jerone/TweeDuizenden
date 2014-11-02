@@ -9,11 +9,25 @@
           index = that.data('player-index'),
           row = that.parents('tr'),
           prev = row.prev().find('.g2000n-player-' + index).val(),
-          preprev = row.prev().prev().find('.g2000n-player-' + index).val();
+          preprev = row.prev().prev().find('.g2000n-player-' + index).val(),
+          total;
       if (!isNaN(prev) && !isNaN(preprev)) {
-        var total = parseInt(prev, 10) + parseInt(preprev, 10);
+        if (gameType.direction === '+') {
+          total = parseInt(preprev, 10) + parseInt(prev, 10);
+        } else if (gameType.direction === '-') {
+          total = parseInt(preprev, 10) - parseInt(prev, 10);
+        }
         that.val(total);
-        that.parent().toggleClass('has-success', total >= 2000);
+
+        if (gameType.win.end !== null) {
+          if (gameType.win.direction === 'highest' && total >= gameType.win.end) {
+            that.parent().addClass('has-success');
+          } else if (gameType.win.direction === 'lowest' && total <= gameType.win.end) {
+            that.parent().addClass('has-success');
+          }
+        } else {
+          that.parent().removeClass('has-success');
+        }
       } else {
         that.val('');
       }
@@ -115,14 +129,20 @@
       totals.push({ player: player, score: total });
     }
 
-    totals.sort(function (a, b) { return b.score - a.score; });
+    if (gameType.win.direction === 'highest') {
+      totals.sort(function (a, b) { return b.score - a.score; });
+    } else if (gameType.win.direction === 'lowest') {
+      totals.sort(function (a, b) { return a.score - b.score; });
+    }
 
-    $.each(totals, function (index, total) {
+    totals.forEach(function (total, index) {
       var winner = 'list-group-item-danger';
-      if (total.score >= 2000) {
-        if (index === 0 || total.score === totals[0].score) {
-          winner = 'list-group-item-success';
-        } else {
+      if (index === 0 || total.score === totals[0].score) {
+        winner = 'list-group-item-success';
+      } else if (gameType.win.end !== null) {
+        if (gameType.win.direction === 'highest' && total.score >= gameType.win.end) {
+          winner = 'list-group-item-warning';
+        } else if (gameType.win.direction === 'lowest' && total.score <= gameType.win.end) {
           winner = 'list-group-item-warning';
         }
       }
