@@ -54,6 +54,7 @@
     <Content Include=".gitignore" />
     <Content Include=".jshintrc" />
     <Content Include=".nodemonignore" />
+    <Content Include="CONTRIBUTING.md" />
     <Content Include="LICENSE" />
     <Content Include="locales\en-US\app.json" />
     <Content Include="locales\en-US\en-US.gif" />
