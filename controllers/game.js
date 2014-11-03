@@ -14,8 +14,8 @@ exports.index = function (req, res, next) {
 
     var queryParams = qs.parse(url.parse(req.url).query),
         orderByDefault = 'createdAt',
-        orderByQuery = req.query.orderBy,
-        orderDirQuery = req.query.orderDir,
+        orderByQuery = decodeURIComponent(req.query.orderBy),
+        orderDirQuery = decodeURIComponent(req.query.orderDir),
         orderDirSort = orderDirQuery !== 'desc' ? 1 : -1,
         orderDirFn = function (orderBy) {
           queryParams.orderBy = orderBy;
@@ -111,16 +111,16 @@ exports.add = function (req, res) {
           players = [new PlayerEdit('', 0), new PlayerEdit('', 1)];
 
       if (req.query.name) {
-        name = req.query.name;
+        name = decodeURIComponent(req.query.name);
         isPlayerAction = 2;
       }
       if (req.query.type) {
-        type = req.query.type;
+        type = decodeURIComponent(req.query.type);
       }
       if (req.query.players) {
         players = [];
         req.query.players.split(',').forEach(function (player, index) {
-          players.push(new PlayerEdit(player, index));
+          players.push(new PlayerEdit(decodeURIComponent(player), index));
         });
       }
 
