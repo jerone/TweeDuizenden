@@ -51,6 +51,7 @@
     <Content Include=".gitignore" />
     <Content Include=".jshintrc" />
     <Content Include=".nodemonignore" />
+    <Content Include=".travis.yml" />
     <Content Include="bower.json" />
     <Content Include="CONTRIBUTING.md" />
     <Content Include="LICENSE" />
