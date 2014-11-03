@@ -6,18 +6,40 @@ var express = require('express'),
 
 var path = require('path');
 
+var staticOptions = { maxAge: '7d' };
+
 module.exports = function routesStatic(app) {
 
-  app.use(favicon(path.join('.', 'public', 'favicon.ico'), { maxAge: '7d' }));
+  app.use(favicon(path.join('.', 'public', 'favicon.ico'), staticOptions));
 
   app.use(less(path.join('.', 'public')));
 
-  app.use(express.static(path.join('.', 'public'), { maxAge: '7d' }));
+  app.use(express.static(path.join('.', 'public'), staticOptions));
 
-  app.use(express.static(path.join('.', 'locales'), { maxAge: '7d' }));
+  app.use(express.static(path.join('.', 'locales'), staticOptions));
 
-  app.use('/js/vendor/moment.min.js',
-    express.static(path.join('.', 'node_modules', 'moment', 'min', 'moment-with-locales.min.js'),
-      { maxAge: '7d' }));
+  app.use('/vendor/:vendor/:file', function (req, res, next) {
+    var dir;
+    switch (req.params.vendor) {
+      case 'bootstrap': {
+        dir = path.join('.', 'bower_components', 'bootstrap', 'dist', req.params.file);
+        break;
+      }
+      case 'jquery': {
+        dir = path.join('.', 'bower_components', 'jquery', 'dist', req.params.file);
+        break;
+      }
+      case 'jquery.floatThead': {
+        dir = path.join('.', 'bower_components', 'jquery.floatThead', 'dist', req.params.file);
+        break;
+      }
+      case 'moment': {
+        dir = path.join('.', 'node_modules', 'moment', 'min', req.params.file);
+        break;
+      }
+      default: return next();
+    }
+    return express.static(dir, staticOptions).apply(this, arguments);
+  });
 
 };

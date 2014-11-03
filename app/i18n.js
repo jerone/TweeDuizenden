@@ -11,7 +11,7 @@ module.exports = function i18n(app) {
     debug: app.get('env') === 'development',
     sendMissingTo: 'fallback',
     jsonIntend: 2,
-    ignoreRoutes: ['images/', 'public/', 'css/', 'js/', 'favicon.ico'],
+    ignoreRoutes: ['vendor/', 'images/', 'css/', 'js/', 'favicon.ico'],
     cookieName: 'lang',
     detectLngQS: 'lang',
     supportedLngs: ['en-US', 'nl-NL'],

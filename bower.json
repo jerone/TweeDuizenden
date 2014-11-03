@@ -1,0 +1,38 @@
+{
+  "name": "TweeDuizenden",
+  "description": "Tool to help record statistics for the game called TweeDuizenden.",
+  "authors": [
+    "Jeroen van Warmerdam <jeronevw@hotmail.com>"
+  ],
+  "homepage": "https://github.com/jerone/TweeDuizenden",
+  "version": "0.1.0",
+  "license": "MIT",
+  "keywords": [
+    "game",
+    "games",
+    "card game",
+    "card games"
+  ],
+  "bugs": {
+    "url": "https://github.com/jerone/TweeDuizenden/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jerone/TweeDuizenden.git"
+  },
+  "main": "app.js",
+  "moduleType": [ "node" ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery.floatThead": "~1.2.9",
+    "bootstrap": "~3.3.0",
+    "jquery": "~2.1.1"
+  }
+}
