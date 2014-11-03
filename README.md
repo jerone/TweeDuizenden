@@ -1,6 +1,9 @@
 #TweeDuizenden
 
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/jerone/TweeDuizenden?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/jerone/TweeDuizenden)
+[![Dependency Status](http://img.shields.io/david/jerone/TweeDuizenden.svg)](https://david-dm.org/jerone/TweeDuizenden)
+[![Build Status](http://img.shields.io/travis/jerone/TweeDuizenden.svg)](https://travis-ci.org/jerone/TweeDuizenden)
+[![Github Issues](http://img.shields.io/github/issues/jerone/TweeDuizenden.svg)](https://github.com/jerone/TweeDuizenden/issues)
 
 Tool to help record statistics for the game called TweeDuizenden.
 
