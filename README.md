@@ -21,9 +21,9 @@ Tool to help record statistics for the game called TweeDuizenden.
 2. Install NPM dependencies `npm install`.
 3. Install bower dependencies `bower install`.
 4. Start app `node app.js`.
-5. Open browser with url `http://localhost:3000/`.
+5. Open browser with url [`http://localhost:3000/`](http://localhost:3000/).
 
-:exclamation: **Note:** I highly recommend installing [Nodemon](https://github.com/remy/nodemon).
+:exclamation: **Note:** I highly recommend installing [nodemon](https://github.com/remy/nodemon).
 It watches for any changes in your node.js app and automatically restarts the server.
 Once installed, instead of `node app.js` use `nodemon app.js`.
 It will save you a lot of time in the long run, because you won't need to manually restart the server each time you make a small change in code.
