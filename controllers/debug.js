@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 
 //var helpers = require('./../app/helpers');
 var GameTypes = require('./../models/GameTypes');
@@ -23,7 +23,7 @@ exports.index = function (req, res) {
   console.log(GameTypes, Array.prototype.find);
   res.render('debug', {
     data: [
-      GameTypes.toList(),
+      JSON.stringify(GameTypes.toList()),
       GameTypes.toEnum().join(', '),
       GameTypes.getByKey('tweeduizenden').key,
       ""].join('\n')
