@@ -1,7 +1,17 @@
-﻿Push live:
+﻿Openshift:
+
+Add Node.js cartridge: https://raw.githubusercontent.com/icflorescu/openshift-cartridge-nodejs/master/metadata/manifest.yml
+
+Add MongoDB cartridge: https://raw.githubusercontent.com/icflorescu/openshift-cartridge-mongodb/master/metadata/manifest.yml
+
 ```
 git push origin master && git push openshift master
 ```
+
+ssh into app: `rhc ssh tweeduizenden`<br>
+Cd to `cd app-root/runtime/repo`<br>
+Install packages `npm install`<br>
+Install bower `npm install bower -g` and install packages `HOME=$HOME/app-root/runtime bower install`
 
 ---------------------
 
@@ -15,6 +25,7 @@ export NODE_ENV=development && node-inspector & nodemon --debug app.js
 ---------------------
 
 * https://openshift.redhat.com/app/console/application/541bffeb4382ec64b60009fb-tweeduizenden
+* https://www.mongodb.com/download-center#community
 * http://i18next.com/node/
 * https://www.npmjs.org/
 * http://nodejs.org/api/url.html
