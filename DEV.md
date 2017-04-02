@@ -24,6 +24,15 @@ export NODE_ENV=development && node-inspector & nodemon --debug app.js
 
 ---------------------
 
+MongoDB:
+
+```
+cd C:\Program Files\MongoDB\Server\3.4\bin
+mongod --dbpath C:\test\mongodb\data
+```
+
+---------------------
+
 * https://openshift.redhat.com/app/console/application/541bffeb4382ec64b60009fb-tweeduizenden
 * https://www.mongodb.com/download-center#community
 * http://i18next.com/node/

@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 
 var homeController = require('./../controllers/home'),
     gameController = require('./../controllers/game'),
@@ -41,6 +41,7 @@ module.exports = function routes(app) {
 
   // Handle 404;
   app.use(function (req, res/*, next*/) {
+    console.log("404", req.url);
     res.status(404);
     if (req.accepts('html')) {
       res.render('error', {
