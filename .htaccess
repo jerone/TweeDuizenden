@@ -1,1 +1,2 @@
-﻿AllowEncodedSlashes On
+﻿AcceptPathInfo On
+AllowEncodedSlashes On

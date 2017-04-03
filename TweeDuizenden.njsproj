@@ -49,8 +49,10 @@
     <Compile Include="public\js\view.js" />
     <Content Include=".editorconfig" />
     <Content Include=".gitignore" />
+    <Content Include=".htaccess" />
     <Content Include=".jshintrc" />
     <Content Include=".nodemonignore" />
+    <Content Include=".openshift\config\.htaccess" />
     <Content Include=".travis.yml" />
     <Content Include="bower.json" />
     <Content Include="CONTRIBUTING.md" />
