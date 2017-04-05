@@ -7,7 +7,7 @@
     /*
      * Counting;
      */
-    $('.g2000n-value').change(function () {
+    var counting = function () {
       $('.g2000n-sum.g2000n-player-' + $(this).data('player-index')).each(function sum() {
         var that = $(this),
             index = that.data('player-index'),
@@ -15,7 +15,7 @@
             prev = row.prev().find('.g2000n-player-' + index).val(),
             preprev = row.prev().prev().find('.g2000n-player-' + index).val(),
             total;
-        if (!isNaN(prev) && !isNaN(preprev)) {
+        if (prev && !isNaN(prev) && preprev && !isNaN(preprev)) {
           if (gameType.direction === '+') {
             total = parseInt(preprev, 10) + parseInt(prev, 10);
           } else if (gameType.direction === '-') {
@@ -36,7 +36,8 @@
           that.val('');
         }
       });
-    }).trigger('change');
+    }
+    $('.g2000n-value').on('change blur keyup', debounce(counting, 500)).each(counting);
 
     /*
      * Fixed headers in table;
@@ -162,7 +163,7 @@
      * Confirm leaving page;
      */
     function onbeforeunload() {
-      return 'You are about to navigate away from this page.\n\nIf you leave this page all scrores that you have entered will be lost!\n\nUse the save button to save all scores.';
+      return 'You are about to navigate away from this page.\n\nIf you leave this page all scores that you have entered will be lost!\n\nUse the save button to save all scores.';
     }
     $('.g2000n-save').click(function () {
       window.onbeforeunload = null;
