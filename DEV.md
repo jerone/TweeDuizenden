@@ -42,3 +42,5 @@ mongod --dbpath C:\test\mongodb\data
 * http://mongoosejs.com/docs/guide.html
 * http://getbootstrap.com/
 * http://scotch.io/bar-talk/expressjs-4-0-new-features-and-upgrading-from-3-0
+* https://github.com/icflorescu/openshift-cartridge-mongodb
+* https://github.com/mongodb/node-mongodb-native

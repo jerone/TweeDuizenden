@@ -94,6 +94,8 @@
     <Content Include="views\_partials\tracking.jade" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include=".openshift\" />
+    <Folder Include=".openshift\config\" />
     <Folder Include="app\" />
     <Folder Include="config\" />
     <Folder Include="controllers\" />
