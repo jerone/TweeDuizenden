@@ -1,4 +1,4 @@
-@import "../vendor/bootstrap/css/bootstrap.min.css";
+﻿@import "../vendor/bootstrap/css/bootstrap.min.css";
 @import "../vendor/bootstrap/css/bootstrap-theme.min.css";
 
 /*
@@ -67,6 +67,12 @@ td select.form-control {
 /* Inline form; */
 .inline-form {
     display: inline-block;
+}
+
+/* Remove spinners from number input for quieter design while keeping numeric keyboard. */
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
 }
 
 
