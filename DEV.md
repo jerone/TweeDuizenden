@@ -1,12 +1,21 @@
-﻿Openshift:
+﻿### Openshift installation
 
 Add Node.js cartridge: https://raw.githubusercontent.com/icflorescu/openshift-cartridge-nodejs/master/metadata/manifest.yml
 
 Add MongoDB cartridge: https://raw.githubusercontent.com/icflorescu/openshift-cartridge-mongodb/master/metadata/manifest.yml
 
+On Windows make sure `.openshift/action_hooks/build` (required for Bower) has correct permissions with:
+```
+git update-index --chmod=+x .openshift/action_hooks/build
+```
+
+### Commit to repo & Openshift
+
 ```
 git push origin master && git push openshift master
 ```
+
+### Remaining
 
 ssh into app: `rhc ssh tweeduizenden`<br>
 Cd to `cd app-root/runtime/repo`<br>

@@ -52,7 +52,7 @@
     <Content Include=".htaccess" />
     <Content Include=".jshintrc" />
     <Content Include=".nodemonignore" />
-    <Content Include=".openshift\config\.htaccess" />
+    <Content Include=".openshift\action_hooks\build" />
     <Content Include=".travis.yml" />
     <Content Include="bower.json" />
     <Content Include="CONTRIBUTING.md" />
@@ -96,7 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include=".openshift\" />
-    <Folder Include=".openshift\config\" />
+    <Folder Include=".openshift\action_hooks\" />
     <Folder Include="app\" />
     <Folder Include="config\" />
     <Folder Include="controllers\" />
