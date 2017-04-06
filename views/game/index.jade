@@ -1,4 +1,4 @@
-extends ../_layout
+﻿extends ../_layout
 
 block content
   .page-header
@@ -59,19 +59,19 @@ block content
             td #{helpers.getLocaleDateString(game.updatedAt)} #{helpers.getLocaleTimeString(game.updatedAt)}
             td #{game.players.join(', ')}
             td.text-nowrap
-              a.btn.btn-success(href='/game/view/'+encodeURIComponent(game.name), title=t('game:index.table.open.title'))
+              a.btn.btn-success(href='/game/view/'+encodeURIComponent(encodeURIComponent(game.name)), title=t('game:index.table.open.title'))
                 span.glyphicon.glyphicon-folder-open
                 span.hidden-xs= t('game:index.table.open.text')
               if admin
                 | &nbsp;
                 form.inline-form(method='POST',
-                                 action='/game/edit/'+encodeURIComponent(game.name),
+                                 action='/game/edit/'+encodeURIComponent(encodeURIComponent(game.name)),
                                  enctype='application/x-www-form-urlencoded')
                   button.btn.btn-warning(type='submit', title=t('game:index.table.edit.title'))
                     span.glyphicon.glyphicon-pencil
                 | &nbsp;
                 form.inline-form.g2000n-delete(method='POST',
-                                               action='/game/delete/'+encodeURIComponent(game.name),
+                                               action='/game/delete/'+encodeURIComponent(encodeURIComponent(game.name)),
                                                enctype='application/x-www-form-urlencoded',
                                                data-confirm=t('game:index.table.delete.confirm'))
                   input(type='hidden', name='_method', value='DELETE')

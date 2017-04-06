@@ -36,7 +36,7 @@
           that.val('');
         }
       });
-    }
+    };
     $('.g2000n-value').on('change blur keyup', debounce(counting, 500)).each(counting);
 
     /*
