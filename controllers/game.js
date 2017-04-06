@@ -427,7 +427,7 @@ exports.update = function (req, res, next) {
 
 exports.delete = function (req, res, next) {
   if (req.params.name) {
-    Game.findOneAndRemove({ name: req.params.name }, function (err) {
+    Game.findOneAndRemove({ name: decodeURIComponent(req.params.name) }, function (err) {
       if (req.xhr) {
         res.send({ error: (err || false) });
       } else if (err) {
