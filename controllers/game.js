@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 
 var Game = require('../models/Game'),
     GameTypes = require('../models/GameTypes'),
@@ -155,13 +155,13 @@ exports.edit = function (req, res, next) {
     req.body.players.splice(index, 1);
     res.render('game/edit', req.body);
   } else if (req.params.name) {
-    Game.findOne({ name: req.params.name }, function (err, game) {
+    Game.findOne({ name: decodeURIComponent(req.params.name) }, function (err, game) {
       if (err) { return next(err); }
 
       if (game) {
         if (req.body.name !== undefined && req.body.previousName !== undefined &&
             req.body.name !== req.body.previousName) {
-          req.body.title = req.i18n.t('game:edit.title', { name: req.params.name });
+          req.body.title = req.i18n.t('game:edit.title', { name: decodeURIComponent(req.params.name) });
           req.body.isAdd = false;
           req.body.isPlayerAction = 0;
           req.body.gameTypes = GameTypes.toI18n(req.i18n);
@@ -248,7 +248,7 @@ exports.save = function (req, res, next) {
                   fadeout: true
                 });
 
-                res.redirect('/game/view/' + encodeURIComponent(game.name));
+                res.redirect('/game/view/' + encodeURIComponent(encodeURIComponent(game.name)));
               });
             });
           } else {
@@ -288,7 +288,7 @@ exports.save = function (req, res, next) {
               fadeout: true
             });
 
-            res.redirect('/game/view/' + encodeURIComponent(game.name));
+            res.redirect('/game/view/' + encodeURIComponent(encodeURIComponent(game.name)));
           });
         });
       }
@@ -311,7 +311,7 @@ exports.save = function (req, res, next) {
 
 exports.view = function (req, res, next) {
   if (req.params.name) {
-    Game.findOne({ name: req.params.name }, function (err, game) {
+    Game.findOne({ name: decodeURIComponent(req.params.name) }, function (err, game) {
       if (err) { return next(err); }
 
       if (game) {
@@ -408,7 +408,7 @@ exports.update = function (req, res, next) {
                 fadeout: true
               });
 
-              res.locals.helpers.redirect('/game/view/' + encodeURIComponent(game.name), {}, req.header('referrer'));
+              res.locals.helpers.redirect('/game/view/' + encodeURIComponent(encodeURIComponent(game.name)), {}, req.header('referrer'));
             }
           });
         } else {
