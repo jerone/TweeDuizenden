@@ -37,7 +37,7 @@
         }
       });
     };
-    $('.g2000n-value').on('change blur keyup', debounce(counting, 500)).each(counting);
+    $('.g2000n-value').on('change blur', counting).on('keyup', debounce(counting, 500)).each(counting);
 
     /*
      * Fixed headers in table;
