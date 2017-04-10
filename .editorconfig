@@ -1,11 +1,13 @@
-﻿; editorconfig.org
+; editorconfig.org
 root = true
 
 [*]
 indent_style = space
 indent_size = 2
 end_of_line = crlf
-charset = utf-8
+; Disabled charset setting because it adds a BOM to files.
+; See https://developercommunity.visualstudio.com/content/problem/22922/editorconfig-support-interprets-charset-utf-8-as-u.html
+; charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
 
