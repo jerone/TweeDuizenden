@@ -57,9 +57,17 @@
     <Content Include="bower.json" />
     <Content Include="CONTRIBUTING.md" />
     <Content Include="LICENSE" />
+    <Content Include="locales\en-CA\app.json" />
+    <Content Include="locales\en-CA\error.json" />
+    <Content Include="locales\en-CA\flag.gif" />
+    <Content Include="locales\en-CA\game.json" />
+    <Content Include="locales\en-CA\home.json" />
+    <Content Include="locales\en-CA\_flash.json" />
+    <Content Include="locales\en-CA\_footer.json" />
+    <Content Include="locales\en-CA\_navbar.json" />
     <Content Include="locales\en-US\app.json" />
-    <Content Include="locales\en-US\en-US.gif" />
     <Content Include="locales\en-US\error.json" />
+    <Content Include="locales\en-US\flag.gif" />
     <Content Include="locales\en-US\game.json" />
     <Content Include="locales\en-US\home.json" />
     <Content Include="locales\en-US\_flash.json" />
@@ -67,9 +75,9 @@
     <Content Include="locales\en-US\_navbar.json" />
     <Content Include="locales\nl-NL\app.json" />
     <Content Include="locales\nl-NL\error.json" />
+    <Content Include="locales\nl-NL\flag.gif" />
     <Content Include="locales\nl-NL\game.json" />
     <Content Include="locales\nl-NL\home.json" />
-    <Content Include="locales\nl-NL\nl-NL.gif" />
     <Content Include="locales\nl-NL\_flash.json" />
     <Content Include="locales\nl-NL\_footer.json" />
     <Content Include="locales\nl-NL\_navbar.json" />
@@ -100,6 +108,7 @@
     <Folder Include="app\" />
     <Folder Include="config\" />
     <Folder Include="controllers\" />
+    <Folder Include="locales\en-CA\" />
     <Folder Include="locales\en-US\" />
     <Folder Include="locales\nl-NL\" />
     <Folder Include="models\" />

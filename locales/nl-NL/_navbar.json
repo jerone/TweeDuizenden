@@ -7,12 +7,17 @@
     "home": "Home",
     "game": "Spel",
     "rules": "Spelregels",
-    "english": {
+    "en-US": {
       "alt": "EN",
       "text": "Engels",
       "title": "Engels"
     },
-    "dutch": {
+    "en-CA": {
+      "alt": "CA",
+      "text": "Canadees-Engels",
+      "title": "Canadees-Engels"
+    },
+    "nl-NL": {
       "alt": "NL",
       "text": "Nederlands",
       "title": "Nederlands"

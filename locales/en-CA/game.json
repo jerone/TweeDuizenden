@@ -1,0 +1,148 @@
+{
+  "common": {
+    "types": {
+      "tweeduizenden": "TweeDuizenden",
+      "skipbo": "Skip-Bo"
+    },
+    "error": {
+      "missing": "This game no longer exists!"
+    }
+  },
+  "index": {
+    "title": "Game",
+    "header": {
+      "title": "Games"
+    },
+    "add": {
+      "title": "Add a new game.",
+      "text": "Add new game"
+    },
+    "delete_all": {
+      "title": "Delete all games!",
+      "confirm": "Are you sure you want to delete all games?",
+      "text": "Delete all"
+    },
+    "table": {
+      "name": "Name",
+      "id": "Id",
+      "type": "Type",
+      "created": "Created",
+      "updated": "Updated",
+      "players": "Players",
+      "actions": "Actions",
+      "empty": "There are no games available!",
+      "open": {
+        "title": "Open this game.",
+        "text": "Open"
+      },
+      "delete": {
+        "title": "Delete this game!",
+        "confirm": "Are you sure you want to delete this game?"
+      },
+      "edit": {
+        "title": "Edit this game."
+      }
+    }
+  },
+  "rules": {
+    "title": "Game Rules",
+    "header": {
+      "title": "Rules"
+    },
+    "text__TODO": [],
+    "add": {
+      "text": "Start a new game &raquo;"
+    },
+    "view": {
+      "text": "View previous games &raquo;"
+    }
+  },
+  "add": {
+    "title": "Add Game",
+    "header": {
+      "title": "Add Game"
+    },
+    "start": {
+      "title": "Save and start this game.",
+      "text": "Start Game",
+      "loading": "Starting..."
+    }
+  },
+  "edit": {
+    "title": "Edit Game __name__",
+    "header": {
+      "title": "Edit Game"
+    },
+    "warning": {
+      "no_name": "No name defined!",
+      "no_players": "No players defined!",
+      "name": "This name already exists!"
+    },
+    "name": {
+      "label": "Name",
+      "default": "Game __date__ __time__"
+    },
+    "type": {
+      "label": "Type"
+    },
+    "players": {
+      "label": "Players",
+      "title": "Players"
+    },
+    "addPlayer": {
+      "title": "Add a new player.",
+      "text": "Add Player"
+    },
+    "removePlayer": {
+      "title": "Remove this player.",
+      "text": "Remove Player"
+    },
+    "update": {
+      "title": "Update this game.",
+      "text": "Update Game"
+    }
+  },
+  "view": {
+    "title": "Start Game __name__",
+    "info": {
+      "saved": "Game is saved."
+    },
+    "created": {
+      "text": "Game created:"
+    },
+    "updated": {
+      "text": "Last updated:"
+    },
+    "save": {
+      "title": "Save this game.",
+      "text": "Save",
+      "loading": "Saving..."
+    },
+    "header": {
+      "title": "Start Game"
+    },
+    "table": {
+      "number": "#",
+      "dealer": "Dealer",
+      "wild": "Wild"
+    },
+    "clone": {
+      "title": "Clone this game.",
+      "text": "Clone Game"
+    },
+    "standings": {
+      "title": "Show standings",
+      "text": "Standings",
+      "modal": {
+        "title": "Standings",
+        "close": {
+          "title": "Close",
+          "text": "Close"
+        }
+      }
+    }
+  },
+  "open": {
+    "title": "Open Game __name__"
+  }
+}

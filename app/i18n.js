@@ -14,8 +14,8 @@ module.exports = function i18n(app) {
     ignoreRoutes: ['vendor/', 'images/', 'css/', 'js/', 'favicon.ico'],
     cookieName: 'lang',
     detectLngQS: 'lang',
-    supportedLngs: ['en-US', 'nl-NL'],
-    fallbackLng: ['en-US', 'nl-NL'],
+    supportedLngs: ['en-US', 'en-CA', 'nl-NL'],
+    fallbackLng: ['en-US', 'en-CA', 'nl-NL'],
     ns: {
       namespaces: ['_flash', '_footer', '_navbar', 'app', 'error', 'game', 'home'],
       defaultNs: 'app'
