@@ -20,12 +20,11 @@ exports.query = function (req, res) {
   res.send(req.query);
 };
 exports.index = function (req, res) {
-  console.log(GameTypes, Array.prototype.find);
   res.render('debug', {
     data: [
-      JSON.stringify(GameTypes.toList()),
+      JSON.stringify(GameTypes.toList(), null, '  '),
       GameTypes.toEnum().join(', '),
       GameTypes.getByKey('tweeduizenden').key,
-      ""].join('\n')
+      ''].join('\n')
   });
 };

@@ -21,9 +21,9 @@ function GameTypes() {
   this.types = [skipbo, tweeduizenden/*, rummy*/];
 }
 GameTypes.prototype.getByKey = function (key) {
-  return this.types.filter(function (type) {
+  return this.types.find(function (type) {
     return type.key === key;
-  })[0];
+  });
 };
 GameTypes.prototype.getDefault = function () {
   return tweeduizenden;
