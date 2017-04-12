@@ -30,7 +30,7 @@
     "express-session": "^1.15.2",
     "i18next": "1.7.4",
     "intl": "0.1.4",
-    "jade": "1.7.0",
+    "jade": "^1.11.0",
     "less-middleware": "1.0.4",
     "method-override": "^2.3.8",
     "moment": "2.8.3",
