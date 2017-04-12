@@ -21,7 +21,9 @@
     "url": "https://github.com/jerone/TweeDuizenden.git"
   },
   "main": "app.js",
-  "moduleType": [ "node" ],
+  "moduleType": [
+    "node"
+  ],
   "private": true,
   "ignore": [
     "**/.*",
@@ -31,8 +33,8 @@
     "tests"
   ],
   "dependencies": {
-    "jquery.floatThead": "~1.2.9",
-    "bootstrap": "~3.3.0",
-    "jquery": "~2.1.1"
+    "jquery.floatThead": "~2.0.3",
+    "bootstrap": "~3.3.7",
+    "jquery": "~3.2.1"
   }
 }
