@@ -23,21 +23,21 @@
     "start": "node app.js"
   },
   "dependencies": {
-    "body-parser": "1.9.2",
+    "body-parser": "^1.17.1",
     "connect-flash": "0.1.1",
-    "errorhandler": "1.2.2",
-    "express": "4.10.1",
-    "express-session": "1.9.1",
+    "errorhandler": "^1.5.0",
+    "express": "^4.15.2",
+    "express-session": "^1.15.2",
     "i18next": "1.7.4",
     "intl": "0.1.4",
     "jade": "1.7.0",
     "less-middleware": "1.0.4",
-    "method-override": "2.3.0",
+    "method-override": "^2.3.8",
     "moment": "2.8.3",
-    "morgan": "1.4.1",
-    "serve-favicon": "2.1.6"
     "mongoose": "^4.9.4",
     "mongoose-timestamp": "^0.6.0",
+    "morgan": "^1.8.1",
+    "serve-favicon": "^2.4.2"
   },
   "devDependencies": {
     "bower": "^1.8.0"
