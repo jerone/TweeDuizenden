@@ -34,10 +34,10 @@
     "less-middleware": "1.0.4",
     "method-override": "2.3.0",
     "moment": "2.8.3",
-    "mongoose": "^4.9.1",
-    "mongoose-timestamp": "0.3.0",
     "morgan": "1.4.1",
     "serve-favicon": "2.1.6"
+    "mongoose": "^4.9.4",
+    "mongoose-timestamp": "^0.6.0",
   },
   "devDependencies": {
     "bower": "^1.8.0"
