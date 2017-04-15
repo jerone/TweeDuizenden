@@ -10,14 +10,18 @@ OLD_HOME=$HOME
 
 #########
 
+echo "INFO: Override HOME variable"
+cd $OPENSHIFT_REPO_DIR
+export HOME=$OPENSHIFT_REPO_DIR
+
+#########
+
 echo "INFO: Install Bower"
 npm install bower
 
-##########
+#########
 
 echo "INFO: Running 'bower install'"
-cd $OPENSHIFT_REPO_DIR
-export HOME=$OPENSHIFT_REPO_DIR
 bower install
 
 #########
