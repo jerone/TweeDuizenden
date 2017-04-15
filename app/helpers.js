@@ -17,7 +17,7 @@ function helpers() {
       var date = new Date(datetime),
           gmt = date.getTimezoneOffset() * 60000,
           timezone = 0;
-      switch (req.i18n.lng()) {
+      switch (req.language) {
         case 'nl-NL':
           { timezone = 120; }
       }
@@ -25,10 +25,10 @@ function helpers() {
       return new Date(date.getTime() + gmt + timezone);
     };
     function getLocaleDateString(datetime) {
-      return getLocaleString(datetime).toLocaleDateString(req.i18n.lng());
+      return getLocaleString(datetime).toLocaleDateString(req.language);
     }
     function getLocaleTimeString(datetime) {
-      return getLocaleString(datetime).toLocaleTimeString(req.i18n.lng());
+      return getLocaleString(datetime).toLocaleTimeString(req.language);
     }
 
     function isActiveMenu() {

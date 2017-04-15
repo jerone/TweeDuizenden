@@ -14,7 +14,7 @@ module.exports = function routes(app) {
 
   // Handle i18n;
   app.use(function (req, res, next) {
-    if (req.query.lang) {
+    if (req.query.lng) {
       res.redirect('back');
     } else {
       next();

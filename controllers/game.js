@@ -322,13 +322,13 @@ exports.view = function (req, res, next) {
             datetime: res.locals.helpers.getLocaleDateString(game.createdAt) + ' ' +
                       res.locals.helpers.getLocaleTimeString(game.createdAt),
             timestamp: game.createdAt.getTime(),
-            ago: moment(game.createdAt).locale(req.i18n.lng()).fromNow()
+            ago: moment(game.createdAt).locale(req.language).fromNow()
           },
           updated: {
             datetime: res.locals.helpers.getLocaleDateString(game.updatedAt) + ' ' +
                       res.locals.helpers.getLocaleTimeString(game.updatedAt),
             timestamp: game.updatedAt.getTime(),
-            ago: moment(game.updatedAt).locale(req.i18n.lng()).fromNow()
+            ago: moment(game.updatedAt).locale(req.language).fromNow()
           },
           name: game.name,
           type: GameTypes.getByKey(game.type),
@@ -397,7 +397,7 @@ exports.update = function (req, res, next) {
                   datetime: res.locals.helpers.getLocaleDateString(game.updatedAt) + ' ' +
                             res.locals.helpers.getLocaleTimeString(game.updatedAt),
                   timestamp: game.updatedAt.getTime(),
-                  ago: moment(game.updatedAt).locale(req.i18n.lng()).fromNow()
+                  ago: moment(game.updatedAt).locale(req.language).fromNow()
                 }
               });
             } else if (err) {

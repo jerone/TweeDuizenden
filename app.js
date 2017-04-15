@@ -47,7 +47,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({ resave: true, saveUninitialized: true, secret: secrets.sessionSecret }));
 app.use(methodOverride());
 app.use(flash());
-app.use(i18n(app).handle);
+app.use(i18n(app));
 app.use(helpers());
 
 // Static routes;
