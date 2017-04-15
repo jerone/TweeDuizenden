@@ -4,6 +4,7 @@
 # Bower want to touch .local and .config files in
 # $HOME which isn't writeable on OSE. So we set
 # $HOME to the REPO_DIR temporarily.
+# http://bitflipr.blogspot.nl/2014/08/how-to-get-grunt-and-bower-to-build-and.html
 
 echo "INFO: HOME is $HOME"
 OLD_HOME=$HOME
