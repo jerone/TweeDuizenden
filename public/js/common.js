@@ -4,7 +4,7 @@
   $(function () {
 
     /*
-     * Show loader when clicked;
+     * Show loader when clicked.
      */
     $('a.btn,.btn[type=submit]').click(function () {
       disableButtons($(this));
@@ -13,7 +13,7 @@
   });
 
   /*
-   * Disable buttons;
+   * Disable buttons.
    */
   function disableButtons(btns) {
     return btns.not('.disabled').each(function () {
@@ -47,7 +47,7 @@
   window.disableButtons = disableButtons;
 
   /*
-   * Restore buttons;
+   * Restore buttons.
    */
   function restoreButtons(btns) {
     return btns.filter('.disabled').each(function () {
@@ -78,18 +78,18 @@
   // N milliseconds. If `immediate` is passed, trigger the function on the
   // leading edge, instead of the trailing.
   function debounce(func, wait, immediate) {
-	  var timeout;
-	  return function () {
-		  var context = this, args = arguments;
-		  var later = function () {
-			  timeout = null;
-			  if (!immediate) func.apply(context, args);
-		  };
-		  var callNow = immediate && !timeout;
-		  clearTimeout(timeout);
-		  timeout = setTimeout(later, wait);
-		  if (callNow) func.apply(context, args);
-	  };
+    var timeout;
+    return function () {
+      var context = this, args = arguments;
+      var later = function () {
+          timeout = null;
+          if (!immediate) func.apply(context, args);
+      };
+      var callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      if (callNow) func.apply(context, args);
+    };
   };
   window.debounce = debounce;
 

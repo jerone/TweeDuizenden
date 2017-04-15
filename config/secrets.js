@@ -14,7 +14,7 @@
  *
  * git rm --cached config/secrets.js
  *
- * If you have already commited this file to GitHub with your keys, then
+ * If you have already committed this file to GitHub with your keys, then
  * refer to https://help.github.com/articles/remove-sensitive-data
 */
 

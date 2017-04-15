@@ -1,7 +1,8 @@
 ﻿'use strict';
 
 //var helpers = require('./../app/helpers');
-var GameTypes = require('./../models/GameTypes');
+var Game = require('../models/Game'),
+    GameTypes = require('./../models/GameTypes');
 
 exports.all = function (req, res) {
   res.send({
@@ -22,6 +23,7 @@ exports.query = function (req, res) {
 exports.index = function (req, res) {
   res.render('debug', {
     data: [
+      Game,
       JSON.stringify(GameTypes.toList(), null, '  '),
       GameTypes.toEnum().join(', '),
       GameTypes.getByKey('tweeduizenden').key,

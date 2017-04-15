@@ -5,7 +5,7 @@
   $(function () {
 
     /*
-     * Counting;
+     * Counting.
      */
     var counting = function () {
       $('.g2000n-sum.g2000n-player-' + $(this).data('player-index')).each(function sum() {
@@ -40,22 +40,22 @@
     $('.g2000n-value').on('change blur', counting).on('keyup', debounce(counting, 500)).each(counting);
 
     /*
-     * Fixed headers in table;
+     * Fixed headers in table.
      *
-     * Use this until `position:sticky` is supported in tables;
+     * Use this until `position:sticky` is supported in tables.
      * See http://caniuse.com/#feat=css-sticky
      */
     var floatThead = $('table.table').floatThead();
     $('.alert').on('closed.bs.alert', function () {
       floatThead.floatThead('reflow');
     });
-    // Required for tablets when opening the keyboard;
+    // Required for tablets when opening the keyboard.
     $('input').on('focus blur', function () {
       floatThead.floatThead('reflow');
     });
 
     /*
-     * Save;
+     * Save.
      */
     $('#g2000n-update').submit(function () {
       var form = $(this),
@@ -80,7 +80,7 @@
           }).always(function () {
             restoreButtons(form.find('.g2000n-save'));
           });
-        }, 500);  // Little visual style;
+        }, 500);  // Little visual style.
 
         return false;
       }
@@ -94,7 +94,7 @@
     }, 5 * 60 * 1000);
 
     /*
-     * Auto time;
+     * Auto time.
      */
     var lng = $('html').attr('lang');
     window.setInterval(function () {
@@ -105,12 +105,12 @@
     }, 60 * 1000);
 
     /*
-     * Tooltips;
+     * Tooltips.
      */
     $('[data-toggle=tooltip]').tooltip();
 
     /*
-     * Standings;
+     * Standings.
      */
     $('.g2000n-standings').removeClass('hidden');
     $('#standingsModal').on('show.bs.modal', function () {
@@ -160,7 +160,7 @@
     });
 
     /*
-     * Confirm leaving page;
+     * Confirm leaving page.
      */
     function onbeforeunload() {
       return 'You are about to navigate away from this page.\n\nIf you leave this page all scores that you have entered will be lost!\n\nUse the save button to save all scores.';

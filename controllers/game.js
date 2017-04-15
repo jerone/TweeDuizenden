@@ -49,7 +49,7 @@ exports.index = function (req, res, next) {
 
     games.sort(function (a, b) {
       if (typeof a[orderByQuery] === 'string') {
-        // `localeCompare` doesn't work;
+        // `localeCompare` doesn't work.
         if (a[orderByQuery].toLowerCase() < b[orderByQuery].toLowerCase()) { return orderDirSort * -1; }
         if (a[orderByQuery].toLowerCase() > b[orderByQuery].toLowerCase()) { return orderDirSort * 1; }
       } else {

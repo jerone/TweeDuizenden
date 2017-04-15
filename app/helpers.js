@@ -8,7 +8,7 @@ function helpers() {
   return function (req, res, next) {
 
     /*
-     * Work-around to convert date to a locale date, independed of the timezone.
+     * Work-around to convert date to a locale date, independent of the timezone.
      * Keep in place until one of the following solutions is implemented:
      *  - https://github.com/joyent/node/pull/7719
      *  - https://github.com/andyearnshaw/Intl.js/issues/19
@@ -41,7 +41,7 @@ function helpers() {
       });
     }
 
-    // `originalUrl` usually is `req.header('referrer')` or `req.url`;
+    // `originalUrl` usually is `req.header('referrer')` or `req.url`.
     function redirect(status, path, query, originalUrl) {
       if (isNaN(status)) {
         originalUrl = query;

@@ -88,7 +88,6 @@
     <Content Include="public\images\cards.jpg" />
     <Content Include="README.md" />
     <Content Include="DEV.md" />
-    <Content Include="TODO.md" />
     <Content Include="views\error.jade" />
     <Content Include="views\game\edit.jade" />
     <Content Include="views\game\rules.jade" />

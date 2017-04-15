@@ -29,6 +29,7 @@ SET NODE_ENV=development && nodemon
 export NODE_ENV=development && nodemon
 node-inspector & nodemon --debug app.js
 export NODE_ENV=development && node-inspector & nodemon --debug app.js
+set NODE_ENV=development && nodemon --inspect app.js
 ```
 
 ---------------------
@@ -36,8 +37,7 @@ export NODE_ENV=development && node-inspector & nodemon --debug app.js
 MongoDB:
 
 ```
-cd C:\Program Files\MongoDB\Server\3.4\bin
-mongod --dbpath C:\test\mongodb\data
+"C:\Program Files\MongoDB\Server\3.4\bin\mongod" --dbpath C:\test\mongodb\data
 ```
 
 ---------------------
@@ -53,3 +53,4 @@ mongod --dbpath C:\test\mongodb\data
 * http://scotch.io/bar-talk/expressjs-4-0-new-features-and-upgrading-from-3-0
 * https://github.com/icflorescu/openshift-cartridge-mongodb
 * https://github.com/mongodb/node-mongodb-native
+* https://www.npmjs.org/package/node-inspector

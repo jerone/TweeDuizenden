@@ -5,7 +5,7 @@
   $(function () {
 
     /*
-     * Delete all;
+     * Delete all.
      */
     $('#g2000n-delete-all').submit(function (e) {
       e.preventDefault();
@@ -40,7 +40,7 @@
     });
 
     /*
-     * Delete per game;
+     * Delete per game.
      */
     $('.g2000n-delete').submit(function (e) {
       e.preventDefault();

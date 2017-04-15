@@ -6,13 +6,13 @@ var homeController = require('./../controllers/home'),
 
 module.exports = function routes(app) {
 
-  // Handle flash;
+  // Handle flash.
   app.use(function (req, res, next) {
     res.locals.flash = req.flash();
     next();
   });
 
-  // Handle i18n;
+  // Handle i18n.
   app.use(function (req, res, next) {
     if (req.query.lng) {
       res.redirect('back');
@@ -21,13 +21,13 @@ module.exports = function routes(app) {
     }
   });
 
-  // Handle home;
+  // Handle home.
   app.route('/').get(homeController.index);
 
-  // Handel debug;
+  // Handel debug.
   app.route('/debug').get(debugController.index);
 
-  // Handle game pages;
+  // Handle game pages.
   app.route('/game').get(gameController.index);
   app.route('/game/rules').get(gameController.rules);
   app.route('/game/add').get(gameController.add).post(gameController.add);
@@ -39,7 +39,7 @@ module.exports = function routes(app) {
   app.route('/game/delete/:name').delete(gameController.delete);
   app.route('/game/api').get(gameController.api);
 
-  // Handle 404;
+  // Handle 404.
   app.use(function (req, res/*, next*/) {
     console.log("404", req.url);
     res.status(404);
@@ -56,7 +56,7 @@ module.exports = function routes(app) {
     }
   });
 
-  // Handle 500;
+  // Handle 500.
   app.use(function (err, req, res/*, next*/) {
     res.status(err.status || 500).render('error', {
       title: '500: Internal Server Error',
