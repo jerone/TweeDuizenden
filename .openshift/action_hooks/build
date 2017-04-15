@@ -1,17 +1,26 @@
-﻿# Save the old HOME so we can reset after script.
-# Bower and bower as it is run buy grunt both want
-# to touch .local and .config files in $HOME which
-# isn't writeable on OSE.  So we set $HOME to
-# the REPO_DIR temporarily.
+﻿#!/usr/bin/env bash
+
+# Save the old HOME so we can reset after script.
+# Bower want to touch .local and .config files in
+# $HOME which isn't writeable on OSE. So we set
+# $HOME to the REPO_DIR temporarily.
+
+echo "INFO: HOME is $HOME"
 OLD_HOME=$HOME
 
+#########
+
+echo "INFO: Install Bower"
+npm install bower
+
 ##########
+
 echo "INFO: Running 'bower install'"
 cd $OPENSHIFT_REPO_DIR
 export HOME=$OPENSHIFT_REPO_DIR
-npm install bower
 bower install
 
 #########
+
 export HOME=$OLD_HOME
 echo "INFO: HOME is $HOME"
