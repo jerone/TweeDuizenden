@@ -49,10 +49,10 @@
     $('.alert').on('closed.bs.alert', function () {
       floatThead.floatThead('reflow');
     });
-    // Required for tablets when opening the keyboard.
-    $('input').on('focus blur', function () {
-      floatThead.floatThead('reflow');
-    });
+    //// Required for tablets when opening the keyboard.
+    //$('input').on('focus blur', function () {
+    //  floatThead.floatThead('reflow');
+    //});
 
     /*
      * Save.
