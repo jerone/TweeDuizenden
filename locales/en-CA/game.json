@@ -118,6 +118,16 @@
       "text": "Save",
       "loading": "Saving..."
     },
+    "saveAndClose": {
+      "title": "Save this game and close it.",
+      "text": "Save & close",
+      "loading": "Saving..."
+    },
+    "close": {
+      "title": "Close this game.",
+      "text": "Close",
+      "loading": "Close..."
+    },
     "header": {
       "title": "Start Game"
     },

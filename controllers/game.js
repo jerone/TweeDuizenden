@@ -1,51 +1,51 @@
 ﻿'use strict';
 
 var Game = require('../models/Game'),
-    GameTypes = require('../models/GameTypes'),
-    Flash = require('../models/Flash'),
-    PlayerEdit = require('../models/PlayerEdit'),
-    qs = require('querystring'),
-    moment = require('moment'),
-    url = require('url');
+  GameTypes = require('../models/GameTypes'),
+  Flash = require('../models/Flash'),
+  PlayerEdit = require('../models/PlayerEdit'),
+  qs = require('querystring'),
+  moment = require('moment'),
+  url = require('url');
 
 exports.index = function (req, res, next) {
   Game.find({}, function (err, games) {
     if (err) { return next(err); }
 
     var queryParams = qs.parse(url.parse(req.url).query),
-        orderByDefault = 'createdAt',
-        orderByQuery = decodeURIComponent(req.query.orderBy),
-        orderDirQuery = decodeURIComponent(req.query.orderDir),
-        orderDirSort = orderDirQuery !== 'desc' ? 1 : -1,
-        orderDirFn = function (orderBy) {
-          queryParams.orderBy = orderBy;
-          if ((!orderByQuery && orderBy === orderByDefault) || (orderByQuery === orderBy && orderDirQuery !== 'desc')) {
-            queryParams.orderDir = 'desc';
+      orderByDefault = 'createdAt',
+      orderByQuery = decodeURIComponent(req.query.orderBy),
+      orderDirQuery = decodeURIComponent(req.query.orderDir),
+      orderDirSort = orderDirQuery !== 'desc' ? 1 : -1,
+      orderDirFn = function (orderBy) {
+        queryParams.orderBy = orderBy;
+        if ((!orderByQuery && orderBy === orderByDefault) || (orderByQuery === orderBy && orderDirQuery !== 'desc')) {
+          queryParams.orderDir = 'desc';
+        } else {
+          queryParams.orderDir = 'asc';
+        }
+
+        var icon = '';
+        if ((!orderByQuery && orderBy === orderByDefault) || (orderByQuery === orderBy)) {
+          if (orderDirQuery !== 'desc') {
+            icon = 'glyphicon-arrow-down';
           } else {
-            queryParams.orderDir = 'asc';
+            icon = 'glyphicon-arrow-up';
           }
+        }
 
-          var icon = '';
-          if ((!orderByQuery && orderBy === orderByDefault) || (orderByQuery === orderBy)) {
-            if (orderDirQuery !== 'desc') {
-              icon = 'glyphicon-arrow-down';
-            } else {
-              icon = 'glyphicon-arrow-up';
-            }
-          }
-
-          return {
-            href: '/game?' + qs.stringify(queryParams),
-            icon: icon
-          };
-        },
-        orderDirs = {
-          _id: orderDirFn('_id'),
-          name: orderDirFn('name'),
-          type: orderDirFn('type'),
-          createdAt: orderDirFn('createdAt'),
-          updatedAt: orderDirFn('updatedAt')
+        return {
+          href: '/game?' + qs.stringify(queryParams),
+          icon: icon
         };
+      },
+      orderDirs = {
+        _id: orderDirFn('_id'),
+        name: orderDirFn('name'),
+        type: orderDirFn('type'),
+        createdAt: orderDirFn('createdAt'),
+        updatedAt: orderDirFn('updatedAt')
+      };
 
     games.sort(function (a, b) {
       if (typeof a[orderByQuery] === 'string') {
@@ -102,13 +102,13 @@ exports.add = function (req, res) {
       res.render('game/edit', req.body);
     } else {
       var isPlayerAction = 0,
-          timestamp = new Date(),
-          name = req.i18n.t('game:edit.name.default', {
-            date: res.locals.helpers.getLocaleDateString(timestamp),
-            time: res.locals.helpers.getLocaleTimeString(timestamp)
-          }),
-          type = GameTypes.getDefault().key,
-          players = [new PlayerEdit('', 0), new PlayerEdit('', 1)];
+        timestamp = new Date(),
+        name = req.i18n.t('game:edit.name.default', {
+          date: res.locals.helpers.getLocaleDateString(timestamp),
+          time: res.locals.helpers.getLocaleTimeString(timestamp)
+        }),
+        type = GameTypes.getDefault().key,
+        players = [new PlayerEdit('', 0), new PlayerEdit('', 1)];
 
       if (req.query.name) {
         name = decodeURIComponent(req.query.name);
@@ -160,7 +160,7 @@ exports.edit = function (req, res, next) {
 
       if (game) {
         if (req.body.name !== undefined && req.body.previousName !== undefined &&
-            req.body.name !== req.body.previousName) {
+          req.body.name !== req.body.previousName) {
           req.body.title = req.i18n.t('game:edit.title', { name: decodeURIComponent(req.params.name) });
           req.body.isAdd = false;
           req.body.isPlayerAction = 0;
@@ -201,11 +201,11 @@ exports.save = function (req, res, next) {
     res.redirect(307, req.header('referrer'));
   } else {
     var name = req.body.name && req.body.name.trim(),
-        previousName = req.body.previousName,
-        players = req.body.players.map(function (player) {
-          player.name = player.name.trim();
-          return player;
-        }).filter(function (player) { return player.name; });
+      previousName = req.body.previousName,
+      players = req.body.players.map(function (player) {
+        player.name = player.name.trim();
+        return player;
+      }).filter(function (player) { return player.name; });
 
     if (name && players.length) {
       if (previousName) {
@@ -320,13 +320,13 @@ exports.view = function (req, res, next) {
           navbarNotFixed: true,
           created: {
             datetime: res.locals.helpers.getLocaleDateString(game.createdAt) + ' ' +
-                      res.locals.helpers.getLocaleTimeString(game.createdAt),
+            res.locals.helpers.getLocaleTimeString(game.createdAt),
             timestamp: game.createdAt.getTime(),
             ago: moment(game.createdAt).locale(req.language).fromNow()
           },
           updated: {
             datetime: res.locals.helpers.getLocaleDateString(game.updatedAt) + ' ' +
-                      res.locals.helpers.getLocaleTimeString(game.updatedAt),
+            res.locals.helpers.getLocaleTimeString(game.updatedAt),
             timestamp: game.updatedAt.getTime(),
             ago: moment(game.updatedAt).locale(req.language).fromNow()
           },
@@ -350,7 +350,9 @@ exports.view = function (req, res, next) {
 };
 
 exports.update = function (req, res, next) {
-  if (req.body.clone !== undefined) {
+  if (req.body.close !== undefined) {
+    res.redirect('/game');
+  } else if (req.body.clone !== undefined) {
     if (req.body.name) {
       Game.findOne({ name: req.body.name }, function (err, game) {
         if (err) { return next(err); }
@@ -375,8 +377,7 @@ exports.update = function (req, res, next) {
   } else {
     if (req.body.name) {
       Game.findOne({ name: req.body.name }, function (err, game) {
-        if (req.xhr && err) { return res.send({ error: err }); }
-        if (err) { return next(err); }
+        if (err) { return req.xhr ? res.send({ error: err }) : next(err); }
 
         if (game) {
           game.wild = GameTypes.getByKey(game.type).wild ? req.body.wild : [];
@@ -388,27 +389,29 @@ exports.update = function (req, res, next) {
           game.score = score;
 
           game.save(function (err) {
-            if (req.xhr && err) {
-              res.send({ error: err });
-            } else if (req.xhr) {
+            if (err) { return req.xhr ? res.send({ error: err }) : next(err); }
+
+            if (req.xhr) {
               res.send({
                 error: false,
                 updated: {
                   datetime: res.locals.helpers.getLocaleDateString(game.updatedAt) + ' ' +
-                            res.locals.helpers.getLocaleTimeString(game.updatedAt),
+                  res.locals.helpers.getLocaleTimeString(game.updatedAt),
                   timestamp: game.updatedAt.getTime(),
                   ago: moment(game.updatedAt).locale(req.language).fromNow()
                 }
               });
-            } else if (err) {
-              return next(err);
             } else {
-              req.flash(Flash.info, {
-                message: req.i18n.t('game:view.info.saved'),
-                fadeout: true
-              });
+              if (req.body.saveAndClose !== undefined) {
+                res.redirect('/game');
+              } else {
+                req.flash(Flash.info, {
+                  message: req.i18n.t('game:view.info.saved'),
+                  fadeout: true
+                });
 
-              res.locals.helpers.redirect('/game/view/' + encodeURIComponent(encodeURIComponent(game.name)), {}, req.header('referrer'));
+                res.locals.helpers.redirect('/game/view/' + encodeURIComponent(encodeURIComponent(game.name)), {}, req.header('referrer'));
+              }
             }
           });
         } else {

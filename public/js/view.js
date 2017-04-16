@@ -58,12 +58,14 @@
      * Save.
      */
     $('#g2000n-update').submit(function () {
-      var form = $(this),
-          action = form.attr('action'),
-          params = form.serialize();
+      var form = $(this);
 
-      if (form.data('cancel') !== true) {
-        form.data('cancel', false);
+      // Stop overriding form submit when `data-no-xhr` has been set.
+      if (form.data('no-xhr') !== true) {
+        form.data('no-xhr', false);
+
+        var action = form.attr('action'),
+            params = form.serialize();
 
         disableButtons(form.find('.g2000n-save'));
 
@@ -85,10 +87,11 @@
         return false;
       }
     });
-    $('.g2000n-clone').click(function () {
-      $(this).parents('form').first().data('cancel', true);
+    // Disable xhr form submit.
+    $('.g2000n-no-xhr').click(function () {
+      $(this).parents('form').first().data('no-xhr', true);
     });
-    // Auto save;
+    // Auto save.
     window.setInterval(function () {
       $('#g2000n-update').submit();
     }, 5 * 60 * 1000);

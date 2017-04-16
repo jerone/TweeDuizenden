@@ -145,6 +145,16 @@
       "text": "Opslaan",
       "loading": "Opslaan..."
     },
+    "saveAndClose": {
+      "title": "Dit spel bewaren en sluiten.",
+      "text": "Opslaan & sluiten",
+      "loading": "Opslaan..."
+    },
+    "close": {
+      "title": "Spel sluiten.",
+      "text": "Sluiten",
+      "loading": "Sluiten..."
+    },
     "header": {
       "title": "Start spel"
     },

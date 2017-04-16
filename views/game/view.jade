@@ -75,7 +75,7 @@ block content
                       data-player-index=index)
           - }
 
-    p.text-right
+    .text-right
       button.btn.btn-warning.g2000n-standings.hidden(type='button',
                                                      name='standings',
                                                      data-toggle='modal',
@@ -84,17 +84,38 @@ block content
         span.glyphicon.glyphicon-stats
         span= t('game:view.standings.text')
       | &nbsp;
-      button.btn.btn-success.g2000n-clone(type='submit',
-                                          name='clone',
-                                          title=t('game:view.clone.title'))
+      button.btn.btn-success.g2000n-clone.g2000n-no-xhr(type='submit',
+                                                        name='clone',
+                                                        title=t('game:view.clone.title'))
         span.glyphicon.glyphicon-repeat
         span= t('game:view.clone.text')
       | &nbsp;
-      button.btn.btn-primary.g2000n-save(type='submit',
-                                         title=t('game:view.save.title'),
-                                         data-loading-text=t('game:view.save.loading'))
-        span.glyphicon.glyphicon-floppy-disk
-        span= t('game:view.save.text')
+      .btn-group.dropup
+        button.btn.btn-danger.g2000n-save.g2000n-no-xhr(type='submit',
+                                                         name='saveAndClose',
+                                                         title=t('game:view.saveAndClose.title'),
+                                                         data-loading-text=t('game:view.saveAndClose.loading'))
+          span.glyphicon.glyphicon-floppy-disk
+          span= t('game:view.saveAndClose.text')
+        button.btn.btn-danger.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+          span.caret
+          span.sr-only Toggle Dropdown
+        ul.dropdown-menu.dropdown-menu-right
+          li
+            button.btn.btn-link.g2000n-save(type='submit',
+                                            name='save',
+                                            title=t('game:view.save.title'),
+                                            data-loading-text=t('game:view.save.loading'))
+              span.glyphicon.glyphicon-floppy-disk
+              span= t('game:view.save.text')
+          li
+            button.btn.btn-link.g2000n-no-xhr(type='submit',
+                                              name='close',
+                                              title=t('game:view.close.title'),
+                                              data-loading-text=t('game:view.close.loading'))
+              span.glyphicon.glyphicon-remove-sign
+              span= t('game:view.close.text')
+
 
   #standingsModal.modal.fade(tabindex='-1',
                              role='dialog',
