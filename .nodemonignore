@@ -1,7 +1,8 @@
 /node_modules/*
+/locales/*
 /public/*
 /views/*
 /.git/*
 /.gitignore
 *.md
-*.editorconfig
+.editorconfig
