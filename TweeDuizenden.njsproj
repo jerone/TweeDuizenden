@@ -35,6 +35,7 @@
     <Compile Include="app\methodOverride.js" />
     <Compile Include="app\routes.js" />
     <Compile Include="app\routesStatic.js" />
+    <Compile Include="app\securityHeaders.js" />
     <Compile Include="config\secrets.js" />
     <Compile Include="controllers\debug.js" />
     <Compile Include="controllers\game.js" />
@@ -45,8 +46,10 @@
     <Compile Include="models\GameTypes.js" />
     <Compile Include="models\PlayerEdit.js" />
     <Compile Include="public\js\common.js" />
-    <Compile Include="public\js\index.js" />
-    <Compile Include="public\js\view.js" />
+    <Compile Include="public\js\game-edit.js" />
+    <Compile Include="public\js\google-analytics.js" />
+    <Compile Include="public\js\game-index.js" />
+    <Compile Include="public\js\game-view.js" />
     <Content Include=".editorconfig" />
     <Content Include=".gitignore" />
     <Content Include=".htaccess" />
@@ -54,6 +57,7 @@
     <Content Include=".nodemonignore" />
     <Content Include=".openshift\action_hooks\build" />
     <Content Include=".travis.yml" />
+    <Content Include="app\nonce.js" />
     <Content Include="bower.json" />
     <Content Include="CONTRIBUTING.md" />
     <Content Include="LICENSE" />
@@ -99,7 +103,6 @@
     <Content Include="views\_partials\flash.jade" />
     <Content Include="views\_partials\footer.jade" />
     <Content Include="views\_partials\navbar.jade" />
-    <Content Include="views\_partials\tracking.jade" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include=".openshift\" />

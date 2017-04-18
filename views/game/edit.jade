@@ -1,5 +1,9 @@
 extends ../_layout
 
+if isAdd && isPlayerAction!==2
+  block scripts
+    script(src='/js/game-edit.js')
+
 block content
   .page-header
     if isAdd
@@ -11,10 +15,9 @@ block content
 
   form.form-horizontal(role='form', method='POST', action='/game/save')
     //- The default submit button of a form is the first - not display:none; - submit button;
-    button(name='submitted',
-           type='submit',
-           value='submitted',
-           style='position: fixed; left: -1000px; top: -1000px')= t('game:edit.update.text')
+    button.out-of-screen(name='submitted',
+                         type='submit',
+                         value='submitted')= t('game:edit.update.text')
 
     if !isAdd
       input(name='previousName' type='hidden', value=previousName)
@@ -117,22 +120,3 @@ block content
                                  title=t('game:edit.update.title'))
             span.glyphicon.glyphicon-floppy-disk
             span= t('game:edit.update.text')
-
-  if isAdd && isPlayerAction!==2
-    script.
-      $(function(){
-          $(".placeholder").each(function(){
-              var that = $(this);
-              that.data("placeholder", that.val());
-          }).focus(function(){
-              var that = $(this);
-              if(that.val() === that.data("placeholder")){
-                  that.val('');
-              }
-          }).blur(function(){
-              var that = $(this);
-              if(that.val() === ""){
-                  that.val(that.data("placeholder"));
-              }
-          }).triggerHandler("blur");
-      });

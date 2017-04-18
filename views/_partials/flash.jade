@@ -1,5 +1,5 @@
 mixin fadeout(selector)
-  script.
+  script(nonce=nonce).
       $(function(){
           window.setTimeout(function(){
               $(".#{selector}").alert("close");

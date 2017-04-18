@@ -2,23 +2,25 @@
 
 // Require dependency modules.
 var bodyParser = require('body-parser'),
-    errorHandler = require('errorhandler'),
-    express = require('express'),
-    flash = require('connect-flash'),
-    logger = require('morgan'),
-    mongoose = require('mongoose'),
-    session = require('express-session');
+  errorHandler = require('errorhandler'),
+  express = require('express'),
+  flash = require('connect-flash'),
+  logger = require('morgan'),
+  mongoose = require('mongoose'),
+  session = require('express-session');
 
 // Require core modules.
 var path = require('path');
 
 // Require file modules.
 var secrets = require('./config/secrets'),
-    helpers = require('./app/helpers.js'),
-    i18n = require('./app/i18n.js'),
-    methodOverride = require('./app/methodOverride.js'),
-    routesStatic = require('./app/routesStatic.js'),
-    routes = require('./app/routes.js');
+  helpers = require('./app/helpers.js'),
+  nonce = require('./app/nonce.js'),
+  securityHeaders = require('./app/securityHeaders.js'),
+  i18n = require('./app/i18n.js'),
+  methodOverride = require('./app/methodOverride.js'),
+  routesStatic = require('./app/routesStatic.js'),
+  routes = require('./app/routes.js');
 
 // Init server.
 var app = express();
@@ -42,6 +44,8 @@ if (app.get('env') === 'development') {
   app.use(logger('dev'));
   app.use(errorHandler());
 }
+app.use(nonce());
+app.use(securityHeaders());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({ resave: true, saveUninitialized: true, secret: secrets.sessionSecret }));

@@ -1,5 +1,8 @@
 ﻿extends ../_layout
 
+block scripts
+  script(src='/js/game-index.js')
+
 block content
   .page-header
     h1= t('game:index.header.title')
@@ -88,6 +91,3 @@ block content
       tr
         td(colspan=admin ? 7 : 6)
           p.text-danger= t('game:index.table.empty')
-
-block scripts
-  script(src='/js/index.js')

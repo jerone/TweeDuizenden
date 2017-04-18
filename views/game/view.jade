@@ -1,5 +1,12 @@
 extends ../_layout
 
+block scripts
+  script(nonce=nonce).
+    var gameType = !{JSON.stringify(type)};
+  script(src='/vendor/jquery.floatThead/jquery.floatThead.min.js')
+  script(src='/vendor/moment/moment-with-locales.min.js')
+  script(src='/js/game-view.js')
+
 block content
   form#g2000n-update(role='form', method='POST', action='/game/update', novalidate)
 
@@ -136,11 +143,3 @@ block content
           button.btn.btn-default(type='button',
                                  data-dismiss='modal',
                                  title=t('game:view.standings.modal.close.title'))= t('game:view.standings.modal.close.text')
-
-
-block scripts
-  script.
-    var gameType = !{JSON.stringify(type)};
-  script(src='/vendor/jquery.floatThead/jquery.floatThead.min.js')
-  script(src='/vendor/moment/moment-with-locales.min.js')
-  script(src='/js/view.js')
