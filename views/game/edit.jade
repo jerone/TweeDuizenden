@@ -1,9 +1,5 @@
 extends ../_layout
 
-if isAdd && isPlayerAction!==2
-  block scripts
-    script(src='/js/game-edit.js')
-
 block content
   .page-header
     if isAdd
@@ -25,10 +21,10 @@ block content
     .form-group
       label.col-sm-2.control-label(for='name')= t('game:edit.name.label')
       .col-sm-8
-        input.form-control.placeholder#name(name='name',
-                                            type='text',
-                                            value=name,
-                                            autofocus=isPlayerAction===0)
+        input.form-control#name(name='name',
+                                type='text',
+                                value=name,
+                                autofocus=isPlayerAction===0)
 
     .form-group
       label.col-sm-2.control-label(for='type')= t('game:edit.type.label')

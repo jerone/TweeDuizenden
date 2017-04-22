@@ -46,7 +46,6 @@
     <Compile Include="models\GameTypes.js" />
     <Compile Include="models\PlayerEdit.js" />
     <Compile Include="public\js\common.js" />
-    <Compile Include="public\js\game-edit.js" />
     <Compile Include="public\js\google-analytics.js" />
     <Compile Include="public\js\game-index.js" />
     <Compile Include="public\js\game-view.js" />
