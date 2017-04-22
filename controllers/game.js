@@ -104,8 +104,8 @@ exports.add = function (req, res) {
       var isPlayerAction = 0,
         timestamp = new Date(),
         name = req.i18n.t('game:edit.name.default', {
-          date: res.locals.helpers.getLocaleDateString(timestamp),
-          time: res.locals.helpers.getLocaleTimeString(timestamp)
+          date: encodeURIComponent(encodeURIComponent(res.locals.helpers.getLocaleDateString(timestamp))),
+          time: encodeURIComponent(encodeURIComponent(res.locals.helpers.getLocaleTimeString(timestamp)))
         }),
         type = GameTypes.getDefault().key,
         players = [new PlayerEdit('', 0), new PlayerEdit('', 1)];
@@ -129,7 +129,7 @@ exports.add = function (req, res) {
         isAdd: true,
         isPlayerAction: isPlayerAction,
         previousName: '',
-        name: name,
+        name: decodeURIComponent(decodeURIComponent(name)),
         type: type,
         gameTypes: GameTypes.toI18n(req.i18n),
         players: players
@@ -161,7 +161,7 @@ exports.edit = function (req, res, next) {
       if (game) {
         if (req.body.name !== undefined && req.body.previousName !== undefined &&
           req.body.name !== req.body.previousName) {
-          req.body.title = req.i18n.t('game:edit.title', { name: decodeURIComponent(req.params.name) });
+          req.body.title = req.i18n.t('game:edit.title', { name: req.params.name });
           req.body.isAdd = false;
           req.body.isPlayerAction = 0;
           req.body.gameTypes = GameTypes.toI18n(req.i18n);

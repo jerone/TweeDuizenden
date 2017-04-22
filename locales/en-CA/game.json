@@ -49,7 +49,6 @@
     "header": {
       "title": "Rules"
     },
-    "text__TODO": [],
     "add": {
       "text": "Start a new game &raquo;"
     },
@@ -69,7 +68,7 @@
     }
   },
   "edit": {
-    "title": "Edit Game __name__",
+    "title": "Edit Game {{name}}",
     "header": {
       "title": "Edit Game"
     },
@@ -80,7 +79,7 @@
     },
     "name": {
       "label": "Name",
-      "default": "Game __date__ __time__"
+      "default": "Game {{date}} {{time}}"
     },
     "type": {
       "label": "Type"
@@ -103,7 +102,7 @@
     }
   },
   "view": {
-    "title": "Start Game __name__",
+    "title": "Start Game {{name}}",
     "info": {
       "saved": "Game is saved."
     },
@@ -153,6 +152,6 @@
     }
   },
   "open": {
-    "title": "Open Game __name__"
+    "title": "Open Game {{name}}"
   }
 }

@@ -96,7 +96,7 @@
     }
   },
   "edit": {
-    "title": "Spel __name__ bewerken",
+    "title": "Spel {{name}} bewerken",
     "header": {
       "title": "Spel bewerken"
     },
@@ -107,7 +107,7 @@
     },
     "name": {
       "label": "Naam",
-      "default": "Spel __date__ __time__"
+      "default": "Spel {{date}} {{time}}"
     },
     "type": {
       "label": "Spelsoort"
@@ -130,7 +130,7 @@
     }
   },
   "view": {
-    "title": "Start spel __name__",
+    "title": "Start spel {{name}}",
     "info": {
       "saved": "Spel is opgeslagen."
     },
@@ -180,6 +180,6 @@
     }
   },
   "open": {
-    "title": "Open spel __name__"
+    "title": "Open spel {{name}}"
   }
 }
