@@ -45,7 +45,15 @@
      * Use this until `position:sticky` is supported in tables.
      * See http://caniuse.com/#feat=css-sticky
      */
-    var floatThead = $('table.table').floatThead();
+    var floatThead = $('table.table').floatThead({
+      position: 'absolute',
+      support: {
+        bootstrap: true,
+        datatables: false,
+        jqueryUI: false,
+        perfectScrollbar: false
+      }
+    });
     $('.alert').on('closed.bs.alert', function () {
       floatThead.floatThead('reflow');
     });
