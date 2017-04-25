@@ -12,6 +12,7 @@ module.exports = function routesStatic(app) {
 
   app.use(favicon(path.join('.', 'public', 'favicon.ico'), staticOptions));
 
+  // Needs to be before Express static on public folder.s
   app.use(less(path.join('.', 'public')));
 
   app.use(express.static(path.join('.', 'public'), staticOptions));
