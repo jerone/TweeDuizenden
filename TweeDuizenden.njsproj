@@ -85,7 +85,6 @@
     <Content Include="locales\nl-NL\_footer.json" />
     <Content Include="locales\nl-NL\_navbar.json" />
     <Content Include="package.json" />
-    <Content Include="public\css\styles.css" />
     <Content Include="public\css\styles.less" />
     <Content Include="public\favicon.ico" />
     <Content Include="public\images\cards.jpg" />

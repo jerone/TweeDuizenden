@@ -1,8 +1,9 @@
 ﻿'use strict';
 
 var express = require('express'),
-    less = require('less-middleware'),
-    favicon = require('serve-favicon');
+  less = require('less-middleware'),
+  uglify = require("uglifyjs-middleware"),
+  favicon = require('serve-favicon');
 
 var path = require('path');
 
@@ -12,8 +13,12 @@ module.exports = function routesStatic(app) {
 
   app.use(favicon(path.join('.', 'public', 'favicon.ico'), staticOptions));
 
-  // Needs to be before Express static on public folder.s
+  // Needs to be before Express static on public folder.
   app.use(less(path.join('.', 'public')));
+
+  app.use('/js', uglify(path.join('.', 'public', 'js'), {
+    generateSourceMap: app.get('env') === 'development'
+  }));
 
   app.use(express.static(path.join('.', 'public'), staticOptions));
 
