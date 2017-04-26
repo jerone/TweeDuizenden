@@ -1,8 +1,29 @@
 'use strict';
 
 var qs = require('querystring'),
-    url = require('url');
-require('intl');
+  url = require('url');
+
+polyfillIntl();
+
+function polyfillIntl() {
+  var areIntlLocalesSupported = require('intl-locales-supported');
+
+  var localesMyAppSupports = ['en-US', 'en-CA', 'nl-NL'];
+
+  if (global.Intl) {
+    // Determine if the built-in `Intl` has the locale data we need.
+    if (!areIntlLocalesSupported(localesMyAppSupports)) {
+      // `Intl` exists, but it doesn't have the data we need, so load the
+      // polyfill and patch the constructors we need with the polyfill's.
+      var IntlPolyfill = require('intl');
+      Intl.NumberFormat = IntlPolyfill.NumberFormat;
+      Intl.DateTimeFormat = IntlPolyfill.DateTimeFormat;
+    }
+  } else {
+    // No `Intl`, so use and load the polyfill.
+    global.Intl = require('intl');
+  }
+}
 
 function helpers() {
   return function (req, res, next) {
@@ -15,8 +36,8 @@ function helpers() {
      */
     var getLocaleString = function (datetime) {
       var date = new Date(datetime),
-          gmt = date.getTimezoneOffset() * 60000,
-          timezone = 0;
+        gmt = date.getTimezoneOffset() * 60000,
+        timezone = 0;
       switch (req.language) {
         case 'nl-NL':
           { timezone = 120; }
@@ -25,9 +46,11 @@ function helpers() {
       return new Date(date.getTime() + gmt + timezone);
     };
     function getLocaleDateString(datetime) {
+      console.log(" -------- getLocaleDateString -------- ", req.language);
       return getLocaleString(datetime).toLocaleDateString(req.language);
     }
     function getLocaleTimeString(datetime) {
+      console.log(" -------- getLocaleTimeString -------- ", req.language);
       return getLocaleString(datetime).toLocaleTimeString(req.language);
     }
 
@@ -61,9 +84,9 @@ function helpers() {
     }
 
     var helpers = {
-      getLocaleDateString : getLocaleDateString,
-      getLocaleTimeString : getLocaleTimeString,
-      isActiveMenu : isActiveMenu,
+      getLocaleDateString: getLocaleDateString,
+      getLocaleTimeString: getLocaleTimeString,
+      isActiveMenu: isActiveMenu,
       redirect: redirect
     };
     if (res) {

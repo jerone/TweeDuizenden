@@ -30,6 +30,7 @@ export NODE_ENV=development && nodemon
 node-inspector & nodemon --debug app.js
 export NODE_ENV=development && node-inspector & nodemon --debug app.js
 set NODE_ENV=development && nodemon --inspect app.js
+nodemon --inspect app.js
 ```
 
 ---------------------
