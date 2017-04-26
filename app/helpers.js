@@ -46,12 +46,18 @@ function helpers() {
       return new Date(date.getTime() + gmt + timezone);
     };
     function getLocaleDateString(datetime) {
-      console.log(" -------- getLocaleDateString -------- ", req.language);
-      return getLocaleString(datetime).toLocaleDateString(req.language);
+      var a = getLocaleString(datetime);
+      var b = a.toLocaleDateString(req.language);
+      console.log("getLocaleDateString", req.language, a, b);
+      return b;
+      //return getLocaleString(datetime).toLocaleDateString(req.language);
     }
     function getLocaleTimeString(datetime) {
-      console.log(" -------- getLocaleTimeString -------- ", req.language);
-      return getLocaleString(datetime).toLocaleTimeString(req.language);
+      var a = getLocaleString(datetime);
+      var b = a.toLocaleTimeString(req.language);
+      console.log("getLocaleTimeString", req.language, a, b);
+      return b;
+      //return getLocaleString(datetime).toLocaleTimeString(req.language);
     }
 
     function isActiveMenu() {
