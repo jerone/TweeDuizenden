@@ -47,15 +47,19 @@ function helpers() {
     };
     function getLocaleDateString(datetime) {
       var a = getLocaleString(datetime);
-      var b = a.toLocaleDateString(req.language);
-      console.log("getLocaleDateString", req.language, a, b);
+      var b = new Intl.DateTimeFormat(req.language, { year: 'numeric', month: 'numeric', day: 'numeric' }).format(a);
+      //var a = getLocaleString(datetime);
+      //var b = a.toLocaleDateString(req.language);
+      console.log('getLocaleDateString', req.language, a, b);
       return b;
       //return getLocaleString(datetime).toLocaleDateString(req.language);
     }
     function getLocaleTimeString(datetime) {
       var a = getLocaleString(datetime);
-      var b = a.toLocaleTimeString(req.language);
-      console.log("getLocaleTimeString", req.language, a, b);
+      var b = new Intl.DateTimeFormat(req.language, { hour: 'numeric', minute: 'numeric' }).format(a);
+      //var a = getLocaleString(datetime);
+      //var b = a.toLocaleTimeString(req.language);
+      console.log('getLocaleTimeString', req.language, a, b);
       return b;
       //return getLocaleString(datetime).toLocaleTimeString(req.language);
     }
