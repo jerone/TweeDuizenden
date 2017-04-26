@@ -7,7 +7,8 @@ var bodyParser = require('body-parser'),
   flash = require('connect-flash'),
   logger = require('morgan'),
   mongoose = require('mongoose'),
-  session = require('express-session');
+  session = require('express-session'),
+  MongoStore = require('connect-mongo')(session);
 
 // Require core modules.
 var path = require('path');
@@ -48,7 +49,7 @@ app.use(nonce());
 app.use(securityHeaders());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(session({ resave: true, saveUninitialized: true, secret: secrets.sessionSecret }));
+app.use(session({ resave: true, saveUninitialized: true, secret: secrets.sessionSecret, store: new MongoStore({ mongooseConnection: mongoose.connection }) }));
 app.use(methodOverride());
 app.use(flash());
 app.use(i18n(app));
