@@ -34,34 +34,37 @@ function helpers() {
      *  - https://github.com/joyent/node/pull/7719
      *  - https://github.com/andyearnshaw/Intl.js/issues/19
      */
-    var getLocaleString = function (datetime) {
+    var getLocaleDateTimeWithTimeZone = function (datetime) {
       var date = new Date(datetime),
         gmt = date.getTimezoneOffset() * 60000,
         timezone = 0;
       switch (req.language) {
         case 'nl-NL':
-          { timezone = 120; }
+          {
+            timezone = 2 * 60;
+            break;
+          }
+        case 'en-CA':
+          {
+            timezone = -4 * 60;
+            break;
+          }
+        case 'en-US':
+        default: {
+          // Use UTC time.
+          break;
+        }
       }
       timezone *= 60000;
       return new Date(date.getTime() + gmt + timezone);
     };
     function getLocaleDateString(datetime) {
-      var a = getLocaleString(datetime);
-      var b = new Intl.DateTimeFormat(req.language, { year: 'numeric', month: 'numeric', day: 'numeric' }).format(a);
-      //var a = getLocaleString(datetime);
-      //var b = a.toLocaleDateString(req.language);
-      console.log('getLocaleDateString', req.language, a, b);
-      return b;
-      //return getLocaleString(datetime).toLocaleDateString(req.language);
+      var dateTimeWithTimeZone = getLocaleDateTimeWithTimeZone(datetime);
+      return new Intl.DateTimeFormat(req.language, { year: 'numeric', month: 'numeric', day: 'numeric' }).format(dateTimeWithTimeZone);
     }
     function getLocaleTimeString(datetime) {
-      var a = getLocaleString(datetime);
-      var b = new Intl.DateTimeFormat(req.language, { hour: 'numeric', minute: 'numeric' }).format(a);
-      //var a = getLocaleString(datetime);
-      //var b = a.toLocaleTimeString(req.language);
-      console.log('getLocaleTimeString', req.language, a, b);
-      return b;
-      //return getLocaleString(datetime).toLocaleTimeString(req.language);
+      var dateTimeWithTimeZone = getLocaleDateTimeWithTimeZone(datetime);
+      return new Intl.DateTimeFormat(req.language, { hour: 'numeric', minute: 'numeric' }).format(dateTimeWithTimeZone);
     }
 
     function isActiveMenu() {
