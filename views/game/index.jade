@@ -32,20 +32,30 @@ block content
       tr
         if admin
           th
-            a(href=orderDir._id.href)= t('game:index.table.id')
-              span.glyphicon(class=orderDir._id.icon)
+            a(href=orderDir._id.href)
+              span= t('game:index.table.id')
+              if orderDir._id.icon
+                span.glyphicon(class=orderDir._id.icon)
         th
-          a(href=orderDir.name.href)= t('game:index.table.name')
-            span.glyphicon(class=orderDir.name.icon)
+          a(href=orderDir.name.href)
+            span= t('game:index.table.name')
+            if orderDir.name.icon
+              span.glyphicon(class=orderDir.name.icon)
         th
-          a(href=orderDir.type.href)= t('game:index.table.type')
-            span.glyphicon(class=orderDir.type.icon)
+          a(href=orderDir.type.href)
+            span= t('game:index.table.type')
+            if orderDir.type.icon
+              span.glyphicon(class=orderDir.type.icon)
         th
-          a(href=orderDir.createdAt.href)= t('game:index.table.created')
-            span.glyphicon(class=orderDir.createdAt.icon)
+          a(href=orderDir.createdAt.href)
+            span= t('game:index.table.created')
+            if orderDir.createdAt.icon
+              span.glyphicon(class=orderDir.createdAt.icon)
         th
-          a(href=orderDir.updatedAt.href)= t('game:index.table.updated')
-            span.glyphicon(class=orderDir.updatedAt.icon)
+          a(href=orderDir.updatedAt.href)
+            span= t('game:index.table.updated')
+            if orderDir.updatedAt.icon
+              span.glyphicon(class=orderDir.updatedAt.icon)
         th= t('game:index.table.players')
         th= t('game:index.table.actions')
 
@@ -65,6 +75,7 @@ block content
               a.btn.btn-success(href='/game/view/'+encodeURIComponent(encodeURIComponent(game.name)), title=t('game:index.table.open.title'))
                 span.glyphicon.glyphicon-folder-open
                 span.hidden-xs= t('game:index.table.open.text')
+              | &nbsp;
               form.inline-form(method='POST',
                                action='/game/clone/'+encodeURIComponent(encodeURIComponent(game.name)),
                                enctype='application/x-www-form-urlencoded')
