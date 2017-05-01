@@ -138,6 +138,30 @@ exports.add = function (req, res) {
   }
 };
 
+exports.clone = function (req, res, next) {
+  if (req.params.name) {
+    Game.findOne({ name: decodeURIComponent(req.params.name) }, function (err, game) {
+      if (err) { return next(err); }
+
+      if (game) {
+        res.locals.helpers.redirect('/game/add', {
+          name: encodeURIComponent(game.name),
+          type: encodeURIComponent(game.type),
+          players: game.players.map(function (player) { return encodeURIComponent(player); }).join(',')
+        });
+      } else {
+        req.flash(Flash.error, {
+          message: req.i18n.t('game:common.error.missing')
+        });
+
+        res.redirect('/game/add');
+      }
+    });
+  } else {
+    res.redirect('/game/add');
+  }
+}
+
 exports.edit = function (req, res, next) {
   if (req.body.addPlayer !== undefined) {
     req.body.title = req.i18n.t('game:edit.title', { name: req.params.name });

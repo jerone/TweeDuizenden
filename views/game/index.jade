@@ -65,6 +65,11 @@ block content
               a.btn.btn-success(href='/game/view/'+encodeURIComponent(encodeURIComponent(game.name)), title=t('game:index.table.open.title'))
                 span.glyphicon.glyphicon-folder-open
                 span.hidden-xs= t('game:index.table.open.text')
+              form.inline-form(method='POST',
+                               action='/game/clone/'+encodeURIComponent(encodeURIComponent(game.name)),
+                               enctype='application/x-www-form-urlencoded')
+                button.btn.btn-info(type='submit', title=t('game:index.table.clone.title'))
+                  span.glyphicon.glyphicon-repeat
               if admin
                 | &nbsp;
                 form.inline-form(method='POST',

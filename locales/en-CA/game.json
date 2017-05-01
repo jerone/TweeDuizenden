@@ -41,6 +41,9 @@
       },
       "edit": {
         "title": "Edit this game."
+      },
+      "clone": {
+        "title": "Clone this game."
       }
     }
   },

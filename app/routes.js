@@ -37,6 +37,7 @@ module.exports = function routes(app) {
   app.route('/game/update').post(gameController.update);
   app.route('/game/delete').delete(gameController.delete);
   app.route('/game/delete/:name').delete(gameController.delete);
+  app.route('/game/clone/:name').post(gameController.clone);
   app.route('/game/api').get(gameController.api);
 
   // Handle 404.

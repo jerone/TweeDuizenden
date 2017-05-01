@@ -41,6 +41,9 @@
       },
       "edit": {
         "title": "Dit spel bewerken."
+      },
+      "clone": {
+        "title": "Kloon dit spel."
       }
     }
   },
