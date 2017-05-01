@@ -29,7 +29,7 @@ module.exports = function i18n(app) {
       saveMissing: app.get('env') === 'development',
       backend: {
         loadPath: path.join(__dirname, '/../locales/{{lng}}/{{ns}}.json'),
-        addPath: path.join(__dirname, '/../locales/{{lng}}/{{ns}}.missing.json')
+        addPath: path.join(__dirname, '/../locales/{{lng}}/{{ns}}.json')
       },
       detection: {
         caches: ['cookie'],
