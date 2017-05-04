@@ -7,10 +7,12 @@ html(lang=language)
     meta(name='description', content=t('app:description'))
     meta(name='author', content='https://github.com/jerone')
     title !{title} | #{t('app:title')}
-    link(href='/css/styles.min.css', rel='stylesheet')
-    script(src='/vendor/jquery/jquery.min.js')
-    script(src='/vendor/bootstrap/js/bootstrap.min.js')
-    script(src='/js/common.min.js')
+    link(href='/vendor/bootstrap/css/bootstrap.min.css?v=#{deployVersion}', rel='stylesheet')
+    link(href='/vendor/bootstrap/css/bootstrap-theme.min.css?v=#{deployVersion}', rel='stylesheet')
+    link(href='/css/styles.min.css?v=#{deployVersion}', rel='stylesheet')
+    script(src='/vendor/jquery/jquery.min.js?v=#{deployVersion}')
+    script(src='/vendor/bootstrap/js/bootstrap.min.js?v=#{deployVersion}')
+    script(src='/js/common.min.js?v=#{deployVersion}')
     block scripts
   body
     include _partials/navbar
@@ -21,5 +23,5 @@ html(lang=language)
 
     include _partials/footer
 
-    script(src='/js/google-analytics.min.js')
+    script(src='/js/google-analytics.min.js?v=#{deployVersion}')
 

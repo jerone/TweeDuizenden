@@ -7,9 +7,9 @@ var express = require('express'),
 
 var path = require('path');
 
-var staticOptions = { maxAge: '7d' };
-
 module.exports = function routesStatic(app) {
+
+  var staticOptions = { maxAge: app.get('env') === 'development' ? 0 : '30d' };
 
   app.use(favicon(path.join('.', 'public', 'favicon.ico'), staticOptions));
 

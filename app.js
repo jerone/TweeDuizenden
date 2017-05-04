@@ -33,6 +33,7 @@ app.set('env', (process.env.NODE_ENV || 'development').trim());  // Fix issue wi
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.locals.pretty = app.get('env') === 'development';
+app.locals.deployVersion = (new Date).getTime();
 
 // Database.
 mongoose.connect(secrets.db);
