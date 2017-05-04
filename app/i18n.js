@@ -20,7 +20,7 @@ module.exports = function i18n(app) {
       }
     })
     .init({
-      debug: app.get('env') === 'development',
+      //debug: app.get('env') === 'development',
       lngs: ['en-US', 'en-CA', 'nl-NL'],
       fallbackLng: ['en-US', 'en-CA', 'nl-NL'],
       ns: ['_flash', '_footer', '_navbar', 'app', 'error', 'game', 'home'],

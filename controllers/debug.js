@@ -23,6 +23,7 @@ exports.query = function (req, res) {
 exports.index = function (req, res) {
   res.render('debug', {
     data: [
+      'process.env.NODE_ENV: ' + process.env.NODE_ENV,
       Game,
       JSON.stringify(GameTypes.toList(), null, '  '),
       GameTypes.toEnum().join(', '),
