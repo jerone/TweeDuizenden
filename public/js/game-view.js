@@ -7,37 +7,55 @@
     /*
      * Counting.
      */
-    var counting = function () {
-      $('.g2000n-sum.g2000n-player-' + $(this).data('player-index')).each(function sum() {
-        var that = $(this),
-            index = that.data('player-index'),
-            row = that.parents('tr'),
-            prev = row.prev().find('.g2000n-player-' + index).val(),
-            preprev = row.prev().prev().find('.g2000n-player-' + index).val(),
-            total;
-        if (prev && !isNaN(prev) && preprev && !isNaN(preprev)) {
+    function counting() {
+      var playerElementClass = '.g2000n-player-' + this.dataset.playerIndex;
+      var playerSumElements = document.querySelectorAll(playerElementClass + '.g2000n-sum');
+      Array.prototype.forEach.call(playerSumElements, function (playerSumElement) {
+        var playerSumRow = findParentByTagName(playerSumElement, 'tr'),
+          prevPlayerInputElement = playerSumRow.previousElementSibling.querySelector(playerElementClass).value,
+          prevPrevPlayerInputElement = playerSumRow.previousElementSibling.previousElementSibling.querySelector(playerElementClass).value,
+          total;
+
+        if (prevPlayerInputElement && !isNaN(prevPlayerInputElement) && prevPrevPlayerInputElement && !isNaN(prevPrevPlayerInputElement)) {
           if (gameType.direction === '+') {
-            total = parseInt(preprev, 10) + parseInt(prev, 10);
+            total = parseInt(prevPrevPlayerInputElement, 10) + parseInt(prevPlayerInputElement, 10);
           } else if (gameType.direction === '-') {
-            total = parseInt(preprev, 10) - parseInt(prev, 10);
+            total = parseInt(prevPrevPlayerInputElement, 10) - parseInt(prevPlayerInputElement, 10);
           }
-          that.val(total);
+          playerSumElement.value = total;
 
           if (gameType.win.end !== null) {
             if (gameType.win.direction === 'highest' && total >= gameType.win.end) {
-              that.parent().addClass('has-success');
+              playerSumElement.parentNode.classList.add('has-success');
             } else if (gameType.win.direction === 'lowest' && total <= gameType.win.end) {
-              that.parent().addClass('has-success');
+              playerSumElement.parentNode.classList.add('has-success');
             }
           } else {
-            that.parent().removeClass('has-success');
+            playerSumElement.parentNode.classList.remove('has-success');
           }
         } else {
-          that.val('');
+          playerSumElement.value = '';
         }
       });
     };
-    $('.g2000n-value').on('change blur', counting).on('keyup', debounce(counting, 500)).each(counting);
+
+    var alreadyExecutedColumnCounting = [];
+    var playerValueElements = document.querySelectorAll('.g2000n-value');
+    Array.prototype.forEach.call(playerValueElements, function (playerValueElement) {
+      var countingDebounced = debounce(counting, 500);
+      playerValueElement.addEventListener('change', countingDebounced);
+      playerValueElement.addEventListener('blur', countingDebounced);
+      playerValueElement.addEventListener('keyup', countingDebounced);
+
+      // Only trigger counting on the first input as the counting function takes care of all inputs in that column.
+      var playerIndex = playerValueElement.dataset.playerIndex;
+      if (alreadyExecutedColumnCounting.indexOf(playerIndex) === -1) {
+        alreadyExecutedColumnCounting.push(playerIndex);
+        counting.call(playerValueElement);
+      }
+    });
+
+
 
     /*
      * Fixed headers in table.
@@ -184,4 +202,15 @@
     });
 
   });
+
+  // Find parent element by tag-name.
+  function findParentByTagName(element, tag) {
+    tag = tag.toLowerCase();
+    while (element.parentNode) {
+      element = element.parentNode;
+      if (element.tagName.toLowerCase() === tag)
+        return element;
+    }
+    return null;
+  }
 })();
