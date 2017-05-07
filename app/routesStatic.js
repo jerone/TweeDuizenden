@@ -13,17 +13,6 @@ module.exports = function routesStatic(app) {
 
   app.use(favicon(path.join('.', 'public', 'favicon.ico'), staticOptions));
 
-  // Needs to be before Express static on public folder.
-  app.use(less(path.join('.', 'public')));
-
-  app.use('/js', uglify(path.join('.', 'public', 'js'), {
-    generateSourceMap: app.get('env') === 'development'
-  }));
-
-  app.use(express.static(path.join('.', 'public'), staticOptions));
-
-  app.use(express.static(path.join('.', 'locales'), staticOptions));
-
   app.use('/vendor/:vendor/:file', function (req, res, next) {
     var dir;
     switch (req.params.vendor) {
@@ -47,5 +36,16 @@ module.exports = function routesStatic(app) {
     }
     return express.static(dir, staticOptions).apply(this, arguments);
   });
+
+  // Needs to be before Express static on public folder.
+  app.use(less(path.join('.', 'public')));
+
+  app.use(uglify(path.join('.', 'public'), {
+    generateSourceMap: app.get('env') === 'development'
+  }));
+
+  app.use(express.static(path.join('.', 'public'), staticOptions));
+
+  app.use(express.static(path.join('.', 'locales'), staticOptions));
 
 };
