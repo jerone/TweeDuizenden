@@ -10,6 +10,9 @@ module.exports = function securityHeaders() {
         }],
         imgSrc: ["'self'", '*.google-analytics.com']
       }
+    },
+    referrerPolicy: {
+      policy: 'origin-when-cross-origin'
     }
   });
 };
