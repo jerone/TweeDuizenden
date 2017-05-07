@@ -13,9 +13,9 @@
       var form = $(this);
       if (confirm(form.data('confirm'))) {
         var action = form.attr('action'),
-            params = form.serialize(),
-            tbody = $('#g2000n-table tbody'),
-            rows = tbody.find('tr');
+          params = form.serialize(),
+          tbody = $('#g2000n-table tbody'),
+          rows = tbody.find('tr');
 
         $.post(action, params, 'json').done(function (data) {
           if (data.error) {
@@ -48,9 +48,9 @@
       var form = $(this);
       if (confirm(form.data('confirm'))) {
         var action = form.attr('action'),
-            params = form.serialize(),
-            tbody = form.parents('tbody'),
-            row = form.parents('tr');
+          params = form.serialize(),
+          tbody = form.parents('tbody'),
+          row = form.parents('tr');
 
         $.post(action, params, 'json').done(function (data) {
           if (data.error) {
@@ -76,5 +76,13 @@
       return false;
     });
 
+    /*
+     * Open admin section with Konami Code.
+     */
+    cheet('↑ ↑ ↓ ↓ ← → ← → b a', function () {
+      if (location.href.indexOf('admin=true') === -1 && confirm('You found the easter egg with the Konami Code :)\nYou will now be directed to the admin section.')) {
+        location.href += '?admin=true';
+      }
+    });
   });
 })();
