@@ -71,11 +71,11 @@ block content
             td #{gameTypes[game.type]}
             td
               nobr=helpers.getLocaleDateString(game.createdAt)
-              |&nbsp;
+              |&#32;
               nobr=helpers.getLocaleTimeString(game.createdAt)
             td
               nobr=helpers.getLocaleDateString(game.updatedAt)
-              |&nbsp;
+              |&#32;
               nobr=helpers.getLocaleTimeString(game.updatedAt)
             td #{game.players.join(', ')}
             td.text-nowrap
