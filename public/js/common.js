@@ -12,6 +12,8 @@
 
   });
 
+
+
   /*
    * Disable buttons.
    */
@@ -37,7 +39,7 @@
       }
 
       var text = icon.length ? icon.next() : btn,
-          loadingText = btn.data('loading-text');
+        loadingText = btn.data('loading-text');
       if (loadingText) {
         btn.data('restore-text', text.text());
         text.text(loadingText);
@@ -46,13 +48,15 @@
   }
   window.disableButtons = disableButtons;
 
+
+
   /*
    * Restore buttons.
    */
   function restoreButtons(btns) {
     return btns.filter('.disabled').each(function () {
       var btn = $(this),
-          icon = btn.find('.glyphicon');
+        icon = btn.find('.glyphicon');
       if (icon.length) {
         var glyphicon = btn.data('prev-glyphicon');
         if (glyphicon && glyphicon !== 'glyphicon-refresh') {
@@ -64,7 +68,7 @@
       btn.removeClass('disabled');
 
       var text = icon.length ? icon.next() : btn,
-          restoreText = btn.data('restore-text');
+        restoreText = btn.data('restore-text');
       if (restoreText) {
         text.text(restoreText);
       }
@@ -73,6 +77,10 @@
   window.restoreButtons = restoreButtons;
 
 
+
+  /*
+   * Debounce.
+   */
   // Returns a function, that, as long as it continues to be invoked, will not
   // be triggered. The function will be called after it stops being called for
   // N milliseconds. If `immediate` is passed, trigger the function on the
@@ -82,8 +90,8 @@
     return function () {
       var context = this, args = arguments;
       var later = function () {
-          timeout = null;
-          if (!immediate) func.apply(context, args);
+        timeout = null;
+        if (!immediate) func.apply(context, args);
       };
       var callNow = immediate && !timeout;
       clearTimeout(timeout);
@@ -92,5 +100,34 @@
     };
   };
   window.debounce = debounce;
+
+
+
+  /*
+   * Find parent element by tag-name.
+   */
+  function findParentByTagName(element, tag) {
+    tag = tag.toLowerCase();
+    while (element.parentNode) {
+      element = element.parentNode;
+      if (element.tagName.toLowerCase() === tag)
+        return element;
+    }
+    return null;
+  }
+  window.findParentByTagName = findParentByTagName;
+
+
+
+  /*
+   * Empty element.
+   */
+  function emptyElement(element) {
+    while (element.firstChild) {
+      element.removeChild(element.firstChild);
+    }
+    return element;
+  }
+  window.emptyElement = emptyElement;
 
 })();

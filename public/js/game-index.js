@@ -39,6 +39,8 @@
       return false;
     });
 
+
+
     /*
      * Delete per game.
      */
@@ -75,6 +77,8 @@
 
       return false;
     });
+
+
 
     /*
      * Open admin section with Konami Code.

@@ -29,6 +29,8 @@
               playerSumElement.parentNode.classList.add('has-success');
             } else if (gameType.win.direction === 'lowest' && total <= gameType.win.end) {
               playerSumElement.parentNode.classList.add('has-success');
+            } else {
+              playerSumElement.parentNode.classList.remove('has-success');
             }
           } else {
             playerSumElement.parentNode.classList.remove('has-success');
@@ -80,6 +82,8 @@
     //  floatThead.floatThead('reflow');
     //});
 
+
+
     /*
      * Save.
      */
@@ -91,7 +95,7 @@
         form.data('no-xhr', false);
 
         var action = form.attr('action'),
-            params = form.serialize();
+          params = form.serialize();
 
         disableButtons(form.find('.g2000n-save'));
 
@@ -119,8 +123,10 @@
     });
     // Auto save.
     window.setInterval(function () {
-      $('#g2000n-update').submit();
+      document.getElementById('g2000n-update').submit();
     }, 5 * 60 * 1000);
+
+
 
     /*
      * Auto time.
@@ -133,34 +139,44 @@
       });
     }, 60 * 1000);
 
+
+
     /*
      * Tooltips.
      */
     $('[data-toggle=tooltip]').tooltip();
 
+
+
     /*
      * Standings.
      */
-    $('.g2000n-standings').removeClass('hidden');
+    // Show button when JavaScript is supported.
+    Array.prototype.forEach.call(document.querySelectorAll('.g2000n-standings'), function (elm) {
+      elm.classList.remove('hidden');
+    });
+    // Update standings model with current standings.
     $('#standingsModal').on('show.bs.modal', function () {
-      var standings = $('#standingsList').empty(),
-          index = -1,
-          totals = [],
-          sum = function () {
-            if (this.value && !isNaN(this.value)) {
-              total += parseInt(this.value, 10);
-            }
-          };
+      var standings = document.getElementById('standingsList');
+      emptyElement(standings);
+
+      var index = -1,
+        totals = [],
+        sum = function (elm) {
+          if (elm.value && !isNaN(elm.value)) {
+            total += parseInt(elm.value, 10);
+          }
+        };
       while (true) {
         index++;
 
-        var inputs = $('.g2000n-value.g2000n-player-' + index);
-        if (!inputs.length) { break; }
+        var inputs = document.querySelectorAll('.g2000n-value.g2000n-player-' + index);
+        if (!inputs.length) break;
 
         var total = 0;
-        inputs.each(sum);
+        Array.prototype.forEach.call(inputs, sum);
 
-        var player = $('#g2000n-player-name-' + index).text();
+        var player = document.getElementById('g2000n-player-name-' + index).textContent;
         totals.push({ player: player, score: total });
       }
 
@@ -182,35 +198,39 @@
           }
         }
 
-        standings.append(
-        $('<li/>').addClass('list-group-item ' + winner).text(total.player).prepend(
-          $('<span/>').addClass('badge').text(total.score)));
+        const listItem = document.createElement('li');
+        listItem.classList.add('list-group-item', winner);
+        listItem.appendChild(document.createTextNode(total.player));
+        standings.appendChild(listItem);
+
+        const badge = document.createElement('span');
+        badge.classList.add('badge');
+        badge.appendChild(document.createTextNode(total.score));
+        listItem.appendChild(badge);
       });
     });
+
+
 
     /*
      * Confirm leaving page.
      */
+    // Custom message only supported on older browser.
     function onbeforeunload() {
       return 'You are about to navigate away from this page.\n\nIf you leave this page all scores that you have entered will be lost!\n\nUse the save button to save all scores.';
     }
-    $('.g2000n-save').click(function () {
-      window.onbeforeunload = null;
+    // A value changed (without saving), ask users if they want to confirm before leaving.
+    Array.prototype.forEach.call(document.querySelectorAll('.g2000n-value'), function (elm) {
+      elm.addEventListener('change', function () {
+        window.onbeforeunload = onbeforeunload;
+      });
     });
-    $('.g2000n-value').change(function () {
-      window.onbeforeunload = onbeforeunload;
+    // Game is saved, don't need to confirm before leaving anymore.
+    Array.prototype.forEach.call(document.querySelectorAll('.g2000n-save'), function (elm) {
+      elm.addEventListener('click', function () {
+        window.onbeforeunload = null;
+      });
     });
 
   });
-
-  // Find parent element by tag-name.
-  function findParentByTagName(element, tag) {
-    tag = tag.toLowerCase();
-    while (element.parentNode) {
-      element = element.parentNode;
-      if (element.tagName.toLowerCase() === tag)
-        return element;
-    }
-    return null;
-  }
 })();
