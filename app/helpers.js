@@ -3,26 +3,27 @@
 var qs = require('querystring'),
   url = require('url');
 
-polyfillIntl();
 
-function polyfillIntl() {
-  var areIntlLocalesSupported = require('intl-locales-supported');
+var areIntlLocalesSupported = require('intl-locales-supported');
 
-  var localesMyAppSupports = ['en-US', 'en-CA', 'nl-NL'];
+var localesMyAppSupports = ['en-US', 'en-CA', 'nl-NL'];
 
-  if (global.Intl) {
-    // Determine if the built-in `Intl` has the locale data we need.
-    if (!areIntlLocalesSupported(localesMyAppSupports)) {
-      // `Intl` exists, but it doesn't have the data we need, so load the
-      // polyfill and patch the constructors we need with the polyfill's.
-      var IntlPolyfill = require('intl');
-      Intl.NumberFormat = IntlPolyfill.NumberFormat;
-      Intl.DateTimeFormat = IntlPolyfill.DateTimeFormat;
-    }
-  } else {
-    // No `Intl`, so use and load the polyfill.
-    global.Intl = require('intl');
+if (global.Intl) {
+  // Determine if the built-in `Intl` has the locale data we need.
+  if (!areIntlLocalesSupported(localesMyAppSupports)) {
+    // `Intl` exists, but it doesn't have the data we need, so load the
+    // polyfill and patch the constructors we need with the polyfill's.
+    var IntlPolyfill = require('intl');
+    Intl.NumberFormat = IntlPolyfill.NumberFormat;
+    Intl.DateTimeFormat = IntlPolyfill.DateTimeFormat;
   }
+} else {
+  // No `Intl`, so use and load the polyfill.
+  global.Intl = require('intl');
+}
+
+if (Intl.__disableRegExpRestore) {
+  Intl.__disableRegExpRestore();
 }
 
 function helpers() {
@@ -60,10 +61,12 @@ function helpers() {
     };
     function getLocaleDateString(datetime) {
       var dateTimeWithTimeZone = getLocaleDateTimeWithTimeZone(datetime);
+      console.log("-------- getLocaleDateString", datetime, dateTimeWithTimeZone, req.language);
       return new Intl.DateTimeFormat(req.language, { year: 'numeric', month: 'numeric', day: 'numeric' }).format(dateTimeWithTimeZone);
     }
     function getLocaleTimeString(datetime) {
       var dateTimeWithTimeZone = getLocaleDateTimeWithTimeZone(datetime);
+      console.log("-------- getLocaleTimeString", datetime, dateTimeWithTimeZone, req.language);
       return new Intl.DateTimeFormat(req.language, { hour: 'numeric', minute: 'numeric' }).format(dateTimeWithTimeZone);
     }
 
