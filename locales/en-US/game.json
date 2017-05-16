@@ -102,6 +102,14 @@
     "update": {
       "title": "Update this game.",
       "text": "Update Game"
+    },
+    "upPlayer": {
+      "title": "Move player up.",
+      "text": "Player up"
+    },
+    "downPlayer": {
+      "title": "Move player down.",
+      "text": "Player down"
     }
   },
   "view": {

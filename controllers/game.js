@@ -93,6 +93,22 @@ exports.add = function (req, res) {
     req.body.gameTypes = GameTypes.toI18n(req.i18n);
     req.body.players.splice(index, 1);
     res.render('game/edit', req.body);
+  } else if (req.body.upPlayer !== undefined) {
+    var index = parseInt(req.body.upPlayer, 10);
+    req.body.title = req.i18n.t('game:add.title');
+    req.body.isAdd = true;
+    req.body.isPlayerAction = -1;
+    req.body.gameTypes = GameTypes.toI18n(req.i18n);
+    req.body.players[index] = req.body.players.splice(index - 1, 1, req.body.players[index])[0];
+    res.render('game/edit', req.body);
+  } else if (req.body.downPlayer !== undefined) {
+    var index = parseInt(req.body.downPlayer, 10);
+    req.body.title = req.i18n.t('game:add.title');
+    req.body.isAdd = true;
+    req.body.isPlayerAction = -1;
+    req.body.gameTypes = GameTypes.toI18n(req.i18n);
+    req.body.players[index] = req.body.players.splice(index + 1, 1, req.body.players[index])[0];
+    res.render('game/edit', req.body);
   } else {
     if (req.body.name !== undefined) {
       req.body.title = req.i18n.t('game:add.title');
@@ -178,6 +194,22 @@ exports.edit = function (req, res, next) {
     req.body.gameTypes = GameTypes.toI18n(req.i18n);
     req.body.players.splice(index, 1);
     res.render('game/edit', req.body);
+  } else if (req.body.upPlayer !== undefined) {
+    var index = parseInt(req.body.upPlayer, 10);
+    req.body.title = req.i18n.t('game:edit.title', { name: req.params.name });
+    req.body.isAdd = false;
+    req.body.isPlayerAction = -1;
+    req.body.gameTypes = GameTypes.toI18n(req.i18n);
+    req.body.players[index] = req.body.players.splice(index - 1, 1, req.body.players[index])[0];
+    res.render('game/edit', req.body);
+  } else if (req.body.downPlayer !== undefined) {
+    var index = parseInt(req.body.downPlayer, 10);
+    req.body.title = req.i18n.t('game:edit.title', { name: req.params.name });
+    req.body.isAdd = false;
+    req.body.isPlayerAction = -1;
+    req.body.gameTypes = GameTypes.toI18n(req.i18n);
+    req.body.players[index] = req.body.players.splice(index + 1, 1, req.body.players[index])[0];
+    res.render('game/edit', req.body);
   } else if (req.params.name) {
     Game.findOne({ name: decodeURIComponent(req.params.name) }, function (err, game) {
       if (err) { return next(err); }
@@ -221,7 +253,7 @@ exports.edit = function (req, res, next) {
 };
 
 exports.save = function (req, res, next) {
-  if (req.body.addPlayer !== undefined || req.body.removePlayer !== undefined) {
+  if (req.body.addPlayer !== undefined || req.body.removePlayer !== undefined || req.body.upPlayer !== undefined || req.body.downPlayer !== undefined) {
     res.redirect(307, req.header('referrer'));
   } else {
     var name = req.body.name && req.body.name.trim(),

@@ -130,6 +130,14 @@
     "update": {
       "title": "Dit spel bijwerken.",
       "text": "Spel opslaan"
+    },
+    "upPlayer": {
+      "title": "Verplaats speler naar beneden.",
+      "text": "Speler naar beneden"
+    },
+    "downPlayer": {
+      "title": "Verplaats speler naar boven.",
+      "text": "Speler naar boven"
     }
   },
   "view": {
