@@ -33,7 +33,7 @@
     "i18next": "^8.2.1",
     "i18next-express-middleware": "^1.0.5",
     "i18next-node-fs-backend": "^1.0.0",
-    "intl": "^1.2.4",
+    "intl": "1.2.4",
     "intl-locales-supported": "^1.0.0",
     "jade": "^1.11.0",
     "less-middleware": "^2.2.0",
