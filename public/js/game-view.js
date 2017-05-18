@@ -87,30 +87,39 @@
     /*
      * Save.
      */
-    $('#g2000n-update').submit(function () {
-      var form = $(this);
+    document.getElementById('g2000n-update').addEventListener('submit', function (e) {
+      var form = this,
+        $form = $(form);
 
       // Stop overriding form submit when `data-no-xhr` has been set.
-      if (form.data('no-xhr') !== true) {
-        form.data('no-xhr', false);
+      if (form.dataset['noXhr'] !== 'true') {
+        form.dataset['noXhr'] = false;
 
-        var action = form.attr('action'),
-          params = form.serialize();
+        e.preventDefault();
 
-        disableButtons(form.find('.g2000n-save'));
+        var action = this.action,
+          params = $form.serialize();
+
+        disableButtons($form.find('.g2000n-save'));
 
         window.setTimeout(function () {
           $.post(action, params, 'json').done(function (data) {
             if (data.error) {
-              console.error(data.error);
+              console.error('Save', data.error);
             } else {
-              $('.g2000n-updated').data('timestamp', data.updated.timestamp).attr('title', data.updated.datetime).text(data.updated.ago);
+              // Successful, update timestamp text and tooltip.
+              var updatedElm = document.getElementById('g2000n-updated');
+              updatedElm.dataset.timestamp = data.updated.timestamp;
+              updatedElm.dataset.originalTitle = data.updated.datetime;
+              updatedElm.textContent = data.updated.ago;
+
+              // Successful, remove confirmation before leaving page.
               window.onbeforeunload = null;
             }
           }).fail(function (data) {
-            console.error(data);
+            console.error('Save', data);
           }).always(function () {
-            restoreButtons(form.find('.g2000n-save'));
+            restoreButtons($form.find('.g2000n-save'));
           });
         }, 500);  // Little visual style.
 
@@ -118,8 +127,10 @@
       }
     });
     // Disable xhr form submit.
-    $('.g2000n-no-xhr').click(function () {
-      $(this).parents('form').first().data('no-xhr', true);
+    Array.prototype.forEach.call(document.querySelectorAll('.g2000n-no-xhr'), function (elm) {
+      elm.addEventListener('click', function () {
+        findParentByTagName(this, 'form').dataset['noXhr'] = true;
+      });
     });
     // Auto save.
     window.setInterval(function () {
@@ -131,11 +142,11 @@
     /*
      * Auto time.
      */
-    var lng = $('html').attr('lang');
+    var lng = document.documentElement.getAttribute('lang');
     window.setInterval(function () {
-      $('[data-timestamp]').each(function () {
-        var that = $(this);
-        that.text(moment(that.data('timestamp')).locale(lng).fromNow());
+      Array.prototype.forEach.call(document.querySelectorAll('[data-timestamp]'), function (elm) {
+        var timestamp = parseInt(elm.dataset.timestamp, 10);
+        elm.textContent = moment(timestamp).locale(lng).fromNow();
       });
     }, 60 * 1000);
 
