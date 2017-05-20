@@ -81,9 +81,19 @@ input[type='number']::-webkit-outer-spin-button {
 }
 
 /* Full width buttons in split-button dropdown menu. */
-.dropdown-menu li button {
+:not(#random-id-to-get-higher-specificity) .dropdown-menu li button {
     text-align: left;
     width: 100%;
+    margin: 0;
+}
+
+/* Don't let buttons touch each other when wrapping. */
+:not(.text-nowrap):not(.btn-group) > .btn {
+    margin: 1ch 0;
+
+    + .btn {
+        margin: 0;
+    }
 }
 
 
