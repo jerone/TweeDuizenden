@@ -54,21 +54,21 @@ block content
                                                         value=index,
                                                         title=t('game:edit.addPlayer.title'))
                   span.glyphicon.glyphicon-plus
-                  span.visible-xs-inline= t('game:edit.addPlayer.text')
+                  span.hidden= t('game:edit.addPlayer.text')
                 button.btn.btn-info.btn-inline-block(name='upPlayer',
                                                      type='submit',
                                                      value=index,
                                                      disabled=true,
                                                      title=t('game:edit.upPlayer.title'))
                   span.glyphicon.glyphicon-arrow-up
-                  span.visible-xs-inline= t('game:edit.upPlayer.text')
+                  span.hidden= t('game:edit.upPlayer.text')
                 button.btn.btn-info.btn-inline-block(name='downPlayer',
                                                      type='submit',
                                                      value=index,
                                                      disabled=true,
                                                      title=t('game:edit.downPlayer.title'))
                   span.glyphicon.glyphicon-arrow-down
-                  span.visible-xs-inline= t('game:edit.downPlayer.text')
+                  span.hidden= t('game:edit.downPlayer.text')
       else if index==0
         .form-group
           label.col-sm-2.control-label(for='player-0')= t('game:edit.players.label')
@@ -83,21 +83,21 @@ block content
                                                        value=index,
                                                        title=t('game:edit.removePlayer.title'))
                   span.glyphicon.glyphicon-minus
-                  span.visible-xs-inline= t('game:edit.removePlayer.text')
+                  span.hidden= t('game:edit.removePlayer.text')
                 button.btn.btn-info.btn-inline-block(name='upPlayer',
                                                      type='submit',
                                                      value=index,
                                                      disabled=true,
                                                      title=t('game:edit.upPlayer.title'))
                   span.glyphicon.glyphicon-arrow-up
-                  span.visible-xs-inline= t('game:edit.upPlayer.text')
+                  span.hidden= t('game:edit.upPlayer.text')
                 button.btn.btn-info.btn-inline-block(name='downPlayer',
                                                      type='submit',
                                                      value=index,
                                                      disabled=false,
                                                      title=t('game:edit.downPlayer.title'))
                   span.glyphicon.glyphicon-arrow-down
-                  span.visible-xs-inline= t('game:edit.downPlayer.text')
+                  span.hidden= t('game:edit.downPlayer.text')
       else if index==players.length-1
         .form-group
           .col-sm-offset-2.col-sm-8
@@ -111,21 +111,21 @@ block content
                                                         value=index,
                                                         title=t('game:edit.addPlayer.title'))
                   span.glyphicon.glyphicon-plus
-                  span.visible-xs-inline= t('game:edit.addPlayer.text')
+                  span.hidden= t('game:edit.addPlayer.text')
                 button.btn.btn-info.btn-inline-block(name='upPlayer',
                                                      type='submit',
                                                      value=index,
                                                      disabled=false,
                                                      title=t('game:edit.upPlayer.title'))
                   span.glyphicon.glyphicon-arrow-up
-                  span.visible-xs-inline= t('game:edit.upPlayer.text')
+                  span.hidden= t('game:edit.upPlayer.text')
                 button.btn.btn-info.btn-inline-block(name='downPlayer',
                                                      type='submit',
                                                      value=index,
                                                      disabled=true,
                                                      title=t('game:edit.downPlayer.title'))
                   span.glyphicon.glyphicon-arrow-down
-                  span.visible-xs-inline= t('game:edit.downPlayer.text')
+                  span.hidden= t('game:edit.downPlayer.text')
       else
         .form-group
           .col-sm-offset-2.col-sm-8
@@ -139,21 +139,21 @@ block content
                                                        value=index,
                                                        title=t('game:edit.removePlayer.title'))
                   span.glyphicon.glyphicon-minus
-                  span.visible-xs-inline= t('game:edit.removePlayer.text')
+                  span.hidden= t('game:edit.removePlayer.text')
                 button.btn.btn-info.btn-inline-block(name='upPlayer',
                                                      type='submit',
                                                      value=index,
                                                      disabled=false,
                                                      title=t('game:edit.upPlayer.title'))
                   span.glyphicon.glyphicon-arrow-up
-                  span.visible-xs-inline= t('game:edit.upPlayer.text')
+                  span.hidden= t('game:edit.upPlayer.text')
                 button.btn.btn-info.btn-inline-block(name='downPlayer',
                                                      type='submit',
                                                      value=index,
                                                      disabled=false,
                                                      title=t('game:edit.downPlayer.title'))
                   span.glyphicon.glyphicon-arrow-down
-                  span.visible-xs-inline= t('game:edit.downPlayer.text')
+                  span.hidden= t('game:edit.downPlayer.text')
 
     .form-group
       .col-sm-offset-2.col-sm-8
