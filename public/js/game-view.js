@@ -134,7 +134,7 @@
     });
     // Auto save.
     window.setInterval(function () {
-      document.getElementById('g2000n-update').submit();
+      document.querySelector('.g2000n-save:not(.g2000n-no-xhr)').click();
     }, 5 * 60 * 1000);
 
 
