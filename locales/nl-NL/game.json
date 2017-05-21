@@ -188,6 +188,10 @@
           "text": "Sluiten"
         }
       }
+    },
+    "edit": {
+      "title": "Dit spel bewerken.",
+      "text": "Bewerken"
     }
   },
   "open": {

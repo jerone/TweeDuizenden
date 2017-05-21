@@ -1,7 +1,7 @@
 ﻿'use strict';
 
 (function () {
-  /* global disableButtons,restoreButtons,moment,gameType */
+  /* global disableButtons,restoreButtons,moment,gameType,cheet */
   $(function () {
 
     /*
@@ -241,6 +241,17 @@
       elm.addEventListener('click', function () {
         window.onbeforeunload = null;
       });
+    });
+
+
+
+    /*
+     * Open admin section with Konami Code.
+     */
+    cheet('↑ ↑ ↓ ↓ ← → ← → b a', function () {
+      if (location.href.indexOf('admin=true') === -1 && confirm('You found the easter egg with the Konami Code :)\nYou will now be directed to the admin section.')) {
+        location.href += '?admin=true';
+      }
     });
 
   });

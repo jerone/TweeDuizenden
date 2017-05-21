@@ -160,6 +160,10 @@
           "text": "Close"
         }
       }
+    },
+    "edit": {
+      "title": "Edit this game.",
+      "text": "Edit"
     }
   },
   "open": {

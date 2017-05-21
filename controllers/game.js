@@ -373,6 +373,7 @@ exports.view = function (req, res, next) {
       if (game) {
         res.render('game/view', {
           title: req.i18n.t('game:view.title', { name: game.name }),
+          admin: typeof req.query.admin !== 'undefined',
           navbarNotFixed: true,
           created: {
             datetime: res.locals.helpers.getLocaleDateString(game.createdAt) + ' ' +
@@ -406,7 +407,13 @@ exports.view = function (req, res, next) {
 };
 
 exports.update = function (req, res, next) {
-  if (req.body.close !== undefined) {
+  if (req.body.edit !== undefined) {
+    if (req.body.name) {
+      res.redirect('/game/edit/' + encodeURIComponent(encodeURIComponent(req.body.name)));
+    } else {
+      res.redirect('/game/add');
+    }
+  } else if (req.body.close !== undefined) {
     res.redirect('/game');
   } else if (req.body.clone !== undefined) {
     if (req.body.name) {

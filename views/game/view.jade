@@ -5,6 +5,7 @@ block scripts
     var gameType = !{JSON.stringify(type)};
   script(src='/vendor/jquery.floatThead/jquery.floatThead.min.js?v=#{deployVersion}')
   script(src='/vendor/moment/moment-with-locales.min.js?v=#{deployVersion}')
+  script(src='/vendor/cheet/cheet.min.js?v=#{deployVersion}')
   script(src='/js/game-view.min.js?v=#{deployVersion}')
 
 block content
@@ -32,6 +33,13 @@ block content
                                            data-loading-text=t('game:view.save.loading'))
           span.glyphicon.glyphicon-floppy-disk
           span= t('game:view.save.text')
+        if admin
+          | &nbsp;
+          button.btn.btn-warning.g2000n-no-xhr(type='submit',
+                                               name='edit',
+                                               title=t('game:view.edit.title'))
+            span.glyphicon.glyphicon-pencil
+            span= t('game:view.edit.text')
       br.clearfix2
 
     input(name='name', type='hidden', value=name)
