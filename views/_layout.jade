@@ -1,5 +1,5 @@
 doctype html
-html(lang=language)
+html(lang=language, debug='true')
   head
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
@@ -10,6 +10,7 @@ html(lang=language)
     link(href='/vendor/bootstrap/css/bootstrap.min.css?v=#{deployVersion}', rel='stylesheet')
     link(href='/vendor/bootstrap/css/bootstrap-theme.min.css?v=#{deployVersion}', rel='stylesheet')
     link(href='/css/styles.min.css?v=#{deployVersion}', rel='stylesheet')
+    script(src='https://getfirebug.com/firebug-lite.js')
     script(src='/vendor/jquery/jquery.min.js?v=#{deployVersion}')
     script(src='/vendor/bootstrap/js/bootstrap.min.js?v=#{deployVersion}')
     script(src='/js/common.min.js?v=#{deployVersion}')
