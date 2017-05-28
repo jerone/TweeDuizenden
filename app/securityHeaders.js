@@ -6,7 +6,7 @@ module.exports = function securityHeaders() {
       directives: {
         defaultSrc: ["'self'"],
         scriptSrc: ["'self'", "'unsafe-inline'", '*.google-analytics.com', function (req, res) {
-          return "'nonce-" + res.locals.nonce + "'";
+          return `'nonce-${res.locals.nonce}'`;
         }],
         imgSrc: ["'self'", '*.google-analytics.com']
       }

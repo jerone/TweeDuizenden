@@ -42,7 +42,7 @@ module.exports = function routes(app) {
 
   // Handle 404.
   app.use(function (req, res/*, next*/) {
-    console.error("404", req.url);
+    console.error('404', req.url);
     res.status(404);
     if (req.accepts('html')) {
       res.render('error', {
