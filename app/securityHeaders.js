@@ -5,11 +5,11 @@ module.exports = function securityHeaders() {
     contentSecurityPolicy: {
       directives: {
         defaultSrc: ["'self'"],
-        styleSrc: ["'self'", "'unsafe-inline'", 'getfirebug.com'],
-        scriptSrc: ["'self'", '*.google-analytics.com', 'getfirebug.com', "'unsafe-eval'", function (req, res) {
+        styleSrc: ["'self'", "'unsafe-inline'", 'https://getfirebug.com'],
+        scriptSrc: ["'self'", "'unsafe-eval'", '*.google-analytics.com', 'https://getfirebug.com', function (req, res) {
           return "'nonce-" + res.locals.nonce + "'";
         }],
-        imgSrc: ["'self'", '*.google-analytics.com', 'getfirebug.com']
+        imgSrc: ["'self'", '*.google-analytics.com', 'https://getfirebug.com']
       }
     },
     referrerPolicy: {
