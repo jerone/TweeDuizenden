@@ -6,7 +6,7 @@ module.exports = function securityHeaders() {
       directives: {
         defaultSrc: ["'self'"],
         styleSrc: ["'self'", "'unsafe-inline'", 'https://getfirebug.com'],
-        scriptSrc: ["'self'", "'unsafe-eval'", '*.google-analytics.com', 'https://getfirebug.com', function (req, res) {
+        scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", '*.google-analytics.com', 'https://getfirebug.com', function (req, res) {
           return "'nonce-" + res.locals.nonce + "'";
         }],
         imgSrc: ["'self'", '*.google-analytics.com', 'https://getfirebug.com']
