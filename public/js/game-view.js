@@ -209,12 +209,12 @@
           }
         }
 
-        const listItem = document.createElement('li');
+        var listItem = document.createElement('li');
         listItem.classList.add('list-group-item', winner);
         listItem.appendChild(document.createTextNode(total.player));
         standings.appendChild(listItem);
 
-        const badge = document.createElement('span');
+        var badge = document.createElement('span');
         badge.classList.add('badge');
         badge.appendChild(document.createTextNode(total.score));
         listItem.appendChild(badge);
