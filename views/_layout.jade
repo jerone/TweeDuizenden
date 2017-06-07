@@ -25,3 +25,5 @@ html(lang=language)
 
     script(src='/js/google-analytics.min.js?v=#{deployVersion}')
 
+    if showChangelog
+      include _partials/changelog

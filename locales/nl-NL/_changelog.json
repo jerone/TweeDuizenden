@@ -1,0 +1,11 @@
+{
+  "modal": {
+    "close": {
+      "title": "Sluiten",
+      "text": "Sluiten"
+    },
+    "title": {
+      "text": "Changelog"
+    }
+  }
+}

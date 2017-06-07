@@ -1,8 +1,10 @@
 ﻿'use strict';
 
+var fs = require('fs');
+
 var homeController = require('./../controllers/home'),
-    gameController = require('./../controllers/game'),
-    debugController = require('./../controllers/debug');
+  gameController = require('./../controllers/game'),
+  debugController = require('./../controllers/debug');
 
 module.exports = function routes(app) {
 
@@ -19,6 +21,13 @@ module.exports = function routes(app) {
     } else {
       next();
     }
+  });
+
+  app.use(function (req, res, next) {
+    const currentVersion = app.locals.version;
+    const previousVersion = req.cookies['changelog-version'];
+    if (currentVersion !== previousVersion) res.locals.showChangelog = true;
+    next();
   });
 
   // Handle home.

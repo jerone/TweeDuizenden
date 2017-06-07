@@ -8,10 +8,12 @@ var bodyParser = require('body-parser'),
   logger = require('morgan'),
   mongoose = require('mongoose'),
   session = require('express-session'),
+  cookieParser = require('cookie-parser'),
   MongoStore = require('connect-mongo')(session);
 
 // Require core modules.
-var path = require('path');
+var path = require('path'),
+  fs = require('fs');
 
 // Require file modules.
 var secrets = require('./config/secrets'),
@@ -34,6 +36,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.locals.pretty = app.get('env') === 'development';
 app.locals.deployVersion = (new Date).getTime();
+app.locals.version = fs.readFileSync('./config/version.txt', 'utf8');
 
 // Database.
 mongoose.connect(secrets.db);
@@ -50,6 +53,7 @@ app.use(nonce());
 app.use(securityHeaders());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use(session({ resave: true, saveUninitialized: true, secret: secrets.sessionSecret, store: new MongoStore({ mongooseConnection: mongoose.connection }) }));
 app.use(methodOverride());
 app.use(flash());

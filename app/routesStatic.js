@@ -32,6 +32,10 @@ module.exports = function routesStatic(app) {
         dir = path.join('.', 'node_modules', 'moment', 'min', req.params.file);
         break;
       }
+      case 'cookie': {
+        dir = path.join('.', 'bower_components', 'js-cookie', 'src', req.params.file);
+        break;
+      }
       case 'cheet': {
         dir = path.join('.', 'bower_components', 'cheet.js', req.params.file);
         break;

@@ -1,0 +1,25 @@
+script(src='/vendor/cookie/js.cookie.js?v=#{deployVersion}')
+script(nonce=nonce).
+  document.addEventListener('DOMContentLoaded', function() {
+    $('#changelogModal').on('hidden.bs.modal', function (e) {
+      Cookies.set('changelog-version', '!{version}');
+    }).modal('show');
+  });
+
+#changelogModal.modal.fade(tabindex='-1',
+                           role='dialog',
+                           aria-hidden='true')
+  .modal-dialog.modal-sm
+    .modal-content
+      .modal-header
+        button.close(type='button',
+                     data-dismiss='modal',
+                     title=t('_changelog:modal.close.title'))
+          span(aria-hidden='true') &times;
+          span.sr-only= t('_changelog:modal.close.text')
+        h4.modal-title= t('_changelog:modal.title.text')
+      .modal-body !{t('_changelog:modal.body.text',{postProcess:'markdown'})}
+      .modal-footer
+        button.btn.btn-default(type='button',
+                               data-dismiss='modal',
+                               title=t('_changelog:modal.close.title'))= t('_changelog:modal.close.text')

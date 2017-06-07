@@ -19,7 +19,7 @@
     <OutputPath>.</OutputPath>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
-    <ProjectView>ProjectFiles</ProjectView>
+    <ProjectView>ShowAllFiles</ProjectView>
     <NodejsPort>1337</NodejsPort>
     <StartWebBrowser>true</StartWebBrowser>
   </PropertyGroup>
@@ -58,29 +58,36 @@
     <Content Include=".travis.yml" />
     <Content Include="app\nonce.js" />
     <Content Include="bower.json" />
+    <Content Include="config\version.txt" />
     <Content Include="CONTRIBUTING.md" />
     <Content Include="LICENSE" />
     <Content Include="locales\en-CA\app.json" />
+    <Content Include="locales\en-CA\changelog.md" />
     <Content Include="locales\en-CA\error.json" />
     <Content Include="locales\en-CA\flag.gif" />
     <Content Include="locales\en-CA\game.json" />
     <Content Include="locales\en-CA\home.json" />
+    <Content Include="locales\en-CA\_changelog.json" />
     <Content Include="locales\en-CA\_flash.json" />
     <Content Include="locales\en-CA\_footer.json" />
     <Content Include="locales\en-CA\_navbar.json" />
     <Content Include="locales\en-US\app.json" />
+    <Content Include="locales\en-US\changelog.md" />
     <Content Include="locales\en-US\error.json" />
     <Content Include="locales\en-US\flag.gif" />
     <Content Include="locales\en-US\game.json" />
     <Content Include="locales\en-US\home.json" />
+    <Content Include="locales\en-US\_changelog.json" />
     <Content Include="locales\en-US\_flash.json" />
     <Content Include="locales\en-US\_footer.json" />
     <Content Include="locales\en-US\_navbar.json" />
     <Content Include="locales\nl-NL\app.json" />
+    <Content Include="locales\nl-NL\changelog.md" />
     <Content Include="locales\nl-NL\error.json" />
     <Content Include="locales\nl-NL\flag.gif" />
     <Content Include="locales\nl-NL\game.json" />
     <Content Include="locales\nl-NL\home.json" />
+    <Content Include="locales\nl-NL\_changelog.json" />
     <Content Include="locales\nl-NL\_flash.json" />
     <Content Include="locales\nl-NL\_footer.json" />
     <Content Include="locales\nl-NL\_navbar.json" />
@@ -99,6 +106,7 @@
     <Content Include="views\debug.jade" />
     <Content Include="views\home.jade" />
     <Content Include="views\_layout.jade" />
+    <Content Include="views\_partials\changelog.jade" />
     <Content Include="views\_partials\flash.jade" />
     <Content Include="views\_partials\footer.jade" />
     <Content Include="views\_partials\navbar.jade" />
