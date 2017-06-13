@@ -176,7 +176,7 @@ exports.clone = function (req, res, next) {
   } else {
     res.redirect('/game/add');
   }
-}
+};
 
 exports.edit = function (req, res, next) {
   if (req.body.addPlayer !== undefined) {

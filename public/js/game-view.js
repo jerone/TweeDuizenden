@@ -14,7 +14,7 @@
         var playerSumRow = findParentByTagName(playerSumElement, 'tr'),
           prevPlayerInputElement = playerSumRow.previousElementSibling.querySelector(playerElementClass).value,
           prevPrevPlayerInputElement = playerSumRow.previousElementSibling.previousElementSibling.querySelector(playerElementClass).value,
-          total;
+          total = 0;
 
         if (prevPlayerInputElement && !isNaN(prevPlayerInputElement) && prevPrevPlayerInputElement && !isNaN(prevPrevPlayerInputElement)) {
           if (gameType.direction === '+') {
@@ -39,7 +39,7 @@
           playerSumElement.value = '';
         }
       });
-    };
+    }
 
     var alreadyExecutedColumnCounting = [];
     var playerValueElements = document.querySelectorAll('.g2000n-value');
